@@ -1,72 +1,35 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
+#include "Bullet.h"
 #include "Player.h"
-#include "Ball.h"
-#include "Gun_pistol.h"
-#include "Ob_floor.h"
-#include "Ob_movable.h"
-#include "Ob_drag.h"
 #include "Main.h"
 
 Main::Main()
 {
-    // 배경
-    for (int i = 0; i < number_star; i++)
+    rect = new ObRect;
+    for (int i = 0; i < StarMax; i++)
     {
-        bg_star[i] = new ObStar();
-        bg_star[i]->SetWorldPos(Vector2(RANDOM->Int(-3000, 3000), RANDOM->Int(0, 2000)));
-        bg_star[i]->scale = Vector2(RANDOM->Int(5, 30));
-        bg_star[i]->color = Color(RANDOM->Float(), RANDOM->Float(), RANDOM->Float()) * RANDOM->Float();
+        bg[i] = new ObStar();
+        bg[i]->SetWorldPosX(RANDOM->Float(-800.0f, 800.0f));
+        bg[i]->SetWorldPosY(RANDOM->Float(-600.0f, 600.0f));
+        bg[i]->scale.x = 15.0f;
+        bg[i]->scale.y = 15.0f;
+        bg[i]->color = Color(0, 1, 1)* RANDOM->Float();
+        //bg[i]->space = SPACE::SCREEN;
     }
-    floor = new Ob_floor();
-
-    ball = new Ball();
-    // 사물
-    //rect_movable = new Ob_movable();
-    //rect_drag = new Ob_drag();
-
-    // 플레이어
-	//player = new Player();
-
-    // 총기류
-    //pistol = new Gun_pistol();
-    //pistol->SetParentRT(*player);
-
-    //for (auto& goalpost : goalpost)
-    //goalpost = new Player();
-
-//ball = new Ball();
+    
 }
 
 Main::~Main()
 {
-    //for (int i = 0; i < 2; i++)
-        //delete player[i];
-
-    //for (int i = 0; i < 2; i++)
-        //delete goalpost[i];
-
-    //delete ball;
-    //delete player;
-    //delete pistol;
-
-    //delete rect_movable;
-    delete floor;
 }
 
 void Main::Init()
 {
-	//player->Init(Vector2(-app.GetHalfWidth() + player->scale.x, -app.GetHalfHeight() + player->scale.y), false);
- //   goalpost[0]->Init(Vector2(-app.GetHalfWidth(), 0), false);
- //   goalpost[1]->Init(Vector2(app.GetHalfWidth(), 0), true);
- //   for (auto& goalpost : goalpost)
- //   {
- //       goalpost->hasAxis = false;
- //       goalpost->scale = Vector2(100.f, 100.f);
- //   }
-
-	//ball->Init(Vector2(0, 0), true);
- //   ball->speed = 0;
-
+    rect->scale.x = 300.0f;
+    rect->scale.y = 300.0f;
+	
+	turn = 0;
+    Campos = CAM->position;
 }
 
 void Main::Release()
@@ -76,114 +39,159 @@ void Main::Release()
 
 void Main::Update()
 {
-    //ImGui::Text("ON_MOUSE: %d\n", rect_movable->OnMouse());
-
-
-    ImGui::Text("CAMERA_X: %f\n", CAM->position.x);
-    ImGui::Text("CAMERA_Y: %f\n", CAM->position.y); 
-    //ImGui::Text("CAM_SPEED: %f\n", std::abs(player->GetWorldPos().x - CAM->position.x));
-
-    ImGui::Text("\n\n");
-    //ImGui::Text("PLAYER_X: %f\n", player->GetWorldPos().x);
-    //ImGui::Text("PLAYER_Y: %f\n", player->GetWorldPos().y);
-
-    ImGui::Text("\n\n");
-    ImGui::Text("Keys\n");
-    ImGui::Text("move: [A][S] \n");
-    ImGui::Text("jump: [SPACE] \n");
-    ImGui::Text("fire: [LBUTTON] \n");
-
-    // 배경 업데이트
-    for (int i = 0; i < number_star; i++)
-        bg_star[i]->Update();
-
-    floor->Collision(ball);
-
-    ball->Update();
-    floor->Update();
-
-    // 사물 업데이트
-    //rect_movable->Update();
-    //rect_movable->Control();
-    //rect_movable->SetColor();
-
-    //rect_drag->Update();
-    //rect_drag->OnClick();
-    // 플레이어 업데이트
-    //player->Update();   
-    //player->Control();
-    
-    // 무기 업데이트
-    //pistol->Update();
-
-    // 카메라 업데이트
-    /*if (player->GetWorldPos().x != CAM->position.x
-        && CAM->position.x >= -2500
-        && CAM->position.x <= 2500)
+    ImGui::Text("FPS : %d", (int)TIMER->GetFramePerSecond());
+    /*if (INPUT->KeyPress(VK_UP))
     {
-        float DISTANCE_DIFFERENCE = std::abs(player->GetWorldPos().x - CAM->position.x);
-        if (player->GetWorldPos().x < CAM->position.x)
-            CAM->position += LEFT * (30.f + DISTANCE_DIFFERENCE) * DELTA;
-        else if (player->GetWorldPos().x > CAM->position.x)
-            CAM->position += RIGHT * (30.f + DISTANCE_DIFFERENCE) * DELTA;
+       CAM->position += UP*100.0f* DELTA;
     }
-    else if (CAM->position.x < -2500)
-        CAM->position.x = -2500;
-    else if (CAM->position.x > 2500)
-        CAM->position.x = 2500;*/
+    if (INPUT->KeyPress(VK_DOWN))
+    {
+        CAM->position += DOWN * 100.0f * DELTA;
+    }
+    if (INPUT->KeyPress(VK_LEFT))
+    {
+        CAM->position += LEFT * 100.0f * DELTA;
+    }
+    if (INPUT->KeyPress(VK_RIGHT))
+    {
+        CAM->position += RIGHT * 100.0f * DELTA;;
+    }*/
+
+	
+
+
+
+
+
+
+
+
+
+
+	
+
+    //Campos = (pl[0]->GetWorldPos() + INPUT->GetWorldMousePos() ) * 0.5f;
+
+   // CAM->position = Campos + Vector2(RANDOM->Float(-5, 5), RANDOM->Float(-5, 5));
+
+    //Cam�� �÷��̾��� ���̰� ����
+   /* Vector2 minus = pl[0]->GetWorldPos() - CAM->position;
+
+    CAM->position += minus  *DELTA;*/
+
+    for (int i = 0; i < StarMax; i++)
+    {
+        bg[i]->Update();
+    }
+    rect->Update();
+    //CAM->position.x = Utility::Saturate(CAM->position.x, -400.0f, 400.0f);
+    /*if (CAM->position.x < -400.0f)
+    {
+        CAM->position.x = 400.0f;
+    }*/
+
 }
 
 void Main::LateUpdate()
 {
-    //// 볼이 맵 밖을 벗어날 때 충돌처리
-    //int map_side{ 10 }; //
-    //// x축
-    //if (ball->GetWorldPos().x < -app.GetHalfWidth() + map_side)
+    float MX = INPUT->GetWorldMousePos().x;
+    float MY = INPUT->GetWorldMousePos().y;
+
+    float rectUP = rect->GetWorldPos().y + 150.0f;
+    float rectDOWN = rect->GetWorldPos().y - 150.0f;
+    float rectLEFT = rect->GetWorldPos().x - 150.0f;
+    float rectRIGHT = rect->GetWorldPos().x + 150.0f;
+
+
+
+    if (MX > rectLEFT and MX < rectRIGHT and MY < rectUP and MY > rectDOWN)
+    {
+        Vector2 color = INPUT->GetWorldMousePos() - rect->GetWorldPos();
+        color.x = (color.x + 150) / 2;
+        color.y = (color.y + 150) / 2;
+        color = color / 150;
+        rect->color = Vector4(color.x, color.y, 1.0f- (color.x+ color.y)/2, 1.0f);
+
+
+        if (INPUT->KeyDown(VK_LBUTTON))
+        {
+            mousepoint = INPUT->GetWorldMousePos();
+            rectpoint = rect->GetWorldPos();
+        }
+        if (INPUT->KeyPress(VK_LBUTTON))
+        {
+             rect->SetWorldPos(-mousepoint + INPUT->GetWorldMousePos()+ rectpoint);           
+        }
+       
+    }
+    else rect->color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+
+    
+
+    //for (int i = 0; i < 30; i++)
     //{
-    //    ball->SetWorldPosX(-app.GetHalfWidth() + map_side);
-    //    ball->reflection_y();
-    //    // ball->rotation.z = atan2f(ball->get_right().y, -ball->get_right().x);
+
+    //    if (not pl[turn]->GetBullet(i)->GetIsFire())continue;
+
+    //    if (pl[turn]->GetBullet(i)->GetWorldPos().x < -400.0f + 10.0f)
+    //    {
+    //        pl[turn]->GetBullet(i)->SetWorldPosX(-400.0f + 10.0f);
+    //        pl[turn]->GetBullet(i)->ReflectionY();
+    //        pl[turn]->GetBullet(i)->Update();
+    //    }
+    //    else if (pl[turn]->GetBullet(i)->GetWorldPos().x > 400.0f - 10.0f)
+    //    {
+    //        pl[turn]->GetBullet(i)->SetWorldPosX(400.0f - 10.0f);
+    //        pl[turn]->GetBullet(i)->ReflectionY();
+    //        pl[turn]->GetBullet(i)->Update();
+    //    }
+    //    if (pl[turn]->GetBullet(i)->GetWorldPos().y < -300.0f - 10.0f)
+    //    {
+    //        pl[turn]->GetBullet(i)->Release();
+    //        turn = not turn;
+    //        damage = 0;
+    //        damageTime = 0.0f;
+    //    }
+
+    //    if (pl[turn]->GetBullet(i)->Touch(pl[not turn]))
+    //    {
+    //        //pl[not turn]->
+    //        //pl[not turn]->Damage(10.0f);
+    //        //pl[turn]->GetBullet(i)->Release();
+    //        //turn = not turn;
+    //        damage = 1;
+    //        releasebullet = i;
+    //    }
     //}
-    //else if (ball->GetWorldPos().x > app.GetHalfWidth() - map_side)
-    //{
-    //    ball->SetWorldPosX(app.GetHalfWidth() - map_side);
-    //    ball->reflection_y();
-    //    // ball->rotation.z = atan2f(ball->get_right().y, -ball->get_right().x);
-    //}
-    //// y축
-    //if (ball->GetWorldPos().y < -app.GetHalfHeight() + map_side)
-    //{
-    //    ball->SetWorldPosY(-app.GetHalfHeight() + map_side);
-    //    ball->reflection_x();
-    //    // ball->rotation.z = atan2f(-ball->get_right().y, ball->get_right().x);
-    //}
-    //else if (ball->GetWorldPos().y > app.GetHalfHeight() - map_side)
-    //{
-    //    ball->SetWorldPosY(app.GetHalfHeight() - map_side);
-    //    ball->reflection_x();
-    //    // ball->rotation.z = atan2f(-ball->get_right().y, ball->get_right().x);
-    //}
+
+    /*if (damage)
+    {
+        if (TIMER->GetTick(damageTime, 0.02f))
+        {
+            pl[not turn]->Damage(5.0f);
+            damage++;
+        }
+
+        if (damage >= 5)
+        {
+            pl[turn]->GetBullet(releasebullet)->Release();
+            turn = not turn;
+            damage = 0;
+            damageTime = 0.0f;
+        }
+    }*/
+
 }
 
 void Main::Render()
 {
-    for (int i = 0; i < number_star; i++)
-        bg_star[i]->Render();
-    floor->Render();
+    for (int i = 0; i < StarMax; i++)
+    {
+        bg[i]->Render();
+    }
+    rect->Render();
+   
 
-    ball->Render();
-    /*rect_movable->Render();
-    rect_drag->Render();
-
-	player->Render();*/
-
-	//for (auto& player : player)
-	//	player->Render();
-
- //   for (auto& goalpost : goalpost)
- //       goalpost->Render();
-
-	//ball->Render();
 
 }
 
@@ -196,7 +204,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE prevInstance, LPWSTR param, in
     app.SetAppName(L"Game1");
     app.SetInstance(instance);
 	app.InitWidthHeight(800.0f,600.0f);
-    app.background = Color(0.1f, 0.1f, 0.1f);
+    app.background = Color(0.5, 0.5, 0.5);
 	WIN->Create();
 	Main* main = new Main();
 	int wParam = (int)WIN->Run(main);

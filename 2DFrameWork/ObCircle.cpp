@@ -1,4 +1,4 @@
-ï»¿#include "framework.h"
+#include "framework.h"
 ID3D11Buffer* ObCircle::fillVertexBuffer = nullptr;
 ID3D11Buffer* ObCircle::vertexBuffer = nullptr;
 
@@ -9,88 +9,69 @@ void ObCircle::CreateStaticMember()
 
     for (UINT i = 0; i < 360; i++)
     {
-
-        Vertex[i * 3].position.x = 0.0f;
-        Vertex[i * 3].position.y = 0.0f;
-        Vertex[i * 3].color = Color(1.f, 1.f, 1.0f, 1.0f);
-        //Vertex[i * 3].color = Color(RANDOM->Float(), RANDOM->Float(), RANDOM->Float(), 1.0f);
-
-        //0 1 2 ... 359
-        Vertex[i * 3 + 1].position.x = cosf(i * ToRadian) * 0.5f;
-        Vertex[i * 3 + 1].position.y = sinf(i * ToRadian) * 0.5f;
-        Vertex[i * 3 + 1].color = Color(0.f, 0.f, 0.f, 1.0f);
-        //Vertex[i * 3 + 1].color = Color(RANDOM->Float(), RANDOM->Float(), RANDOM->Float(), 1.0f);
-
-        //1 2 3 .. 360
-        Vertex[i * 3 + 2].position.x = cosf((i + 1) * ToRadian) * 0.5f;
-        Vertex[i * 3 + 2].position.y = sinf((i + 1) * ToRadian) * 0.5f;
-        Vertex[i * 3 + 2].color = Color(0.f, 0.f, 0.f, 1.0f);
-        //Vertex[i * 3 + 2].color = Color(RANDOM->Float(), RANDOM->Float(), RANDOM->Float(), 1.0f);
-          
         //if (i < 60)
         //{
-        //    // red
-        //    float color = i / 60.f;
-
-        //    Vertex[i * 3 + 1].color = Color(1.f, 0.0f, 1.0f - color, 1.0f);
-        //    Vertex[i * 3 + 2].color = Color(1.f, 0.0f, 1.0f - color, 1.0f);
+        //    //float r = (60.0f - i) / 60.0f;
+        //    float g = i / 60.0f;
+        //    //0 ~ 120
+        //    //100 010
+        //    Vertex[i * 3].color.x = 1.0f;
+        //    Vertex[i * 3].color.y = g;
+        //    Vertex[i * 3+1].color.x = 1.0f;
+        //    Vertex[i * 3+1].color.y = g;
+        //    Vertex[i * 3+2].color.x = 1.0f;
+        //    Vertex[i * 3+2].color.y = g;
         //}
         //else if (i < 120)
         //{
-        //    // Red to yellow
-        //    float color = (i - 60) / 60.f;
-
-        //    Vertex[i * 3 + 1].color = Color(1.0f, color, 0.0f, 1.0f);
-        //    Vertex[i * 3 + 2].color = Color(1.0f, color, 0.0f, 1.0f);
-        //}
-        //else if (i < 180)
-        //{
-        //    // Yellow to Green
-        //    float color = (i - 120) / 60.f;
-
-        //    Vertex[i * 3 + 1].color = Color(1.0f - color, 1.f, 0.0f, 1.0f);
-        //    Vertex[i * 3 + 2].color = Color(1.0f - color, 1.f, 0.0f, 1.0f);
-        //}
-        //else if (i < 240)
-        //{
-        //    // Green to cyan
-        //    float color = (i - 180) / 60.f;
-
-        //    Vertex[i * 3 + 1].color = Color(0.0f, 1.f, color, 1.0f);
-        //    Vertex[i * 3 + 2].color = Color(0.0f, 1.f, color, 1.0f);
-        //}
-        //else if (i < 300)
-        //{
-        //    // Cyan to blue
-        //    float color = (i - 240) / 60.f;
-
-        //    Vertex[i * 3 + 1].color = Color(0.0f, 1.f - color, 1.0f, 1.0f);
-        //    Vertex[i * 3 + 2].color = Color(0.0f, 1.f - color, 1.0f, 1.0f);
+        //    int n = i - 60.0f;
+        //    float g = (60.0f - n) / 60.0f;
+        //    //float b = n / 120.0f;
+        //    //0 ~ 120
+        //    //100 010
+        //    Vertex[i * 3].color.x = g;
+        //    Vertex[i * 3].color.y = 1.0f;
+        //    Vertex[i * 3 + 1].color.x = g;
+        //    Vertex[i * 3 + 1].color.y = 1.0f;
+        //    Vertex[i * 3 + 2].color.x = g;
+        //    Vertex[i * 3 + 2].color.y = 1.0f;
         //}
         //else
         //{
-        //    // Blue to magenta
-        //    float color = (i - 300) / 60.f;
 
-        //    Vertex[i * 3 + 1].color = Color(color, 0.0f, 1.0f, 1.0f);
-        //    Vertex[i * 3 + 2].color = Color(color, 0.0f, 1.0f, 1.0f);
         //}
+
+
+        Vertex[i * 3].position.x = 0.0f;
+        Vertex[i * 3].position.y = 0.0f;
+        Vertex[i * 3].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+        //0 1 2 ... 359
+        Vertex[i * 3 + 1].position.x = cosf(i * ToRadian) * 0.5f;
+        Vertex[i * 3 + 1].position.y = sinf(i * ToRadian) * 0.5f;
+        //Vertex[i * 3 + 1].color = Color(RANDOM->Float(), RANDOM->Float(), RANDOM->Float(), 1.0f);
+        Vertex[i * 3 + 1].color = Color(0.0f, 0.0f, 0.0f, 1.0f);
+        //1 2 3 .. 360
+        Vertex[i * 3 + 2].position.x = cosf((i + 1) * ToRadian) * 0.5f;
+        Vertex[i * 3 + 2].position.y = sinf((i + 1) * ToRadian) * 0.5f;
+        Vertex[i * 3 + 2].color = Color(0.0f, 0.0f, 0.0f, 1.0f);
+        //Vertex[i * 3 + 2].color = Color(RANDOM->Float(), RANDOM->Float(), RANDOM->Float(), 1.0f);
+    
     }
-    //ì •ì ë“¤ì´ ë²„í¼ë¡œ ì˜®ê²¨ì§€ëŠ” ì½”ë“œ
+    //Á¤Á¡µéÀÌ ¹öÆÛ·Î ¿Å°ÜÁö´Â ÄÚµå
     {
         D3D11_BUFFER_DESC desc;
-        desc = { 0 }; //ë©¤ë²„ë³€ìˆ˜ ì „ë¶€ 0ìœ¼ë¡œ
-        desc.Usage = D3D11_USAGE_DEFAULT;//ë²„í¼ë¥¼ ì½ê³  ì“°ëŠ” ë°©ë²•
-        desc.ByteWidth = sizeof(VertexPC) * 360 * 3; //ë²„í¼ í¬ê¸° (ë°”ì´íŠ¸)ì…ë‹ˆë‹¤.
-        desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;//ë²„í¼ê°€ íŒŒì´í”„ ë¼ì¸ì— ë°”ì¸ë”©ë˜ëŠ” ë°©ë²•ì„ ì‹ë³„í•˜ì‹­ì‹œì˜¤
+        desc = { 0 }; //¸â¹öº¯¼ö ÀüºÎ 0À¸·Î
+        desc.Usage = D3D11_USAGE_DEFAULT;//¹öÆÛ¸¦ ÀĞ°í ¾²´Â ¹æ¹ı
+        desc.ByteWidth = sizeof(VertexPC) * 360 * 3; //¹öÆÛ Å©±â (¹ÙÀÌÆ®)ÀÔ´Ï´Ù.
+        desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;//¹öÆÛ°¡ ÆÄÀÌÇÁ ¶óÀÎ¿¡ ¹ÙÀÎµùµÇ´Â ¹æ¹ıÀ» ½Äº°ÇÏ½Ê½Ã¿À
 
         D3D11_SUBRESOURCE_DATA data = { 0 };
-        //í•˜ìœ„ ë¦¬ì†ŒìŠ¤ë¥¼ ì´ˆê¸°í™”í•˜ê¸°ìœ„í•œ ë°ì´í„°ë¥¼ ì§€ì •í•©ë‹ˆë‹¤.
+        //ÇÏÀ§ ¸®¼Ò½º¸¦ ÃÊ±âÈ­ÇÏ±âÀ§ÇÑ µ¥ÀÌÅÍ¸¦ ÁöÁ¤ÇÕ´Ï´Ù.
         data.pSysMem = Vertex;
-        //ì´ˆê¸°í™” ë°ì´í„°ì˜ í¬ì¸í„°.
+        //ÃÊ±âÈ­ µ¥ÀÌÅÍÀÇ Æ÷ÀÎÅÍ.
 
-        //ë²„í¼ ë§Œë“¤ê¸°
-        //                                           ì„œìˆ     ì›ë³¸       ë³µì‚¬ëŒ€ìƒ   
+        //¹öÆÛ ¸¸µé±â
+        //                                           ¼­¼ú    ¿øº»       º¹»ç´ë»ó   
         HRESULT hr = D3D->GetDevice()->CreateBuffer(&desc, &data, &fillVertexBuffer);
         assert(SUCCEEDED(hr));
 
@@ -100,7 +81,7 @@ void ObCircle::CreateStaticMember()
 
     Vertex = new VertexPC[361];
 
-    //ë‘ê°€ì§€ ëœë¤í•œ ìƒ‰ ë§Œë“¤ê¸°
+    //µÎ°¡Áö ·£´ıÇÑ »ö ¸¸µé±â
     for (UINT i = 0; i < 361; i++)
     {
         Vertex[i].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
@@ -112,16 +93,16 @@ void ObCircle::CreateStaticMember()
     {
         D3D11_BUFFER_DESC desc;
         desc = { 0 };
-        desc.Usage = D3D11_USAGE_DEFAULT;//ë²„í¼ë¥¼ ì½ê³  ì“°ëŠ” ë°©ë²•
-        desc.ByteWidth = sizeof(VertexPC) * 361; //ë²„í¼ í¬ê¸° (ë°”ì´íŠ¸)ì…ë‹ˆë‹¤.
-        desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;//ë²„í¼ê°€ íŒŒì´í”„ ë¼ì¸ì— ë°”ì¸ë”©ë˜ëŠ” ë°©ë²•ì„ ì‹ë³„í•˜ì‹­ì‹œì˜¤
+        desc.Usage = D3D11_USAGE_DEFAULT;//¹öÆÛ¸¦ ÀĞ°í ¾²´Â ¹æ¹ı
+        desc.ByteWidth = sizeof(VertexPC) * 361; //¹öÆÛ Å©±â (¹ÙÀÌÆ®)ÀÔ´Ï´Ù.
+        desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;//¹öÆÛ°¡ ÆÄÀÌÇÁ ¶óÀÎ¿¡ ¹ÙÀÎµùµÇ´Â ¹æ¹ıÀ» ½Äº°ÇÏ½Ê½Ã¿À
 
         D3D11_SUBRESOURCE_DATA data = { 0 };
-        //í•˜ìœ„ ë¦¬ì†ŒìŠ¤ë¥¼ ì´ˆê¸°í™”í•˜ê¸°ìœ„í•œ ë°ì´í„°ë¥¼ ì§€ì •í•©ë‹ˆë‹¤.
+        //ÇÏÀ§ ¸®¼Ò½º¸¦ ÃÊ±âÈ­ÇÏ±âÀ§ÇÑ µ¥ÀÌÅÍ¸¦ ÁöÁ¤ÇÕ´Ï´Ù.
         data.pSysMem = Vertex;
-        //ì´ˆê¸°í™” ë°ì´í„°ì˜ í¬ì¸í„°.
+        //ÃÊ±âÈ­ µ¥ÀÌÅÍÀÇ Æ÷ÀÎÅÍ.
 
-        //ë²„í¼ ë§Œë“¤ê¸°
+        //¹öÆÛ ¸¸µé±â
         HRESULT hr = D3D->GetDevice()->CreateBuffer(&desc, &data, &vertexBuffer);
         assert(SUCCEEDED(hr));
 
@@ -163,10 +144,10 @@ void ObCircle::Render()
     }
     else
     {
-        D3D->GetDC()->IASetVertexBuffers(0,//ì…ë ¥ìŠ¬ë¡¯(16~32ê°œê¹Œì§€ ì„¤ì •ê°€ëŠ¥)
-            1,//ì…ë ¥ìŠ¬ë¡¯ì— ë¶™ì´ê³ ì í•˜ëŠ” ë²„í¼ì˜ ê°¯ìˆ˜
+        D3D->GetDC()->IASetVertexBuffers(0,//ÀÔ·Â½½·Ô(16~32°³±îÁö ¼³Á¤°¡´É)
+            1,//ÀÔ·Â½½·Ô¿¡ ºÙÀÌ°íÀÚ ÇÏ´Â ¹öÆÛÀÇ °¹¼ö
             &vertexBuffer,
-            &stride,//ì •ì ë²„í¼ì˜ í•œ ì›ì†Œì˜ ë°”ì´íŠ¸ë‹¨ìœ„ í¬ê¸°
+            &stride,//Á¤Á¡¹öÆÛÀÇ ÇÑ ¿ø¼ÒÀÇ ¹ÙÀÌÆ®´ÜÀ§ Å©±â
             &offset);
         D3D->GetDC()->IASetPrimitiveTopology
         (D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);

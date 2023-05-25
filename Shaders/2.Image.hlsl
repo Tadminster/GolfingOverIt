@@ -7,12 +7,12 @@ struct VertexInput
 // PI
 struct PixelInput
 {
-    float4 position : SV_POSITION; //í™”ë©´ì¢Œí‘œê³„ í¬ì§€ì…˜
-    float2 uv : UV0; //ë§¤í•‘ëœ ì¢Œí‘œ
-    float4 color : COLOR0; //ì„ì„ìƒ‰ìƒ
+    float4 position : SV_POSITION; //È­¸éÁÂÇ¥°è Æ÷Áö¼Ç
+    float2 uv : UV0; //¸ÅÇÎµÈ ÁÂÇ¥
+    float4 color : COLOR0; //¼¯À»»ö»ó
 };
 
-//ìƒìˆ˜ë²„í¼ í¬ê¸°ëŠ” 16byteë°°ìˆ˜ë¡œ ë§Œë“¤ì–´ì•¼í•œë‹¤.
+//»ó¼ö¹öÆÛ Å©±â´Â 16byte¹è¼ö·Î ¸¸µé¾î¾ßÇÑ´Ù.
 
 cbuffer VS_WVP : register(b0)
 {
@@ -20,7 +20,7 @@ cbuffer VS_WVP : register(b0)
 }
 cbuffer VS_COLOR : register(b1)
 {
-    //4 ê°œì˜ 4ë°”ì´íŠ¸
+    //4 °³ÀÇ 4¹ÙÀÌÆ®
     float4 color;
 }
 cbuffer VS_UV : register(b2)
@@ -30,19 +30,19 @@ cbuffer VS_UV : register(b2)
 
 cbuffer PS_LIGHT : register(b0)
 {
-	float2 screenPos; //ìŠ¤í¬ë¦°ì¢Œí‘œ
-	float radius; //ë°˜ì§€ë¦„í¬ê¸°
-	float select; //ë‚¨ëŠ”ê°’
-	float4 lightColor; //ì¡°ëª… ìƒ‰
-	float4 outColor; //ì™¸ê³½ ìƒ‰
+	float2 screenPos; //½ºÅ©¸°ÁÂÇ¥
+	float radius; //¹İÁö¸§Å©±â
+	float select; //³²´Â°ª
+	float4 lightColor; //Á¶¸í »ö
+	float4 outColor; //¿Ü°û »ö
 };
 
-//ë²„í…ìŠ¤ ì‰ì´ë”
-//ë°˜í™˜í˜•  í•¨ìˆ˜ì´ë¦„(ë§¤ê°œë³€ìˆ˜)
+//¹öÅØ½º ½¦ÀÌ´õ
+//¹İÈ¯Çü  ÇÔ¼öÀÌ¸§(¸Å°³º¯¼ö)
 // VertexInput(in) ->  VS  -> PixelInput (out)
 PixelInput VS(VertexInput input)
 {
-    //ê³µê°„ë³€í™˜ì´ ìˆì„ ì˜ˆì •ì¸ ê³³
+    //°ø°£º¯È¯ÀÌ ÀÖÀ» ¿¹Á¤ÀÎ °÷
     PixelInput output;
     //output.Position * input.Position;
     //L-W
@@ -50,7 +50,7 @@ PixelInput VS(VertexInput input)
     
     output.color = color;
     
-    //ë§¤í•‘ëœ ì¢Œí‘œ ì‚¬ìš©
+    //¸ÅÇÎµÈ ÁÂÇ¥ »ç¿ë
     output.uv = input.uv;
     
     [branch]
@@ -68,20 +68,20 @@ PixelInput VS(VertexInput input)
     return output;
 }
 
-//í…ìŠ¤ì³ ìì›  (srv) ì—ì„œ ì—°ê²°
+//ÅØ½ºÃÄ ÀÚ¿ø  (srv) ¿¡¼­ ¿¬°á
 Texture2D Texture : register(t0);
 
-//ì¶”ì¶œê¸°
+//ÃßÃâ±â
 SamplerState Sampler : register(s0);
 
-//í”½ì…€ì‰ì´ë” ì§„ì… í•¨ìˆ˜
-float4 PS(PixelInput input) : SV_TARGET //SV_TARGET ì€ íƒ€ê²Ÿì´ë  ìƒ‰ê¹” 
+//ÇÈ¼¿½¦ÀÌ´õ ÁøÀÔ ÇÔ¼ö
+float4 PS(PixelInput input) : SV_TARGET //SV_TARGET Àº Å¸°ÙÀÌµÉ »ö±ò 
 {
     float4 TextureColor =
-    // ë§¤í•‘ëœ ì¢Œí‘œë¡œ í…ìŠ¤ì³ ë¡œë“œ
+    // ¸ÅÇÎµÈ ÁÂÇ¥·Î ÅØ½ºÃÄ ·Îµå
     Texture.Sample(Sampler, input.uv);
     
-    //ì½ì–´ì˜¨ ê·¸ë¦¼íŒŒì¼ì˜ í”½ì…€ìƒ‰ìƒì„ ì¡°ê±´ë¬¸ìœ¼ë¡œ ë¹„êµ
+    //ÀĞ¾î¿Â ±×¸²ÆÄÀÏÀÇ ÇÈ¼¿»ö»óÀ» Á¶°Ç¹®À¸·Î ºñ±³
     [flatten]
     if (TextureColor.r == 1.0f &&
         TextureColor.g == 0.0f &&

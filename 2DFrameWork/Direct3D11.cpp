@@ -81,7 +81,6 @@ void Direct3D11::Create()
 		}
 		SafeRelease(factory);
 	}
-
 	//CreateSwapChainAndDevice
 	{
 		DXGI_SWAP_CHAIN_DESC swapChainDesc = { 0 };

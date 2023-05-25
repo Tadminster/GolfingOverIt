@@ -10,18 +10,19 @@ void ObRect::CreateStaticMember()
     Vertex = new VertexPC[4];
     //VertexCount = 4;
     //시계방향으로 정점찍기
+    //좌 하단
     Vertex[0].position.x = -0.5f;
     Vertex[0].position.y = -0.5f;
     Vertex[0].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
-
+    //좌 상단
     Vertex[1].position.x = -0.5f;
     Vertex[1].position.y = 0.5f;
     Vertex[1].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
-
+    //우 하단
     Vertex[2].position.x = 0.5f;
     Vertex[2].position.y = -0.5f;
     Vertex[2].color = Color(0.0f, 0.0f, 0.0f, 1.0f);
-
+    //우 상단
     Vertex[3].position.x = 0.5f;
     Vertex[3].position.y = 0.5f;
     Vertex[3].color = Color(0.0f, 0.0f, 0.0f, 1.0f);
@@ -31,7 +32,7 @@ void ObRect::CreateStaticMember()
         //DESC 서술형 구조체
         D3D11_BUFFER_DESC desc;
         desc = { 0 };
-        desc.Usage = D3D11_USAGE_DEFAULT;//버퍼를 읽고 쓰는 방법
+        desc.Usage = D3D11_USAGE_IMMUTABLE;//버퍼를 읽고 쓰는 방법
         desc.ByteWidth = sizeof(VertexPC) * 4; //버퍼 크기 (바이트)입니다.
         desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;//버퍼가 파이프 라인에 바인딩되는 방법을 식별하십시오
 
@@ -73,7 +74,7 @@ void ObRect::CreateStaticMember()
     {
         D3D11_BUFFER_DESC desc;
         desc = { 0 };
-        desc.Usage = D3D11_USAGE_DEFAULT;//버퍼를 읽고 쓰는 방법
+        desc.Usage = D3D11_USAGE_IMMUTABLE;//버퍼를 읽고 쓰는 방법
         desc.ByteWidth = sizeof(VertexPC) * 5; //버퍼 크기 (바이트)입니다.
         desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;//버퍼가 파이프 라인에 바인딩되는 방법을 식별하십시오
 

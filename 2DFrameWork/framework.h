@@ -48,9 +48,6 @@ using namespace SimpleMath;
 #include "../Libs/ImGui/ImGuiFileDialog.h"
 #include "../Libs/ImGui/ImGuiFileDialogConfig.h"
 
-//MAcro(in game)
-#define FLOOR				-app.GetHalfHeight() + 50.f
-
 //Macro(Pascal)
 #define Check(hr)			{ assert(SUCCEEDED(hr)); }
 #define SafeRelease(p)		{ if(p){ (p)->Release(); (p) = nullptr; } }
@@ -59,8 +56,8 @@ using namespace SimpleMath;
 #define	ToRadian			0.0174532f
 //Macro(WINAPI Style)
 #define	PI					3.1415926f	//180
-#define	DIV2PI				1.5707963f	//90
-#define	DIV4PI				0.7853981f	//45
+#define	HALFPI				1.5707963f	//90
+#define	QUATERPI			0.7853981f	//45
 #define	UP					Vector2(0.0f,1.0f)
 #define	DOWN				Vector2(0.0f,-1.0f)
 #define	LEFT				Vector2(-1.0f,0.0f)
@@ -85,9 +82,9 @@ extern Application app;//Extern Global
 #include "Timer.h"
 #include "Camara.h"
 #include "Random.h"
-#include "Texture.h"
-#include "Sound.h"
-#include "SceneManager.h"
+//#include "Texture.h"
+//#include "Sound.h"
+//#include "SceneManager.h"
 
 #include "VertexType.h"
 #include "Shader.h"
@@ -97,7 +94,7 @@ extern Application app;//Extern Global
 #include "ObStar.h"
 #include "ObCircle.h"
 #include "ObLine.h"
-#include "ObImage.h"
+//#include "ObImage.h"
 
 //Singleton Macro
 #define	D3D			Direct3D11::GetInstance()
@@ -108,6 +105,6 @@ extern Application app;//Extern Global
 #define TIMER		Timer::GetInstance()
 #define DELTA		Timer::GetInstance()->GetDeltaTime()
 #define RANDOM		Random::GetInstance()
-#define TEXTURE		Texture::GetInstance()
-#define SOUND		Sound::GetInstance()
-#define SCENE       SceneManager::GetInstance()
+//#define TEXTURE		Texture::GetInstance()
+//#define SOUND		Sound::GetInstance()
+//#define SCENE       SceneManager::GetInstance()

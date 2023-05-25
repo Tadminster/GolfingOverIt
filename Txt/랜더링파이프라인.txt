@@ -2,7 +2,7 @@
 
 파이프라인 : 한 단계의 출력이 다음 단계의 입력으로 이어지는 구조
 
-DrawCall -> IA -> VS -> RS -> PS -> OM
+DrawCall -> IA -> VS -> RS -> PS -> OM -> 백버퍼에 찍힘
 
 입력 조립기 (Input Assembler)
 정점 정보를 모으는 역할

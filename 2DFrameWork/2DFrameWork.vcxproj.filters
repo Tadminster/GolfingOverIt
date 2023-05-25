@@ -44,22 +44,10 @@
     <ClInclude Include="Camara.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="Gui.h">
-      <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="ObImage.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Utility.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="Sound.h">
-      <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
+    <ClInclude Include="Gui.h">
       <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
@@ -111,22 +99,10 @@
     <ClCompile Include="Camera.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="Gui.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="ObImage.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Utility.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="Sound.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
+    <ClCompile Include="Gui.cpp">
       <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>

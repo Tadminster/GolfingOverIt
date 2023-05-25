@@ -1,51 +1,55 @@
-//hlsl ì»´íŒŒì¼ ëŒ€ìƒ X
+//hlsl ÄÄÆÄÀÏ ´ë»ó X
 struct VertexInput
 {
-    float4 position : POSITION0; //ì‹œë©˜í‹± ìš©ë„
+    float4 position : POSITION0; //½Ã¸àÆ½ ¿ëµµ
     float4 color : COLOR0;
 };
 // PI
 struct PixelInput
 {
-    float4 position : SV_POSITION; //í™”ë©´ì¢Œí‘œê³„ í¬ì§€ì…˜
+    float4 position : SV_POSITION; //È­¸éÁÂÇ¥°è Æ÷Áö¼Ç
     float4 color : COLOR0;
 };
 
-//ì˜¤ë¸Œì íŠ¸ì˜ í¬ê¸° íšŒì „ ì´ë™
+//¿ÀºêÁ§Æ®ÀÇ Å©±â È¸Àü ÀÌµ¿
 cbuffer VS_WVP : register(b0) //register(b0)
 {
     matrix WVP;
 }
+//»ó¼ö ¹öÆÛ
 cbuffer VS_COLOR : register(b1)
 {
-    //4 ê°œì˜ 4ë°”ì´íŠ¸
+    //4 °³ÀÇ 4¹ÙÀÌÆ®
     float4 color;
 }
 
 cbuffer PS_LIGHT : register(b0)
 {
-	float2 screenPos; //ìŠ¤í¬ë¦°ì¢Œí‘œ
-	float radius; //ë°˜ì§€ë¦„í¬ê¸°
-	float select; //ë‚¨ëŠ”ê°’
-	float4 lightColor; //ì¡°ëª… ìƒ‰
-	float4 outColor; //ì™¸ê³½ ìƒ‰
+	float2 screenPos; //½ºÅ©¸°ÁÂÇ¥
+	float radius; //¹ÝÁö¸§Å©±â
+	float select; //³²´Â°ª
+	float4 lightColor; //Á¶¸í »ö
+	float4 outColor; //¿Ü°û »ö
 };
 
 PixelInput VS(VertexInput input)
 {
-    //ê³µê°„ë³€í™˜ì´ ìžˆì„ ì˜ˆì •ì¸ ê³³
+    //°ø°£º¯È¯ÀÌ ÀÖÀ» ¿¹Á¤ÀÎ °÷
     PixelInput output;
-    
+    //Ä«¸Þ¶ó,¿ùµå ±îÁö Àû¿ëµÈ °ø°£º¯È¯
     output.position = mul(input.position, WVP);
     
+    //             ²ÀÁöÁ¡ »ö±ò     0~2 -1     -1~ 1
     output.color = input.color + (color * 2.0f - 1.0f);
+    
+    
     saturate(output.color);
     
     return output;
 }
 //->pixel  PS   ->color
-//í”½ì…€ì‰ì´ë” ì§„ìž… í•¨ìˆ˜
-float4 PS(PixelInput input) : SV_TARGET //SV_TARGET ì€ íƒ€ê²Ÿì´ë  ìƒ‰ê¹” 
+//ÇÈ¼¿½¦ÀÌ´õ ÁøÀÔ ÇÔ¼ö
+float4 PS(PixelInput input) : SV_TARGET //SV_TARGET Àº Å¸°ÙÀÌµÉ »ö±ò 
 {
 	//if (input.position.y > 200.0f)
 	//{

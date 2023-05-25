@@ -1,9 +1,9 @@
-ï»¿#pragma once
+#pragma once
 class ObLine;
 enum class SPACE
 {
 	WORLD,
-	SCREEN, // ê°€ìš´ë°ê°€ 0,0ì¸
+	SCREEN, // °¡¿îµ¥°¡ 0,0ÀÎ
 };
 enum class COLLIDER
 {
@@ -66,24 +66,24 @@ public:
 
 	//getter setter
 public:
-	//ìœ„ì¹˜ ë°›ì•„ì˜¤ê¸°
+	//À§Ä¡ ¹Ş¾Æ¿À±â
 	Vector2 GetLocalPos()	{ return position;}
 	Vector2 GetWorldPos()	{ return Vector2(RT._41, RT._42); }
 	Vector2 GetWorldPivot() { return Vector2(W._41, W._42); }
-	//ìœ„ì¹˜ë¥¼ ê³ ì •í• ë•Œ =
+	//À§Ä¡¸¦ °íÁ¤ÇÒ¶§ =
 	void	SetLocalPos(Vector2 location)	{ position = location; }
 	void	SetLocalPosX(float lcationX)	{ position.x = lcationX; }
 	void	SetLocalPosY(float lcationY)	{ position.y = lcationY; }
 	void	SetWorldPos(Vector2 worldPos);
 	void	SetWorldPosX(float worldPosX);
 	void	SetWorldPosY(float worldPosY);
-	//ì´ë™ì‹œí‚¬ë•Œ +=
+	//ÀÌµ¿½ÃÅ³¶§ +=
 	void	MoveLocalPos(Vector2 Velocity)	{ position += Velocity; }
 	void	MoveWorldPos(Vector2 Velocity);
-	//ì›”ë“œê¸°ì¤€ ë°©í–¥
+	//¿ùµå±âÁØ ¹æÇâ
 	Vector2 GetRight()	{ return Vector2(RT._11, RT._12); }
 	Vector2 GetUp()		{ return Vector2(RT._21, RT._22); }
-	//ë¶€ëª¨í–‰ë ¬ ë§Œë“¤ê¸°
+	//ºÎ¸ğÇà·Ä ¸¸µé±â
 	void	SetParentRT(GameObject& src)	{ P = &src.RT; }
 	void	SetParentT(GameObject& src)	{ P = &src.T; }
 };

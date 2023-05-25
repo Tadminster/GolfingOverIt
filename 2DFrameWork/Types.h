@@ -62,6 +62,7 @@ public:
 	virtual void ResizeScreen() = 0;
 };
 
+//전역으로 호출해줄 프로그램 정보데이터
 class Application
 {
 	friend class Direct3D11;
@@ -89,7 +90,7 @@ public:
 public:
 	Application() : instance(nullptr), handle(nullptr), vSync(false), fullScreen(false)
 		, appName(L" "), width(1280.0f), height(720.0f), background(Color(0.7f, 0.7f, 0.7f, 1.0f))
-		, fixFrame(200), deltaScale(1.0f), soundScale(1.0f), x(0.0f), y(0.0f) {}
+		, fixFrame(20000), deltaScale(1.0f), soundScale(1.0f), x(0.0f), y(0.0f) {}
 
 	float	GetWidth() { return width; }
 	float	GetHeight() { return height; }
