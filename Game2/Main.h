@@ -19,6 +19,7 @@ private:
 	bool hello;
 
 	int donghwa;
+	int chenhee;
 public:
 	Main();
 	~Main();
