@@ -11,7 +11,7 @@ WPARAM Window::Run(Scene* main)
 	ObLine::CreateStaticMember();
 	ObCircle::CreateStaticMember();
 	ObStar::CreateStaticMember();
-	ObImage::CreateStaticMember();
+	//ObImage::CreateStaticMember();
 	main->Init();
 	MSG msg = { 0 };
 	while (true)
@@ -28,7 +28,7 @@ WPARAM Window::Run(Scene* main)
 		{
 			TIMER->Chronometry(app.fixFrame);
 			INPUT->Update();
-			SOUND->Update();
+			//SOUND->Update();
 			GUI->Update();
 			main->Update();
 			main->LateUpdate();
@@ -48,7 +48,7 @@ WPARAM Window::Run(Scene* main)
 	ObLine::DeleteStaticMember();
 	ObCircle::DeleteStaticMember();
 	ObStar::DeleteStaticMember();
-	ObImage::DeleteStaticMember();
+	//ObImage::DeleteStaticMember();
 
 	main->Release();
 	TIMER->DeleteSingleton();
@@ -56,9 +56,9 @@ WPARAM Window::Run(Scene* main)
 	GUI->DeleteSingleton();
 	CAM->DeleteSingleton();
 	RANDOM->DeleteSingleton();
-	SOUND->DeleteSingleton();
-	TEXTURE->DeleteSingleton();
-	SCENE->DeleteSingleton();
+	//SOUND->DeleteSingleton();
+	//TEXTURE->DeleteSingleton();
+	//SCENE->DeleteSingleton();
 
 	return msg.wParam;
 }

@@ -3,39 +3,21 @@
   <ItemGroup>
     <ClInclude Include="Main.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Bullet.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Ball.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet_proto.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Gun_pistol.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Ob_floor.h" />
-    <ClInclude Include="Ob_movable.h" />
-    <ClInclude Include="Ob_drag.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Bullet.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Ball.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet_proto.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Gun_pistol.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Ob_floor.cpp" />
-    <ClCompile Include="Ob_movable.cpp" />
-    <ClCompile Include="Ob_drag.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">

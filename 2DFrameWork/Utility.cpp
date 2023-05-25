@@ -168,6 +168,6 @@ bool Utility::IntersectCircleCircle(CIRCLE & cc1, CIRCLE & cc2)
 float Utility::DirToRadian(Vector2 Dir)
 {
     //만약 단위벡터가 아니라면
-    Dir.Normalize();
+    //Dir.Normalize();
     return atan2f(Dir.y, Dir.x);
 }

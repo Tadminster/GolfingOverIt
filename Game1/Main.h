@@ -1,32 +1,29 @@
-ï»¿#pragma once
-#define number_star 500
+#pragma once
+#define StarMax 100
 
 class Main : public Scene
 {
 private:
-	// ì§€í˜•
-	class ObStar* bg_star[number_star];
-	class Ob_floor* floor;
-	
-	class Ball* ball;
-	//// ì‚¬ë¬¼
-	//class Ob_movable* rect_movable;
-	//class Ob_drag* rect_drag;
+	ObRect* rect;
+	int turn;
+	int damage = 0;
+	float damageTime = 0.0f;
+	int releasebullet;
 
-	//// í”Œë ˆì´ì–´
-	//class Player* player;
-	//class Gun_pistol* pistol;
+	ObStar* bg[StarMax];
+	Vector2 Campos;
+	Vector2 mousepoint;
+	Vector2 rectpoint;
 
-	//class Ball* ball;
-	//class Player* goalpost[2];
+
 
 public:
 	Main();
 	~Main();
 	virtual void Init() override;
-	virtual void Release() override; //í•´ì œ
+	virtual void Release() override; //ÇØÁ¦
 	virtual void Update() override;
-	virtual void LateUpdate() override;//ê°±ì‹ 
+	virtual void LateUpdate() override;//°»½Å
 	virtual void Render() override;
 	virtual void ResizeScreen() override;
 };

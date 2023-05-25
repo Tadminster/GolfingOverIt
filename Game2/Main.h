@@ -1,15 +1,27 @@
 #pragma once
+#define MAPMAX 100
 class Main : public Scene
 {
 private:
-	ObImage*	coin;
-	ObRect*		ui;	
+	ObRect* map[MAPMAX];
+	class Ball* Golfball;
+
+	Vector2 mousepoint;
+	Vector2 ballpoint;
+	Vector2 point;
+	Vector2 firepower;
+	
+	bool isStop= false;
+	bool onClick = false;
+	float pow;
 
 public:
+	Main();
+	~Main();
 	virtual void Init() override;
-	virtual void Release() override; //í•´ì œ
+	virtual void Release() override; //ÇØÁ¦
 	virtual void Update() override;
-	virtual void LateUpdate() override;//ê°±ì‹ 
+	virtual void LateUpdate() override;//°»½Å
 	virtual void Render() override;
 	virtual void ResizeScreen() override;
 };

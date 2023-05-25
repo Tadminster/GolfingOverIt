@@ -1,4 +1,4 @@
-ï»¿#include "framework.h"
+#include "framework.h"
 
 ObLine* GameObject::axisObject = nullptr;
 ID3D11Buffer* GameObject::WVPBuffer = nullptr;
@@ -28,7 +28,7 @@ void GameObject::CreateStaticMember()
 		D3D11_BUFFER_DESC desc = { 0 };
 		desc.Usage = D3D11_USAGE_DYNAMIC;
 		desc.ByteWidth = sizeof(Color);
-		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER; //ìƒìˆ˜ë²„í¼
+		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER; //»ó¼ö¹öÆÛ
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		desc.MiscFlags = 0;
 		desc.StructureByteStride = 0;
@@ -41,18 +41,18 @@ void GameObject::CreateStaticMember()
 	basicShader = new Shader(L"1.Basic");
 	imageShader = new Shader(L"2.Image");
 
-	//char ë¬¸ìží˜• -> ì•„ìŠ¤í‚¤ì½”ë“œ
-	// r d  ã„±ã…‡ã„·
+	//char ¹®ÀÚÇü -> ¾Æ½ºÅ°ÄÚµå
+	// r d  ¤¡¤·¤§
 	//wchar_t 2byte
 	//wchar_t a;
 
 	//"dfa";
-	//"ê°ì‚¬í•¨";
-	////c ìŠ¤íƒ€ì¼ ë¬¸ìžì—´
+	//"°¨»çÇÔ";
+	////c ½ºÅ¸ÀÏ ¹®ÀÚ¿­
 	//char arr[4];
 	//arr[0] = 'd';
 
-	////c++ ìŠ¤íƒ€ì¼ ë¬¸ìžì—´
+	////c++ ½ºÅ¸ÀÏ ¹®ÀÚ¿­
 	//string a;
 	//a = "a";
 	//wstring b;
@@ -99,27 +99,6 @@ GameObject::GameObject()
 
 void GameObject::Update()
 {
-	/*
-	S._11 = scale.x;
-	S._22 = scale.y;
-
-	R._11 = cos(rotation * ToRadian);
-	R._22 = cos(rotation * ToRadian);
-	R._12 = -sin(rotation * ToRadian);
-	R._21 = sin(rotation * ToRadian);
-
-	T._41 = pos.x;
-	T._42 = pos.y;
-	T._43 = 0;
-
-	Scale, Rotation, Translation
-	S =	{						R = {										T = {
-			{a, 0, 0},					{cos(theta), -sin(theta), 0},				{1, 0, a}
-			{0, b, 0},					{sin(theta), cos(theta),  0},				{0, 1, b}
-			{0, 0, 1}					{0,			 0,			  1}				{0, 0, 1}
-		}							}											}
-	*/
-
 	Pi = Matrix::CreateTranslation(pivot.x, pivot.y, 0.0f);
 	S = Matrix::CreateScale(scale.x, scale.y,1.0f);
 	T = Matrix::CreateTranslation(position.x, position.y,0.0f);
@@ -129,7 +108,7 @@ void GameObject::Update()
 
 	RT =  R * T * R2;
 	
-	//Pì˜ ì£¼ì†Œê°€ ìžˆìœ¼ë©´
+	//PÀÇ ÁÖ¼Ò°¡ ÀÖÀ¸¸é
 	if (P)
 	{
 		RT *= *P;
@@ -167,13 +146,14 @@ void GameObject::Render()
 	}
 
 	WVP = WVP.Transpose();
-
+	//wvp ¹ÙÀÎµù
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedResource;
 		D3D->GetDC()->Map(WVPBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 		memcpy_s(mappedResource.pData, sizeof(Matrix), &WVP, sizeof(Matrix));
 		D3D->GetDC()->Unmap(WVPBuffer, 0);
 	}
+	//color ¹ÙÀÎµù
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedResource;
 		D3D->GetDC()->Map(colorBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
@@ -186,7 +166,7 @@ bool GameObject::Intersect(Vector2 coord)
 {
 	if (collider == COLLIDER::RECT)
 	{
-		//íšŒì „ X
+		//È¸Àü X
 		if (GetRight() == RIGHT)
 		{
 			Utility::RECT rc(GetWorldPivot(), scale);
@@ -218,7 +198,7 @@ bool GameObject::Intersect(GameObject* ob)
 	{
 		if (ob->collider == COLLIDER::RECT)
 		{
-			//íšŒì „ X
+			//È¸Àü X
 			if ((GetRight() == RIGHT) && (ob->GetRight() == RIGHT))
 			{
 				Utility::RECT rc1(GetWorldPivot(), scale);
@@ -233,7 +213,7 @@ bool GameObject::Intersect(GameObject* ob)
 		}
 		else if (ob->collider == COLLIDER::CIRCLE)
 		{
-			//íšŒì „ X
+			//È¸Àü X
 			if (GetRight() == RIGHT)
 			{
 				Utility::RECT rc(GetWorldPivot(), scale);
@@ -258,7 +238,7 @@ bool GameObject::Intersect(GameObject* ob)
 	{
 		if (ob->collider == COLLIDER::RECT)
 		{
-			//íšŒì „ X
+			//È¸Àü X
 			if (ob->GetRight() == RIGHT)
 			{
 				Utility::RECT rc(ob->GetWorldPivot(), ob->scale);

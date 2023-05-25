@@ -1,30 +1,22 @@
-﻿#pragma once
-class Player : public ObRect
+#pragma once
+class Player : public ObCircle
 {
-public:
-	// 플레이어 능력치
-	int					speed;
-	int					score;
-	float				jump_power;
-	float				jump_startPoint;
-	float				charge_current;
+	class Bullet* bullet[30];
 
-	// 플레이어 상태
-	int					hand;
-	bool				jump_status;
-	int					characterDirection; // 캐릭터 시선 방향
-
-
-	// 무기
-	class Gun_pistol*	pistol;
-
+	//�ð�������
+	ObRect* gauge;
+	ObRect* gauge2;
+	float pressPower;
 public:
 	Player();
 	virtual ~Player();
-	void Init(Vector2 spawn, bool isLeft);
+	void Init(Vector2 spawn,bool isLeft);
 	void Control();
-	void Control(Vector2 arrow);
 	void Update() override;
 	void Render() override;
+	float GetHp() { return gauge2->scale.x; }
+	Bullet* GetBullet(int i) const { return bullet[i]; }
+	void Damage(float dmg) { gauge2->scale.x -= dmg; }
+	//const Bullet** GetBullet() { return bullet; }
 };
 

@@ -6,7 +6,7 @@ private:
 	//인터페이스
 	//new 로 생성이 안됨 -> 추상클래스
 	//create 함수를 이용해서 생성된 주소를 받아옴
-	ID3D11Device*						device; //버퍼 생성
+	ID3D11Device*						device;			//버퍼 생성
 	ID3D11DeviceContext*				deviceContext; //렌더링 파이프라인 바인딩
 	IDXGISwapChain*						swapChain; 
 	ID3D11Texture2D*					backBuffer;
