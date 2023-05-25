@@ -181,7 +181,15 @@ void Main::LateUpdate()
 		Golfball->Update();
 	}
 
-	
+	for (int i = 0; i < 19; i++)
+	{
+		map[i]->Collision(Golfball);
+	}
+	//for (auto& wall : map)
+	//{
+	//	wall->Collision(Golfball);
+	//}
+
 }
 
 void Main::Render()
