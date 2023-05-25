@@ -18,6 +18,7 @@ bool Wall::Collision(GameObject* target)
 
 		if (ball)
 		{
+			ball->SetWorldPos(ball->GetWorldPos() + -ball->GetRight());
 			ball->ReflectionX();
 			return true;
 		}
