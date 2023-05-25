@@ -92,7 +92,7 @@ void Main::Update()
 {
 	
 
-
+	int hello;
 	if (Golfball->stopcheck())
 	{
 		Golfball->color = Vector4(0, 1, 0, 1);
