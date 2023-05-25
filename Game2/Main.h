@@ -3,7 +3,7 @@
 class Main : public Scene
 {
 private:
-	ObRect* map[MAPMAX];
+	class Wall* map[MAPMAX];
 	class Ball* Golfball;
 
 	Vector2 mousepoint;

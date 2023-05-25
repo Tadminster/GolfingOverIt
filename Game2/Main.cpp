@@ -1,11 +1,12 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
+#include "Wall.h"
 #include "Ball.h"
 #include "Main.h"
 
 Main::Main()
 {
 	for (int i = 0; i < MAPMAX; i++)
-		map[i] = new ObRect();
+		map[i] = new Wall();
 
 	Golfball = new Ball();
 }
@@ -22,7 +23,7 @@ void Main::Init()
 	Golfball->SetWorldPos(Vector2(0,0));
 
 	map[0]->scale.x = 300.0f;
-	map[0]->scale.y = 100.0f;
+	map[0]->scale.y = 50.0f;
 	map[0]->SetWorldPos(Vector2(-250.0f, -250));
 	map[1]->scale.x = 320.0f;
 	map[1]->scale.y = 150.0f;
@@ -82,6 +83,19 @@ void Main::Init()
 	map[15]->scale.x = 150.0f;
 	map[15]->scale.y = 50.0f;
 	map[15]->SetWorldPos(Vector2(-400.0f, 1250));
+
+	map[16]->scale.x = 100.0f;
+	map[16]->scale.y = 150.0f;
+	map[16]->SetWorldPos(Vector2(-100.0f, 1450));
+
+	map[17]->scale.x = 50.0f;
+	map[17]->scale.y = 10.0f;
+	map[17]->rotation.z = 20.0f;
+	map[17]->SetWorldPos(Vector2(50.0f, 1500));
+
+	map[18]->scale.x = 70.0f;
+	map[18]->scale.y = 10.0f;
+	map[18]->SetWorldPos(Vector2(95.0f, 1520));
 }
 
 void Main::Release()
@@ -91,7 +105,25 @@ void Main::Release()
 void Main::Update()
 {
 	
-
+	if (INPUT->KeyPress(VK_UP))
+	{
+		CAM->position += UP * 500.0f * DELTA;
+	}
+	if (INPUT->KeyPress(VK_DOWN))
+	{
+		CAM->position += DOWN * 500.0f * DELTA;
+	}
+	if (INPUT->KeyPress(VK_LEFT))
+	{
+		CAM->position += LEFT * 500.0f * DELTA;
+	}
+	if (INPUT->KeyPress(VK_RIGHT))
+	{
+		CAM->position += RIGHT * 500.0f * DELTA;;
+	}
+	for (int i = 0; i < MAPMAX; i++) {
+		map[i]->Update();
+	}
 	int hello;
 	if (Golfball->stopcheck())
 	{
