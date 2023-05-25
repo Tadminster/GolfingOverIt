@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 #include "Ball.h"
 #include "Main.h"
 
@@ -92,7 +92,7 @@ void Main::Update()
 {
 	
 
-	int a;
+
 	if (Golfball->stopcheck())
 	{
 		Golfball->color = Vector4(0, 1, 0, 1);
