@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #define MAPMAX 100
 class Main : public Scene
 {
@@ -15,13 +15,15 @@ private:
 	bool onClick = false;
 	float pow;
 
+	bool hi;
+
 public:
 	Main();
 	~Main();
 	virtual void Init() override;
-	virtual void Release() override; //ÇØÁ¦
+	virtual void Release() override; //í•´ì œ
 	virtual void Update() override;
-	virtual void LateUpdate() override;//°»½Å
+	virtual void LateUpdate() override;//ê°±ì‹ 
 	virtual void Render() override;
 	virtual void ResizeScreen() override;
 };
