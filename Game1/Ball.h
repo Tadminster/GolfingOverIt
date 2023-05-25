@@ -1,9 +1,15 @@
-#pragma once
+﻿#pragma once
 class Ball : public ObCircle
 {
 public:
-	float speed;
-	Vector2 direction;
+	float           pressPower;                 // 차지
+	Vector2			direction;
+
+	Vector2         gravityDiretion;        // 중력 방향
+	float           gravityForce;           // 중력 힘
+	float           gravityWeight;          // 중력 가중치
+
+	bool			status_stop;
 
 public:
 	Ball();
@@ -12,11 +18,11 @@ public:
 
 	void Control();
 	void Update() override;
-	void Render() override;
 
-	bool hasIntersect(class GameObject* target);
-	bool collision(class GameObject* target);
+	//bool hasIntersect(class GameObject* target);
+	//bool collision(class GameObject* target);
 
-    void reflection_y() { this->direction.x = -this->direction.x;}
-	void reflection_x() { this->direction.y = -this->direction.y;}
+	void reflection_y();
+	void reflection_x();
+	void checkStop();
 };

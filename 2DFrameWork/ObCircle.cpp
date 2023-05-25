@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 ID3D11Buffer* ObCircle::fillVertexBuffer = nullptr;
 ID3D11Buffer* ObCircle::vertexBuffer = nullptr;
 
@@ -18,63 +18,63 @@ void ObCircle::CreateStaticMember()
         //0 1 2 ... 359
         Vertex[i * 3 + 1].position.x = cosf(i * ToRadian) * 0.5f;
         Vertex[i * 3 + 1].position.y = sinf(i * ToRadian) * 0.5f;
-        //Vertex[i * 3 + 1].color = Color(0.f, 0.f, 0.f, 1.0f);
+        Vertex[i * 3 + 1].color = Color(0.f, 0.f, 0.f, 1.0f);
         //Vertex[i * 3 + 1].color = Color(RANDOM->Float(), RANDOM->Float(), RANDOM->Float(), 1.0f);
 
         //1 2 3 .. 360
         Vertex[i * 3 + 2].position.x = cosf((i + 1) * ToRadian) * 0.5f;
         Vertex[i * 3 + 2].position.y = sinf((i + 1) * ToRadian) * 0.5f;
-        //Vertex[i * 3 + 2].color = Color(0.f, 0.f, 0.f, 1.0f);
+        Vertex[i * 3 + 2].color = Color(0.f, 0.f, 0.f, 1.0f);
         //Vertex[i * 3 + 2].color = Color(RANDOM->Float(), RANDOM->Float(), RANDOM->Float(), 1.0f);
           
-        if (i < 60)
-        {
-            // red
-            float color = i / 60.f;
+        //if (i < 60)
+        //{
+        //    // red
+        //    float color = i / 60.f;
 
-            Vertex[i * 3 + 1].color = Color(1.f, 0.0f, 1.0f - color, 1.0f);
-            Vertex[i * 3 + 2].color = Color(1.f, 0.0f, 1.0f - color, 1.0f);
-        }
-        else if (i < 120)
-        {
-            // Red to yellow
-            float color = (i - 60) / 60.f;
+        //    Vertex[i * 3 + 1].color = Color(1.f, 0.0f, 1.0f - color, 1.0f);
+        //    Vertex[i * 3 + 2].color = Color(1.f, 0.0f, 1.0f - color, 1.0f);
+        //}
+        //else if (i < 120)
+        //{
+        //    // Red to yellow
+        //    float color = (i - 60) / 60.f;
 
-            Vertex[i * 3 + 1].color = Color(1.0f, color, 0.0f, 1.0f);
-            Vertex[i * 3 + 2].color = Color(1.0f, color, 0.0f, 1.0f);
-        }
-        else if (i < 180)
-        {
-            // Yellow to Green
-            float color = (i - 120) / 60.f;
+        //    Vertex[i * 3 + 1].color = Color(1.0f, color, 0.0f, 1.0f);
+        //    Vertex[i * 3 + 2].color = Color(1.0f, color, 0.0f, 1.0f);
+        //}
+        //else if (i < 180)
+        //{
+        //    // Yellow to Green
+        //    float color = (i - 120) / 60.f;
 
-            Vertex[i * 3 + 1].color = Color(1.0f - color, 1.f, 0.0f, 1.0f);
-            Vertex[i * 3 + 2].color = Color(1.0f - color, 1.f, 0.0f, 1.0f);
-        }
-        else if (i < 240)
-        {
-            // Green to cyan
-            float color = (i - 180) / 60.f;
+        //    Vertex[i * 3 + 1].color = Color(1.0f - color, 1.f, 0.0f, 1.0f);
+        //    Vertex[i * 3 + 2].color = Color(1.0f - color, 1.f, 0.0f, 1.0f);
+        //}
+        //else if (i < 240)
+        //{
+        //    // Green to cyan
+        //    float color = (i - 180) / 60.f;
 
-            Vertex[i * 3 + 1].color = Color(0.0f, 1.f, color, 1.0f);
-            Vertex[i * 3 + 2].color = Color(0.0f, 1.f, color, 1.0f);
-        }
-        else if (i < 300)
-        {
-            // Cyan to blue
-            float color = (i - 240) / 60.f;
+        //    Vertex[i * 3 + 1].color = Color(0.0f, 1.f, color, 1.0f);
+        //    Vertex[i * 3 + 2].color = Color(0.0f, 1.f, color, 1.0f);
+        //}
+        //else if (i < 300)
+        //{
+        //    // Cyan to blue
+        //    float color = (i - 240) / 60.f;
 
-            Vertex[i * 3 + 1].color = Color(0.0f, 1.f - color, 1.0f, 1.0f);
-            Vertex[i * 3 + 2].color = Color(0.0f, 1.f - color, 1.0f, 1.0f);
-        }
-        else
-        {
-            // Blue to magenta
-            float color = (i - 300) / 60.f;
+        //    Vertex[i * 3 + 1].color = Color(0.0f, 1.f - color, 1.0f, 1.0f);
+        //    Vertex[i * 3 + 2].color = Color(0.0f, 1.f - color, 1.0f, 1.0f);
+        //}
+        //else
+        //{
+        //    // Blue to magenta
+        //    float color = (i - 300) / 60.f;
 
-            Vertex[i * 3 + 1].color = Color(color, 0.0f, 1.0f, 1.0f);
-            Vertex[i * 3 + 2].color = Color(color, 0.0f, 1.0f, 1.0f);
-        }
+        //    Vertex[i * 3 + 1].color = Color(color, 0.0f, 1.0f, 1.0f);
+        //    Vertex[i * 3 + 2].color = Color(color, 0.0f, 1.0f, 1.0f);
+        //}
     }
     //정점들이 버퍼로 옮겨지는 코드
     {

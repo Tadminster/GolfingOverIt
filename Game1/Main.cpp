@@ -19,16 +19,17 @@ Main::Main()
     }
     floor = new Ob_floor();
 
+    ball = new Ball();
     // 사물
-    rect_movable = new Ob_movable();
-    rect_drag = new Ob_drag();
+    //rect_movable = new Ob_movable();
+    //rect_drag = new Ob_drag();
 
     // 플레이어
-	player = new Player();
+	//player = new Player();
 
     // 총기류
-    pistol = new Gun_pistol();
-    pistol->SetParentRT(*player);
+    //pistol = new Gun_pistol();
+    //pistol->SetParentRT(*player);
 
     //for (auto& goalpost : goalpost)
     //goalpost = new Player();
@@ -45,16 +46,16 @@ Main::~Main()
         //delete goalpost[i];
 
     //delete ball;
-    delete player;
-    delete pistol;
+    //delete player;
+    //delete pistol;
 
-    delete rect_movable;
+    //delete rect_movable;
     delete floor;
 }
 
 void Main::Init()
 {
-	player->Init(Vector2(-app.GetHalfWidth() + player->scale.x, -app.GetHalfHeight() + player->scale.y), false);
+	//player->Init(Vector2(-app.GetHalfWidth() + player->scale.x, -app.GetHalfHeight() + player->scale.y), false);
  //   goalpost[0]->Init(Vector2(-app.GetHalfWidth(), 0), false);
  //   goalpost[1]->Init(Vector2(app.GetHalfWidth(), 0), true);
  //   for (auto& goalpost : goalpost)
@@ -75,16 +76,16 @@ void Main::Release()
 
 void Main::Update()
 {
-    ImGui::Text("ON_MOUSE: %d\n", rect_movable->OnMouse());
+    //ImGui::Text("ON_MOUSE: %d\n", rect_movable->OnMouse());
 
 
     ImGui::Text("CAMERA_X: %f\n", CAM->position.x);
     ImGui::Text("CAMERA_Y: %f\n", CAM->position.y); 
-    ImGui::Text("CAM_SPEED: %f\n", std::abs(player->GetWorldPos().x - CAM->position.x));
+    //ImGui::Text("CAM_SPEED: %f\n", std::abs(player->GetWorldPos().x - CAM->position.x));
 
     ImGui::Text("\n\n");
-    ImGui::Text("PLAYER_X: %f\n", player->GetWorldPos().x);
-    ImGui::Text("PLAYER_Y: %f\n", player->GetWorldPos().y);
+    //ImGui::Text("PLAYER_X: %f\n", player->GetWorldPos().x);
+    //ImGui::Text("PLAYER_Y: %f\n", player->GetWorldPos().y);
 
     ImGui::Text("\n\n");
     ImGui::Text("Keys\n");
@@ -95,24 +96,28 @@ void Main::Update()
     // 배경 업데이트
     for (int i = 0; i < number_star; i++)
         bg_star[i]->Update();
+
+    floor->Collision(ball);
+
+    ball->Update();
     floor->Update();
 
     // 사물 업데이트
-    rect_movable->Update();
-    rect_movable->Control();
-    rect_movable->SetColor();
+    //rect_movable->Update();
+    //rect_movable->Control();
+    //rect_movable->SetColor();
 
-    rect_drag->Update();
-    rect_drag->OnClick();
+    //rect_drag->Update();
+    //rect_drag->OnClick();
     // 플레이어 업데이트
-    player->Update();   
-    player->Control();
+    //player->Update();   
+    //player->Control();
     
     // 무기 업데이트
     //pistol->Update();
 
     // 카메라 업데이트
-    if (player->GetWorldPos().x != CAM->position.x
+    /*if (player->GetWorldPos().x != CAM->position.x
         && CAM->position.x >= -2500
         && CAM->position.x <= 2500)
     {
@@ -125,7 +130,7 @@ void Main::Update()
     else if (CAM->position.x < -2500)
         CAM->position.x = -2500;
     else if (CAM->position.x > 2500)
-        CAM->position.x = 2500;
+        CAM->position.x = 2500;*/
 }
 
 void Main::LateUpdate()
@@ -165,10 +170,12 @@ void Main::Render()
     for (int i = 0; i < number_star; i++)
         bg_star[i]->Render();
     floor->Render();
-    rect_movable->Render();
+
+    ball->Render();
+    /*rect_movable->Render();
     rect_drag->Render();
 
-	player->Render();
+	player->Render();*/
 
 	//for (auto& player : player)
 	//	player->Render();
@@ -177,6 +184,7 @@ void Main::Render()
  //       goalpost->Render();
 
 	//ball->Render();
+
 }
 
 void Main::ResizeScreen()

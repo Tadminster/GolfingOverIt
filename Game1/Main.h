@@ -8,13 +8,14 @@ private:
 	class ObStar* bg_star[number_star];
 	class Ob_floor* floor;
 	
-	// 사물
-	class Ob_movable* rect_movable;
-	class Ob_drag* rect_drag;
+	class Ball* ball;
+	//// 사물
+	//class Ob_movable* rect_movable;
+	//class Ob_drag* rect_drag;
 
-	// 플레이어
-	class Player* player;
-	class Gun_pistol* pistol;
+	//// 플레이어
+	//class Player* player;
+	//class Gun_pistol* pistol;
 
 	//class Ball* ball;
 	//class Player* goalpost[2];
