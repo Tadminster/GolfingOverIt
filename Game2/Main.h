@@ -18,6 +18,7 @@ private:
 	bool hi;
 	bool hello;
 
+	int donghwa;
 public:
 	Main();
 	~Main();
