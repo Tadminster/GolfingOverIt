@@ -16,6 +16,7 @@ private:
 	float pow;
 
 	bool hi;
+	bool hello;
 
 public:
 	Main();
