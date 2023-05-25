@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 ObLine* GameObject::axisObject = nullptr;
 ID3D11Buffer* GameObject::WVPBuffer = nullptr;
@@ -28,7 +28,7 @@ void GameObject::CreateStaticMember()
 		D3D11_BUFFER_DESC desc = { 0 };
 		desc.Usage = D3D11_USAGE_DYNAMIC;
 		desc.ByteWidth = sizeof(Color);
-		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER; //»ó¼ö¹öÆÛ
+		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER; //ìƒìˆ˜ë²„í¼
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		desc.MiscFlags = 0;
 		desc.StructureByteStride = 0;
@@ -41,18 +41,18 @@ void GameObject::CreateStaticMember()
 	basicShader = new Shader(L"1.Basic");
 	imageShader = new Shader(L"2.Image");
 
-	//char ¹®ÀÚÇü -> ¾Æ½ºÅ°ÄÚµå
-	// r d  ¤¡¤·¤§
+	//char ë¬¸ìží˜• -> ì•„ìŠ¤í‚¤ì½”ë“œ
+	// r d  ã„±ã…‡ã„·
 	//wchar_t 2byte
 	//wchar_t a;
 
 	//"dfa";
-	//"°¨»çÇÔ";
-	////c ½ºÅ¸ÀÏ ¹®ÀÚ¿­
+	//"ê°ì‚¬í•¨";
+	////c ìŠ¤íƒ€ì¼ ë¬¸ìžì—´
 	//char arr[4];
 	//arr[0] = 'd';
 
-	////c++ ½ºÅ¸ÀÏ ¹®ÀÚ¿­
+	////c++ ìŠ¤íƒ€ì¼ ë¬¸ìžì—´
 	//string a;
 	//a = "a";
 	//wstring b;
@@ -108,7 +108,7 @@ void GameObject::Update()
 
 	RT =  R * T * R2;
 	
-	//PÀÇ ÁÖ¼Ò°¡ ÀÖÀ¸¸é
+	//Pì˜ ì£¼ì†Œê°€ ìžˆìœ¼ë©´
 	if (P)
 	{
 		RT *= *P;
@@ -146,14 +146,14 @@ void GameObject::Render()
 	}
 
 	WVP = WVP.Transpose();
-	//wvp ¹ÙÀÎµù
+	//wvp ë°”ì¸ë”©
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedResource;
 		D3D->GetDC()->Map(WVPBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 		memcpy_s(mappedResource.pData, sizeof(Matrix), &WVP, sizeof(Matrix));
 		D3D->GetDC()->Unmap(WVPBuffer, 0);
 	}
-	//color ¹ÙÀÎµù
+	//color ë°”ì¸ë”©
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedResource;
 		D3D->GetDC()->Map(colorBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
@@ -166,7 +166,7 @@ bool GameObject::Intersect(Vector2 coord)
 {
 	if (collider == COLLIDER::RECT)
 	{
-		//È¸Àü X
+		//íšŒì „ X
 		if (GetRight() == RIGHT)
 		{
 			Utility::RECT rc(GetWorldPivot(), scale);
@@ -198,7 +198,7 @@ bool GameObject::Intersect(GameObject* ob)
 	{
 		if (ob->collider == COLLIDER::RECT)
 		{
-			//È¸Àü X
+			//íšŒì „ X
 			if ((GetRight() == RIGHT) && (ob->GetRight() == RIGHT))
 			{
 				Utility::RECT rc1(GetWorldPivot(), scale);
@@ -213,7 +213,7 @@ bool GameObject::Intersect(GameObject* ob)
 		}
 		else if (ob->collider == COLLIDER::CIRCLE)
 		{
-			//È¸Àü X
+			//íšŒì „ X
 			if (GetRight() == RIGHT)
 			{
 				Utility::RECT rc(GetWorldPivot(), scale);
@@ -238,7 +238,7 @@ bool GameObject::Intersect(GameObject* ob)
 	{
 		if (ob->collider == COLLIDER::RECT)
 		{
-			//È¸Àü X
+			//íšŒì „ X
 			if (ob->GetRight() == RIGHT)
 			{
 				Utility::RECT rc(ob->GetWorldPivot(), ob->scale);

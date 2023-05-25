@@ -20,7 +20,7 @@ Main::~Main()
 }
 void Main::Init()
 {
-	Golfball->SetWorldPos(Vector2(0,0));
+	Golfball->SetWorldPos(Vector2(-300,-100));
 
 	map[0]->scale.x = 300.0f;
 	map[0]->scale.y = 50.0f;
@@ -121,6 +121,9 @@ void Main::Update()
 	{
 		CAM->position += RIGHT * 500.0f * DELTA;;
 	}
+	CAM->position.x = Utility::Saturate(CAM->position.x, -400.0f, 400.0f);
+	CAM->position.y = Utility::Saturate(CAM->position.y, 0.0f, 1200.0f);
+
 	for (int i = 0; i < MAPMAX; i++) {
 		map[i]->Update();
 	}
@@ -161,9 +164,9 @@ void Main::Update()
 
 void Main::LateUpdate()
 {
-	if (Golfball->GetWorldPos().y < -300.0f + 100.0f)
+	if (Golfball->GetWorldPos().y < -300.0f + 20.0f)
 	{
-		Golfball->SetWorldPosY(-300.0f + 100.0f);
+		Golfball->SetWorldPosY(-300.0f + 20.0f);
 		Golfball->ReflectionX();
 		Golfball->Update();
 	}
