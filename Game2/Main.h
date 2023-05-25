@@ -17,6 +17,7 @@ private:
 
 	bool hi;
 
+	int donghwa;
 public:
 	Main();
 	~Main();
