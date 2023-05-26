@@ -18,8 +18,18 @@ bool Wall::Collision(GameObject* target)
 
 		if (ball)
 		{
-			ball->SetWorldPos(ball->GetWorldPos() + -ball->GetRight());
-			ball->ReflectionX();
+			if (ball->pressPower > 0.01f)
+			{
+				if (this->rotation.z == 0.0f)
+				{
+					ball->SetWorldPos(ball->GetWorldPos() + -ball->GetRight());
+					ball->ReflectionX();
+				}
+				else if (this->rotation.z != 0.0f)
+				{
+					ball->SetWorldPos(ball->GetWorldPos() + this->GetRight());
+				}
+			}
 			return true;
 		}
 	}
@@ -35,6 +45,7 @@ bool Wall::OnMouse()
 		INPUT->GetWorldMousePos().y < this->GetWorldPos().y + scale.y / 2.f)
 	{
 		ImGui::Text("ROTATION_Z: %f\n", this->rotation.z);
+
 		return true;
 	}
 	return false;

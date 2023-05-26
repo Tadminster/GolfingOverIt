@@ -107,6 +107,11 @@ void Main::Update()
 {
 	ImGui::Text("CAMERA_X: %f\n", CAM->position.x);
 	ImGui::Text("CAMERA_Y: %f\n", CAM->position.y);
+	ImGui::Text("\n");
+
+	ImGui::Text("BALL_POWER: %f\n", Golfball->pressPower);
+	ImGui::Text("BALL_GRAVITY: %f\n", Golfball->gravityForce);
+
 	for (int i = 0; i < 19; i++)
 	{
 		map[i]->OnMouse();

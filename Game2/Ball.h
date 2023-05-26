@@ -1,7 +1,7 @@
-#pragma once
+﻿#pragma once
 class Ball : public ObCircle
 {
-private:
+public:
 	Vector2		fireDir;
 	float		pressPower;
 	Vector2		velocity;
