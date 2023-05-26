@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Ball.h"
 
 Ball::Ball()
@@ -7,6 +7,7 @@ Ball::Ball()
 	scale.y = 20.0f;
     fireDir = Vector2(0, 0);
     pressPower = 1.0f;
+    hasAxis = true;
 }
 
 Ball::~Ball()
