@@ -7,5 +7,6 @@ public:
 	virtual ~Wall();
 
 	bool Collision(class GameObject* target);
+	bool OnMouse();
 };
 

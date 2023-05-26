@@ -20,6 +20,7 @@ Main::~Main()
 }
 void Main::Init()
 {
+
 	Golfball->SetWorldPos(Vector2(-300,-100));
 
 	map[0]->scale.x = 300.0f;
@@ -104,7 +105,13 @@ void Main::Release()
 
 void Main::Update()
 {
-	
+	ImGui::Text("CAMERA_X: %f\n", CAM->position.x);
+	ImGui::Text("CAMERA_Y: %f\n", CAM->position.y);
+	for (int i = 0; i < 19; i++)
+	{
+		map[i]->OnMouse();
+	}
+
 	if (INPUT->KeyPress(VK_UP))
 	{
 		CAM->position += UP * 500.0f * DELTA;
