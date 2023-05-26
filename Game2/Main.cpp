@@ -128,7 +128,7 @@ void Main::Update()
 	{
 		CAM->position += RIGHT * 500.0f * DELTA;;
 	}
-	CAM->position.x = Utility::Saturate(CAM->position.x, -400.0f, 400.0f);
+	CAM->position.x = Utility::Saturate(CAM->position.x, 0.0f, 0.0f);
 	CAM->position.y = Utility::Saturate(CAM->position.y, 0.0f, 1200.0f);
 
 	for (int i = 0; i < MAPMAX; i++) {
