@@ -22,6 +22,7 @@ void Main::Init()
 {
 
 	Golfball->SetWorldPos(Vector2(-300,-100));
+	Golfball->fire(Vector2(-50.0f, 0.0f));
 
 	map[0]->scale.x = 300.0f;
 	map[0]->scale.y = 50.0f;
@@ -112,6 +113,15 @@ void Main::Update()
 		map[i]->OnMouse();
 	}
 
+	if (INPUT->KeyPress('Z'))
+	{
+		Golfball->hasAxis = true;
+	}
+	if (INPUT->KeyPress('X'))
+	{
+		Golfball->hasAxis = false;
+	}
+
 	if (INPUT->KeyPress(VK_UP))
 	{
 		CAM->position += UP * 500.0f * DELTA;
@@ -134,10 +144,11 @@ void Main::Update()
 	for (int i = 0; i < MAPMAX; i++) {
 		map[i]->Update();
 	}
-	int hello;
+
+	
 	if (Golfball->stopcheck())
 	{
-		Golfball->color = Vector4(0, 1, 0, 1);
+		Golfball->color = Vector4(1, 1, 1, 1);
 		if (Golfball->Intersect(INPUT->GetWorldMousePos()))
 		{
 			if (INPUT->KeyDown(VK_LBUTTON))
@@ -146,47 +157,54 @@ void Main::Update()
 				point = Golfball->GetWorldPos();
 			}
 		}
-			if (onClick)
-			{	
-				firepower = point-INPUT->GetWorldMousePos();
-				//Golfball->SetgravityForve(0.0f);
+		if (onClick)
+		{	
+			firepower = point-INPUT->GetWorldMousePos();
+			//Golfball->SetgravityForve(0.0f);
 
-				if (INPUT->KeyUp(VK_LBUTTON))
-				{	
-					Golfball->fire(firepower);
-					Golfball->Update();
-					onClick = false;
-				}
+			if (INPUT->KeyUp(VK_LBUTTON))
+			{	
+				Golfball->fire(firepower);
+				Golfball->Update();
+				onClick = false;
+				
 			}
+		}
+		
 	}
-	else Golfball->color = Vector4(1, 0, 0, 1);
+	else
+	{
+		Golfball->color = Vector4(0, 0, 0, 1);
+		Golfball->Update();
+	}
 	
 	for (int i = 0; i < MAPMAX; i++) 
 	{
 		map[i]->Update();
 	}
 
-	Golfball->Update();
+	if(starting==0)Golfball->Update();
 }
 
 void Main::LateUpdate()
 {
-	if (Golfball->GetWorldPos().y < -300.0f + 20.0f)
+	if (Golfball->GetWorldPos().y < -300.0f + 10.0f)
 	{
-		Golfball->SetWorldPosY(-300.0f + 20.0f);
+		Golfball->SetWorldPosY(-300.0f + 10.0f);
 		Golfball->ReflectionX();
 		Golfball->Update();
 	}
 
-	if (Golfball->GetWorldPos().x < -400.0f + 20.0f)
+	if (Golfball->GetWorldPos().x < -400.0f + 10.0f)
 	{
-		Golfball->SetWorldPosX(-400.0f + 20.0f);
+		Golfball->SetWorldPosX(-400.0f + 10.0f);
 		Golfball->ReflectionY();
 		Golfball->Update();
+		starting = true;
 	}
-	else if (Golfball->GetWorldPos().x > 400.0f - 20.0f)
+	else if (Golfball->GetWorldPos().x > 400.0f - 10.0f)
 	{
-		Golfball->SetWorldPosX(400.0f -20.0f);
+		Golfball->SetWorldPosX(400.0f -10.0f);
 		Golfball->ReflectionY();
 		Golfball->Update();
 	}
