@@ -1,13 +1,14 @@
 ﻿#include "stdafx.h"
 #include "Wall.h"
 #include "Ball.h"
+#include "Obstacle.h"
 #include "Main.h"
 
 Main::Main()
 {
 	for (int i = 0; i < MAPMAX; i++)
 		map[i] = new Wall();
-
+	floatingBall = new Obstacle();
 	Golfball = new Ball();
 }
 
@@ -15,12 +16,11 @@ Main::~Main()
 {
 	for (int i = 0; i < MAPMAX; i++) 
 		delete map[i];
-	
+	delete floatingBall;
 	delete Golfball;
 }
 void Main::Init()
 {
-
 	Golfball->SetWorldPos(Vector2(-300,-100));
 
 	map[0]->scale.x = 300.0f;
