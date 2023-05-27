@@ -35,6 +35,8 @@ void Ball::Render()
     ObCircle::Render();
 }
 
+
+
 void Ball::fire(Vector2 dir)
 { 
     if(dir.Length()*5 >500.0f) pressPower = 500.0f;  
@@ -46,8 +48,17 @@ void Ball::fire(Vector2 dir)
 bool Ball::stopcheck()
 {
 
-    if (velocity.Length() < 0.1f)  return isStop = true;
+    if (pressPower <= 0.1f)  return isStop = true;
     else return isStop = false;
+}
+
+void Ball::Reflection(Vector2 dis)
+{
+   // if(!isStop) cout << "충돌" << endl;
+    Vector2 golddis = this->GetRight();
+        fireDir = golddis + (2 * dis * dotProduct(-golddis, dis));
+    pressPower *= 0.5f;
+    gravityForce *= 0.5f;   
 }
 
 

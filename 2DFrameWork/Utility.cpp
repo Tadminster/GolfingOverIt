@@ -1,4 +1,4 @@
-#include "framework.h"
+Ôªø#include "framework.h"
 
 Utility::RECT::RECT(Vector2 pivot, Vector2 scale)
 {
@@ -38,14 +38,14 @@ bool Utility::IntersectRectRect(RECT & rc1, RECT & rc2)
 
 bool Utility::IntersectRectRect(GameObject* ob1, GameObject* ob2)
 {
-    //¡ﬂΩ…¡°
+    //Ï§ëÏã¨Ï†ê
     Vector2 rc1Pivot = ob1->GetWorldPivot();
     Vector2 rc2Pivot = ob2->GetWorldPivot();
 
-    //µŒ ¡ﬂΩ…¡°∞£¿« ¬˜¿Ã ∫§≈Õ
+    //Îëê Ï§ëÏã¨Ï†êÍ∞ÑÏùò Ï∞®Ïù¥ Î≤°ÌÑ∞
     Vector2 dis = rc1Pivot - rc2Pivot;
 
-    //ªÁ∞¢«¸∏∂¥Ÿ 2∞≥¿« ¿˝π›≈©±‚¿« ∫§≈Õ
+    //ÏÇ¨Í∞ÅÌòïÎßàÎã§ 2Í∞úÏùò Ï†àÎ∞òÌÅ¨Í∏∞Ïùò Î≤°ÌÑ∞
     Vector2 Rc1Up =
         ob1->GetUp() * ob1->scale.y * 0.5f;
     Vector2 Rc1Right =
@@ -56,51 +56,51 @@ bool Utility::IntersectRectRect(GameObject* ob1, GameObject* ob2)
     Vector2 Rc2Right =
         ob2->GetRight() * ob2->scale.x * 0.5f;
 
-    //ob1¿« right√‡ ∫Ò±≥
-    //       ¿˝¥Î∞™(≥ª¿˚ a . b)
+    //ob1Ïùò rightÏ∂ï ÎπÑÍµê
+    //       Ï†àÎåÄÍ∞í(ÎÇ¥Ï†Å a . b)
     float c = fabs(dis.Dot(ob1->GetRight()));
 
-    //ob2ø°º≠ µŒ∫§≈Õ∞° ≈ıøµµ» ±Ê¿Ã
+    //ob2ÏóêÏÑú ÎëêÎ≤°ÌÑ∞Í∞Ä Ìà¨ÏòÅÎêú Í∏∏Ïù¥
     float a = fabs(Rc2Up.Dot(ob1->GetRight()))
         + fabs(Rc2Right.Dot(ob1->GetRight()));
 
-    //ob1ø°º≠ µŒ∫§≈Õ∞° ≈ıøµµ» ±Ê¿Ã
+    //ob1ÏóêÏÑú ÎëêÎ≤°ÌÑ∞Í∞Ä Ìà¨ÏòÅÎêú Í∏∏Ïù¥
     float b = ob1->scale.x * 0.5f;
 
     if (c > a + b)return false;
 
-    //ob1¿« Up√‡ ∫Ò±≥
-    //       ¿˝¥Î∞™(≥ª¿˚ a . b)
+    //ob1Ïùò UpÏ∂ï ÎπÑÍµê
+    //       Ï†àÎåÄÍ∞í(ÎÇ¥Ï†Å a . b)
     c = fabs(dis.Dot(ob1->GetUp()));
 
-    //ob2ø°º≠ µŒ∫§≈Õ∞° ≈ıøµµ» ±Ê¿Ã
+    //ob2ÏóêÏÑú ÎëêÎ≤°ÌÑ∞Í∞Ä Ìà¨ÏòÅÎêú Í∏∏Ïù¥
     a = fabs(Rc2Up.Dot(ob1->GetUp()))
         + fabs(Rc2Right.Dot(ob1->GetUp()));
-    //ob1ø°º≠ µŒ∫§≈Õ∞° ≈ıøµµ» ±Ê¿Ã
+    //ob1ÏóêÏÑú ÎëêÎ≤°ÌÑ∞Í∞Ä Ìà¨ÏòÅÎêú Í∏∏Ïù¥
     b = ob1->scale.y * 0.5f;
 
     if (c > a + b)return false;
 
-    //ob2¿« Right√‡ ∫Ò±≥
-    //       ¿˝¥Î∞™(≥ª¿˚ a . b)
+    //ob2Ïùò RightÏ∂ï ÎπÑÍµê
+    //       Ï†àÎåÄÍ∞í(ÎÇ¥Ï†Å a . b)
     c = fabs(dis.Dot(ob2->GetRight()));
 
-    //ob1ø°º≠ µŒ∫§≈Õ∞° ≈ıøµµ» ±Ê¿Ã
+    //ob1ÏóêÏÑú ÎëêÎ≤°ÌÑ∞Í∞Ä Ìà¨ÏòÅÎêú Í∏∏Ïù¥
     a = fabs(Rc1Up.Dot(ob2->GetRight()))
         + fabs(Rc1Right.Dot(ob2->GetRight()));
-    //ob2ø°º≠ µŒ∫§≈Õ∞° ≈ıøµµ» ±Ê¿Ã
+    //ob2ÏóêÏÑú ÎëêÎ≤°ÌÑ∞Í∞Ä Ìà¨ÏòÅÎêú Í∏∏Ïù¥
     b = ob2->scale.x * 0.5f;
 
     if (c > a + b)return false;
 
-    //ob2¿« Up√‡ ∫Ò±≥
-    //       ¿˝¥Î∞™(≥ª¿˚ a . b)
+    //ob2Ïùò UpÏ∂ï ÎπÑÍµê
+    //       Ï†àÎåÄÍ∞í(ÎÇ¥Ï†Å a . b)
     c = fabs(dis.Dot(ob2->GetUp()));
 
-    //ob1ø°º≠ µŒ∫§≈Õ∞° ≈ıøµµ» ±Ê¿Ã
+    //ob1ÏóêÏÑú ÎëêÎ≤°ÌÑ∞Í∞Ä Ìà¨ÏòÅÎêú Í∏∏Ïù¥
     a = fabs(Rc1Up.Dot(ob2->GetUp()))
         + fabs(Rc1Right.Dot(ob2->GetUp()));
-    //ob2ø°º≠ µŒ∫§≈Õ∞° ≈ıøµµ» ±Ê¿Ã
+    //ob2ÏóêÏÑú ÎëêÎ≤°ÌÑ∞Í∞Ä Ìà¨ÏòÅÎêú Í∏∏Ïù¥
     b = ob2->scale.y * 0.5f;
 
     if (c > a + b)return false;
@@ -142,6 +142,46 @@ bool Utility::IntersectRectCircle(RECT & rc, CIRCLE & cc)
     return false;
 }
 
+int Utility::IntersectRectCircleS(RECT& rc, CIRCLE& cc)
+{
+    Vector2 rectPivot1 = (rc.min + rc.max) * 0.5f;
+    rectPivot1.x -= cc.radius*0.5f;
+    Vector2 rectPivot2 = (rc.min + rc.max) * 0.5f;
+    rectPivot2.x += cc.radius * 0.5f;
+    Vector2 rectPivot3 = (rc.min + rc.max) * 0.5f;
+    rectPivot3.y += cc.radius * 0.5f;
+    Vector2 rectPivot4 = (rc.min + rc.max) * 0.5f;
+    rectPivot4.y -= cc.radius * 0.5f;
+    Vector2 rectScale = rc.max - rc.min;
+
+    //Ïôº
+    RECT wRect1(rectPivot1, rectScale + Vector2(cc.radius , 0.0f));
+    if (IntersectRectCoord(wRect1, cc.pivot))
+    {
+        return 1;
+    }
+    //Ïò§
+    RECT wRect2(rectPivot2, rectScale + Vector2(cc.radius , 0.0f));
+    if (IntersectRectCoord(wRect2, cc.pivot))
+    {
+        return 2;
+    }
+    //ÏúÑ
+    RECT hRect1(rectPivot3, rectScale + Vector2(0.0f, cc.radius ));
+    if (IntersectRectCoord(hRect1, cc.pivot))
+    {
+        return 3;
+    }
+    //ÏïÑÎûò
+    RECT hRect2(rectPivot4, rectScale + Vector2(0.0f, cc.radius ));
+    if (IntersectRectCoord(hRect2, cc.pivot))
+    {
+        return 4;
+    }
+
+    return 0;
+}
+
 bool Utility::IntersectCircleCoord(CIRCLE & cc, Vector2 coord)
 {
     Vector2 distance = cc.pivot - coord;
@@ -167,7 +207,7 @@ bool Utility::IntersectCircleCircle(CIRCLE & cc1, CIRCLE & cc2)
 
 float Utility::DirToRadian(Vector2 Dir)
 {
-    //∏∏æ‡ ¥‹¿ß∫§≈Õ∞° æ∆¥œ∂Û∏È
+    //ÎßåÏïΩ Îã®ÏúÑÎ≤°ÌÑ∞Í∞Ä ÏïÑÎãàÎùºÎ©¥
     //Dir.Normalize();
     return atan2f(Dir.y, Dir.x);
 }

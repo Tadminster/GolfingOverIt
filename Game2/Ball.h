@@ -17,12 +17,14 @@ public:
 	void Update() override;
 	void Render() override;
 
+	float dotProduct(Vector2 v1, Vector2 v2) { return v1.x * v2.x + v1.y * v2.y; }
+
 	void fire(Vector2 dir);
 
 	bool stopcheck( ) ;
 	void SetgravityForve(float GF) { gravityForce = GF; };
 
-
+	void Reflection(Vector2 dis);
 	void ReflectionY()
 	{
 		fireDir.x = -fireDir.x;
