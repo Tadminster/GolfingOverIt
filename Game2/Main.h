@@ -13,6 +13,7 @@ private:
 	
 	bool isStop= false;
 	bool onClick = false;
+	bool starting = false;
 	float pow;
 
 	bool hi;
