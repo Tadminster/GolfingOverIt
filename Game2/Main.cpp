@@ -345,7 +345,7 @@ void Main::LateUpdate()
 		Golfball->Update();
 	}
 
-	for (int i = 0; i < 19; i++)
+	for (int i = 0; i < 38; i++)
 	{
 		map[i]->Collision(Golfball);
 	}
