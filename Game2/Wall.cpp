@@ -14,6 +14,7 @@ bool Wall::Collision(GameObject* target)
 {
 	if (this->Intersect(target))
 	{
+		static int x = 0;
 		// 다운캐스팅
 		class Ball* ball = dynamic_cast<Ball*>(target);
 
@@ -29,11 +30,12 @@ bool Wall::Collision(GameObject* target)
 			// 기울어진 벽에 부딪쳤을 때
 			else
 			{
-				ball->SetWorldPos(ball->GetWorldPos() + UP * 100);
+				ball->SetWorldPos(ball->GetWorldPos() + UP);
 				ball->ReflectionX();
 				// 공이 멈추지 않았다면, 벽의 기울기만큼 이동 (미끄러짐)
 				if (!ball->isStop)
 				{
+					cout << "충돌 발생 " << x++ << endl;
 					ball->SetWorldPos(ball->GetWorldPos() + -this->GetRight());
 				}
 

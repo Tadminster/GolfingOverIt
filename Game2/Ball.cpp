@@ -46,7 +46,7 @@ void Ball::fire(Vector2 dir)
 bool Ball::stopcheck()
 {
 
-    if (velocity.Length() < 0.5f)  return isStop = true;
+    if (velocity.Length() < 0.1f)  return isStop = true;
     else return isStop = false;
 }
 
