@@ -25,78 +25,111 @@ void Main::Init()
 
 	map[0]->scale.x = 300.0f;
 	map[0]->scale.y = 50.0f;
-	map[0]->SetWorldPos(Vector2(-250.0f, -250));
+	map[0]->SetWorldPos(Vector2(-300.0f, -275));
 	map[1]->scale.x = 320.0f;
 	map[1]->scale.y = 150.0f;
-	map[1]->SetWorldPos(Vector2(0.0f, -225));
-	map[1]->rotation.z = 30.0f * ToRadian;
+	map[1]->rotation.z = 10.0f * ToRadian;
+	map[1]->SetWorldPos(Vector2(-5.0f, -300));
 	map[2]->scale.x = 300.0f;
 	map[2]->scale.y = 250.0f;
-	map[2]->SetWorldPos(Vector2(250.0f, -200));
+	map[2]->SetWorldPos(Vector2(250.0f, -330));
 	map[3]->scale.x = 300.0f;
 	map[3]->scale.y = 200.0f;
-	map[3]->SetWorldPos(Vector2(350.0f, 5));
-	map[3]->rotation.z = 60.0f * ToRadian;
+	map[3]->rotation.z = 40.0f * ToRadian;
+	map[3]->SetWorldPos(Vector2(300.0f, -200));
+
 	map[4]->scale.x = 200.0f;
 	map[4]->scale.y = 50.0f;
-	map[4]->SetWorldPos(Vector2(120.0f, 250));
+	map[4]->SetWorldPos(Vector2(120.0f, 100));
+
 	map[5]->scale.x = 100.0f;
 	map[5]->scale.y = 25.0f;
-	map[5]->SetWorldPos(Vector2(-100.0f, 300));
+	map[5]->SetWorldPos(Vector2(-100.0f, 200));
+
 	map[6]->scale.x = 100.0f;
 	map[6]->scale.y = 25.0f;
-	map[6]->SetWorldPos(Vector2(-170.0f, 320));
+	map[6]->SetWorldPos(Vector2(-170.0f, 220));
 	map[6]->rotation.z = 150.0f * ToRadian;
+
 	map[7]->scale.x = 200.0f;
 	map[7]->scale.y = 30.0f;
-	map[7]->SetWorldPos(Vector2(-350.0f, 450));
+	map[7]->SetWorldPos(Vector2(-350.0f, 350));
 	map[7]->rotation.z = 20.0f * ToRadian;
 
 	map[8]->scale.x = 200.0f;
 	map[8]->scale.y = 50.0f;
-	map[8]->SetWorldPos(Vector2(-150.0f, 600));
+	map[8]->SetWorldPos(Vector2(-150.0f, 500));
 
 	map[9]->scale.x = 200.0f;
 	map[9]->scale.y = 50.0f;
-	map[9]->SetWorldPos(Vector2(100.0f, 700));
+	map[9]->SetWorldPos(Vector2(100.0f, 600));
 
 	map[10]->scale.x = 100.0f;
 	map[10]->scale.y = 20.0f;
 	map[10]->rotation.z = 60.0f * ToRadian;
-	map[10]->SetWorldPos(Vector2(300.0f, 850));
+	map[10]->SetWorldPos(Vector2(300.0f, 750));
 
 	map[11]->scale.x = 90.0f;
 	map[11]->scale.y = 20.0f;
-	map[11]->SetWorldPos(Vector2(360.0f, 890));
+	map[11]->SetWorldPos(Vector2(360.0f, 790));
 
 	map[12]->scale.x = 150.0f;
 	map[12]->scale.y = 30.0f;
-	map[12]->SetWorldPos(Vector2(120.0f, 950));
+	map[12]->SetWorldPos(Vector2(120.0f, 850));
 
 	map[13]->scale.x = 150.0f;
 	map[13]->scale.y = 30.0f;
-	map[13]->SetWorldPos(Vector2(-80.0f, 850));
+	map[13]->SetWorldPos(Vector2(-120.0f, 850));
 
 	map[14]->scale.x = 250.0f;
 	map[14]->scale.y = 50.0f;
-	map[14]->SetWorldPos(Vector2(-300.0f, 1050));
+	map[14]->SetWorldPos(Vector2(-400.0f, 950));
+
+	//21
+	map[21]->scale.x = 100.0f;
+	map[21]->scale.y = 50.0f;
+	map[21]->SetWorldPos(Vector2(-100.0f, 1050));
 
 	map[15]->scale.x = 150.0f;
 	map[15]->scale.y = 50.0f;
-	map[15]->SetWorldPos(Vector2(-400.0f, 1250));
+	map[15]->SetWorldPos(Vector2(-400.0f, 1150));
 
 	map[16]->scale.x = 100.0f;
-	map[16]->scale.y = 150.0f;
-	map[16]->SetWorldPos(Vector2(-100.0f, 1450));
+	map[16]->scale.y = 100.0f;
+	map[16]->SetWorldPos(Vector2(-100.0f, 1300));
 
 	map[17]->scale.x = 50.0f;
 	map[17]->scale.y = 10.0f;
-	map[17]->rotation.z = 20.0f;
-	map[17]->SetWorldPos(Vector2(50.0f, 1500));
+	map[17]->rotation.z = 60.0f * ToRadian;
+	map[17]->SetWorldPos(Vector2(50.0f, 1400));
 
 	map[18]->scale.x = 70.0f;
 	map[18]->scale.y = 10.0f;
-	map[18]->SetWorldPos(Vector2(95.0f, 1520));
+	map[18]->SetWorldPos(Vector2(90.0f, 1420));
+
+	map[19]->scale.x = 50.0f;
+	map[19]->scale.y = 10.0f;
+	map[19]->rotation.z = 120.0f * ToRadian;
+	map[19]->SetWorldPos(Vector2(130.0f, 1400));
+
+	map[20]->scale.x = 50.0f;
+	map[20]->scale.y = 10.0f;
+	map[20]->rotation.z = 120.0f * ToRadian;
+	map[20]->SetWorldPos(Vector2(200.0f, 1500));
+
+	//22
+	map[22]->scale.x = 70.0f;
+	map[22]->scale.y = 10.0f;
+	map[22]->SetWorldPos(Vector2(240.0f, 1480));
+
+	map[23]->scale.x = 100.0f;
+	map[23]->scale.y = 40.0f;
+	map[23]->SetWorldPos(Vector2(380.0f, 1600));
+
+	map[24]->scale.x = 150.0f;
+	map[24]->scale.y = 40.0f;
+	map[24]->SetWorldPos(Vector2(200.0f, 1700));
+
 }
 
 void Main::Release()
