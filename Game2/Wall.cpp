@@ -12,7 +12,36 @@ Wall::~Wall()
 
 bool Wall::Collision(GameObject* target)
 {
+	class Ball* ball = dynamic_cast<Ball*>(target);
 	if (this->Intersect(target))
+	{
+		
+		switch ((this->IntersectS(target)))
+		{
+		case 1: //왼쪽
+			ball->SetWorldPos(ball->GetWorldPos() + -ball->GetRight());
+			ball->Reflection(-(this->GetRight())*1.3);
+			break;
+		case 2: //오른
+			ball->SetWorldPos(ball->GetWorldPos() + -ball->GetRight());
+			ball->Reflection((this->GetRight()) * 1.3);
+			break;
+		case 3: //위
+			ball->SetWorldPos(ball->GetWorldPos() + -ball->GetRight());
+			ball->Reflection((this->GetUp()) * 1.3);
+			break;
+		case 4: //아래
+			ball->SetWorldPos(ball->GetWorldPos() + -ball->GetRight());
+			ball->Reflection(-(this->GetUp()) * 1.3);
+			break;
+		default:
+			break;
+		}
+
+	}
+
+
+	/*if (this->Intersect(target))
 	{
 		class Ball* ball = dynamic_cast<Ball*>(target);
 
@@ -22,7 +51,7 @@ bool Wall::Collision(GameObject* target)
 			ball->ReflectionX();
 			return true;
 		}
-	}
+	}*/
 
 	return false;
 }
