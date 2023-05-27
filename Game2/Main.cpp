@@ -183,6 +183,8 @@ void Main::Update()
 {
 	ImGui::Text("CAMERA_X: %f\n", CAM->position.x);
 	ImGui::Text("CAMERA_Y: %f\n", CAM->position.y);
+	ImGui::Text("CAMERA_Y: %f\n", Golfball->GetRight());
+
 	for (int i = 0; i < 19; i++)
 	{
 		map[i]->OnMouse();

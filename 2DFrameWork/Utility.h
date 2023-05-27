@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 
 namespace Utility
 {
-    //Ãæµ¹Å¸ÀÔ
+    //ì¶©ëŒíƒ€ì…
     struct RECT
     {
         Vector2 min;
@@ -16,23 +16,24 @@ namespace Utility
         CIRCLE(Vector2 pivot, Vector2 scale);
     };
 
-    //»ç°¢Çü ¿ø °ú ÁÂÇ¥
+    //ì‚¬ê°í˜• ì› ê³¼ ì¢Œí‘œ
     bool IntersectRectCoord(RECT & rc, Vector2 coord);
     bool IntersectCircleCoord(CIRCLE & cc, Vector2 coord);
 
-    //³×¸ğ ³×¸ğ
+    //ë„¤ëª¨ ë„¤ëª¨
     bool IntersectRectRect(RECT & rc1, RECT & rc2);
     //OBB
     bool IntersectRectRect(GameObject * ob1, GameObject * ob2);
 
-    //¿ø ¿ø
+    //ì› ì›
     bool IntersectCircleCircle(CIRCLE & cc1, CIRCLE & cc2);
-    //³×¸ğ ¿ø
+    //ë„¤ëª¨ ì›
     bool IntersectRectCircle(RECT & rc, CIRCLE & cc);
+    int IntersectRectCircleS(RECT & rc, CIRCLE & cc);
 
     float DirToRadian(Vector2 Dir);
 
-    //ÅÛÇÃ¸´ ÇÔ¼ö´Â ¼±¾ğ,Á¤ÀÇ ºĞ¸® ºÒ°¡
+    //í…œí”Œë¦¿ í•¨ìˆ˜ëŠ” ì„ ì–¸,ì •ì˜ ë¶„ë¦¬ ë¶ˆê°€
     template<typename T>
     T Saturate(T src, T min = 0, T max = 1)
     {

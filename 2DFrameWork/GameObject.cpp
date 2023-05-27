@@ -268,6 +268,27 @@ bool GameObject::Intersect(GameObject* ob)
 	return false;
 }
 
+int GameObject::IntersectS(GameObject* ob)
+{
+	if (GetRight() == RIGHT)
+	{
+		Utility::RECT rc(GetWorldPivot(), scale);
+		Utility::CIRCLE cc(ob->GetWorldPivot(), ob->scale);
+		return Utility::IntersectRectCircleS(rc, cc);
+	}
+	else
+	{
+		Vector2 rcPivot = Vector2::Transform(pivot, S);
+		Utility::RECT rc(rcPivot, scale);
+
+		Matrix rcInvert = RT.Invert();
+		Vector2 ccpivot = Vector2::Transform(ob->GetWorldPivot(), rcInvert);
+		Utility::CIRCLE cc(ccpivot, ob->scale);
+		return IntersectRectCircleS(rc, cc);
+	}
+	return 0;
+}
+
 bool GameObject::IntersectScreenMouse(Vector2 coord)
 {
 	coord.y = app.GetHalfHeight() - coord.y;
