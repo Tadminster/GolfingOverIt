@@ -1,11 +1,12 @@
 ﻿#pragma once
-#define MAPMAX 100
+#define MAPMAX 36
+#define FLBMAX 4
 class Main : public Scene
 {
 private:
 	class Wall* map[MAPMAX];
 	class Ball* Golfball;
-	class Obstacle* floatingBall;
+	class Obstacle* floatingBall[FLBMAX];
 
 	Vector2 mousepoint;
 	Vector2 ballpoint;
