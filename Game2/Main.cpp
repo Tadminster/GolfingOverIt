@@ -8,7 +8,10 @@ Main::Main()
 {
 	for (int i = 0; i < MAPMAX; i++)
 		map[i] = new Wall();
-	floatingBall = new Obstacle();
+	for (int i = 0; i < FLBMAX; i++) {
+		floatingBall[i] = new Obstacle();
+	}
+	
 	Golfball = new Ball();
 }
 
@@ -16,11 +19,24 @@ Main::~Main()
 {
 	for (int i = 0; i < MAPMAX; i++) 
 		delete map[i];
-	delete floatingBall;
+	for (int i = 0; i < FLBMAX; i++)
+		delete floatingBall[i];
 	delete Golfball;
 }
 void Main::Init()
 {
+	floatingBall[0]->flbpower = 200.0f;
+	floatingBall[0]->SetWorldPos(Vector2(0.0f, 380.0f));
+
+	floatingBall[1]->flbpower = 300.0f;
+	floatingBall[1]->SetWorldPos(Vector2(-200.0f, 700.0f));
+
+	floatingBall[2]->flbpower = 250.0f;
+	floatingBall[2]->SetWorldPos(Vector2(-100.0f, 1150.0f));
+
+	floatingBall[3]->flbpower = 400.0f;
+	floatingBall[3]->SetWorldPos(Vector2(-300.0f, 1500.0f));
+
 	Golfball->SetWorldPos(Vector2(-300,-100));
 
 	map[0]->scale.x = 300.0f;
@@ -37,6 +53,11 @@ void Main::Init()
 	map[3]->scale.y = 200.0f;
 	map[3]->rotation.z = 40.0f * ToRadian;
 	map[3]->SetWorldPos(Vector2(300.0f, -200));
+
+	//35
+	map[35]->scale.x = 95.0f;
+	map[35]->scale.y = 70.0f;
+	map[35]->SetWorldPos(Vector2(400.0f, -60));
 
 	map[4]->scale.x = 200.0f;
 	map[4]->scale.y = 50.0f;
@@ -186,7 +207,46 @@ void Main::Update()
 	{
 		map[i]->OnMouse();
 	}
+	if (floatingBall[0]->GetWorldPos().x <= -200.0f) {
+		floatingBall[0]->SetWorldPosX(-199.0f);
+		floatingBall[0]->ReflectionY();
+	}
+	else if (floatingBall[0]->GetWorldPos().x >= 300.0f) {
+		floatingBall[0]->SetWorldPosX(299.0f);
+		floatingBall[0]->ReflectionY();
+	}
+	floatingBall[0]->Update();
 
+	if (floatingBall[1]->GetWorldPos().x <= -300.0f) {
+		floatingBall[1]->SetWorldPosX(-299.0f);
+		floatingBall[1]->ReflectionY();
+	}
+	else if (floatingBall[1]->GetWorldPos().x >= 0.0f) {
+		floatingBall[1]->SetWorldPosX(-1.0f);
+		floatingBall[1]->ReflectionY();
+	}
+	floatingBall[1]->Update();
+
+	if (floatingBall[2]->GetWorldPos().x <= -200.0f) {
+		floatingBall[2]->SetWorldPosX(-199.0f);
+		floatingBall[2]->ReflectionY();
+	}
+	else if (floatingBall[2]->GetWorldPos().x >= 200.0f) {
+		floatingBall[2]->SetWorldPosX(199.0f);
+		floatingBall[2]->ReflectionY();
+	}
+	floatingBall[2]->Update();
+
+	if (floatingBall[3]->GetWorldPos().x <= -350.0f) {
+		floatingBall[3]->SetWorldPosX(-349.0f);
+		floatingBall[3]->ReflectionY();
+	}
+	else if (floatingBall[3]->GetWorldPos().x >= -50.0f) {
+		floatingBall[3]->SetWorldPosX(-51.0f);
+		floatingBall[3]->ReflectionY();
+	}
+	floatingBall[3]->Update();
+	
 	if (INPUT->KeyPress(VK_UP))
 	{
 		CAM->position += UP * 500.0f * DELTA;
@@ -209,7 +269,7 @@ void Main::Update()
 	for (int i = 0; i < MAPMAX; i++) {
 		map[i]->Update();
 	}
-	int hello;
+
 	if (Golfball->stopcheck())
 	{
 		Golfball->color = Vector4(0, 1, 0, 1);
@@ -283,7 +343,9 @@ void Main::Render()
 	{
 		map[i]->Render();
 	}
-
+	for (int i = 0; i < FLBMAX; i++) 
+		floatingBall[i]->Render();
+	
 	Golfball->Render();
 }
 
