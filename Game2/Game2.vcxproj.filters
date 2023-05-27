@@ -5,10 +5,12 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="Obstacle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
   </ItemGroup>
 </Project>
