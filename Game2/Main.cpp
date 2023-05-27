@@ -49,7 +49,7 @@ void Main::Init()
 	map[6]->scale.x = 100.0f;
 	map[6]->scale.y = 25.0f;
 	map[6]->SetWorldPos(Vector2(-170.0f, 220));
-	map[6]->rotation.z = 150.0f * ToRadian;
+	map[6]->rotation.z = -30.0f * ToRadian;
 
 	map[7]->scale.x = 200.0f;
 	map[7]->scale.y = 30.0f;
@@ -109,12 +109,12 @@ void Main::Init()
 
 	map[19]->scale.x = 50.0f;
 	map[19]->scale.y = 10.0f;
-	map[19]->rotation.z = 120.0f * ToRadian;
+	map[19]->rotation.z = -60.0f * ToRadian;
 	map[19]->SetWorldPos(Vector2(130.0f, 1400));
 
 	map[20]->scale.x = 50.0f;
 	map[20]->scale.y = 10.0f;
-	map[20]->rotation.z = 120.0f * ToRadian;
+	map[20]->rotation.z = -60.0f * ToRadian;
 	map[20]->SetWorldPos(Vector2(200.0f, 1500));
 
 	//22
@@ -129,6 +129,48 @@ void Main::Init()
 	map[24]->scale.x = 150.0f;
 	map[24]->scale.y = 40.0f;
 	map[24]->SetWorldPos(Vector2(200.0f, 1700));
+
+	map[25]->scale.x = 30.0f;
+	map[25]->scale.y = 200.0f;
+	map[25]->SetWorldPos(Vector2(130.0f, 1780));
+
+	map[27]->scale.x = 60.0f;
+	map[27]->scale.y = 10.0f;
+	map[27]->rotation.z = -50.0f * ToRadian;
+	map[27]->SetWorldPos(Vector2(50.0f, 1710));
+
+	map[26]->scale.x = 80.0f;
+	map[26]->scale.y = 20.0f;
+	map[26]->SetWorldPos(Vector2(0.0f, 1730));
+
+	map[28]->scale.x = 60.0f;
+	map[28]->scale.y = 10.0f;
+	map[28]->rotation.z = -50.0f * ToRadian;
+	map[28]->SetWorldPos(Vector2(-50.0f, 1750));
+
+	map[29]->scale.x = 100.0f;
+	map[29]->scale.y = 30.0f;
+	map[29]->SetWorldPos(Vector2(-170.0f, 1630));
+
+	map[30]->scale.x = 100.0f;
+	map[30]->scale.y = 30.0f;
+	map[30]->SetWorldPos(Vector2(-350.0f, 1780));
+
+	map[31]->scale.x = 10.0f;
+	map[31]->scale.y = 150.0f;
+	map[31]->SetWorldPos(Vector2(-170.0f, 1930));
+
+	map[32]->scale.x = 50.0f;
+	map[32]->scale.y = 20.0f;
+	map[32]->SetWorldPos(Vector2(-200.0f, 1900));
+
+	map[33]->scale.x = 100.0f;
+	map[33]->scale.y = 30.0f;
+	map[33]->SetWorldPos(Vector2(-350.0f, 2030));
+
+	map[34]->scale.x = 50.0f;
+	map[34]->scale.y = 50.0f;
+	map[34]->SetWorldPos(Vector2(0.0f, 2200));
 
 }
 
@@ -162,7 +204,7 @@ void Main::Update()
 		CAM->position += RIGHT * 500.0f * DELTA;;
 	}
 	CAM->position.x = Utility::Saturate(CAM->position.x, -400.0f, 400.0f);
-	CAM->position.y = Utility::Saturate(CAM->position.y, 0.0f, 1200.0f);
+	CAM->position.y = Utility::Saturate(CAM->position.y, 0.0f, 2000.0f);
 
 	for (int i = 0; i < MAPMAX; i++) {
 		map[i]->Update();
