@@ -14,26 +14,34 @@ bool Wall::Collision(GameObject* target)
 {
 	if (this->Intersect(target))
 	{
+		// 다운캐스팅
 		class Ball* ball = dynamic_cast<Ball*>(target);
 
+		// 만약 target이 Ball 클래스라면
 		if (ball)
 		{
-			if (ball->pressPower > 0.01f)
+			// 일반 벽에 부딪쳤을 때
+			if (this->rotation.z == 0.0f)
 			{
-				if (this->rotation.z == 0.0f)
-				{
-					ball->SetWorldPos(ball->GetWorldPos() + -ball->GetRight());
-					ball->ReflectionX();
-				}
-				else if (this->rotation.z != 0.0f)
-				{
-					ball->SetWorldPos(ball->GetWorldPos() + this->GetRight());
-				}
+				ball->SetWorldPos(ball->GetWorldPos() + -ball->GetRight());
+				ball->ReflectionX();
 			}
+			// 기울어진 벽에 부딪쳤을 때
+			else
+			{
+				ball->SetWorldPos(ball->GetWorldPos() + UP * 100);
+				ball->ReflectionX();
+				// 공이 멈추지 않았다면, 벽의 기울기만큼 이동 (미끄러짐)
+				if (!ball->isStop)
+				{
+					ball->SetWorldPos(ball->GetWorldPos() + -this->GetRight());
+				}
+
+			}
+			// 충돌이 잘 일어났으면 true 반환
 			return true;
 		}
 	}
-
 	return false;
 }
 
