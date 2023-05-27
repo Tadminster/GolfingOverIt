@@ -204,8 +204,12 @@ void Main::Update()
 {
 	ImGui::Text("CAMERA_X: %f\n", CAM->position.x);
 	ImGui::Text("CAMERA_Y: %f\n", CAM->position.y);
-	ImGui::Text("CAMERA_Y: %f\n", Golfball->GetRight());
+	ImGui::Text("\n");
 
+	ImGui::Text("BALL_X: %f\n", Golfball->GetWorldPos().x);
+	ImGui::Text("BALL_Y: %f\n", Golfball->GetWorldPos().y);
+	ImGui::Text("BALL_RIGHT: %f\n", Golfball->GetRight());
+	ImGui::Text("\n");
 	for (int i = 0; i < 19; i++)
 	{
 		map[i]->OnMouse();
@@ -345,7 +349,7 @@ void Main::LateUpdate()
 		Golfball->Update();
 	}
 
-	for (int i = 0; i < 38; i++)
+	for (int i = 0; i < 35; i++)
 	{
 		map[i]->Collision(Golfball);
 	}
