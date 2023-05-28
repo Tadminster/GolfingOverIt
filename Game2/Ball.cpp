@@ -7,7 +7,7 @@ Ball::Ball()
 	scale.y = 20.0f;
     fireDir = Vector2(0, 0);
     pressPower = 1.0f;
-    hasAxis = true;
+    hasAxis = false;
 }
 
 Ball::~Ball()
