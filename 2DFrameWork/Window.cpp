@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 
 Application	 app;
 Scene* Window::main = nullptr;
@@ -24,7 +24,7 @@ WPARAM Window::Run(Scene* main)
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		else //ÇÑÇÁ·¹ÀÓ
+		else //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		{
 			TIMER->Chronometry(app.fixFrame);
 			INPUT->Update();
