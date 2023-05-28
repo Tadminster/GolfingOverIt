@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 
 Application	 app;
 Scene* Window::main = nullptr;
@@ -11,7 +11,7 @@ WPARAM Window::Run(Scene* main)
 	ObLine::CreateStaticMember();
 	ObCircle::CreateStaticMember();
 	ObStar::CreateStaticMember();
-	//ObImage::CreateStaticMember();
+	ObImage::CreateStaticMember();
 	main->Init();
 	MSG msg = { 0 };
 	while (true)
@@ -24,7 +24,7 @@ WPARAM Window::Run(Scene* main)
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		else //ÇÑÇÁ·¹ÀÓ
+		else //í•œí”„ë ˆìž„
 		{
 			TIMER->Chronometry(app.fixFrame);
 			INPUT->Update();
@@ -48,7 +48,7 @@ WPARAM Window::Run(Scene* main)
 	ObLine::DeleteStaticMember();
 	ObCircle::DeleteStaticMember();
 	ObStar::DeleteStaticMember();
-	//ObImage::DeleteStaticMember();
+	ObImage::DeleteStaticMember();
 
 	main->Release();
 	TIMER->DeleteSingleton();

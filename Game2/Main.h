@@ -21,6 +21,7 @@ private:
 
 	bool ADMIN_MODE=false;
 	
+	ObImage* bg;
 
 	
 public:
