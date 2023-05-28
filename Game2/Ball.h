@@ -40,5 +40,20 @@ public:
 		pressPower *= 0.5f;
 		gravityForce *= 0.5f;
 	}
+	void ReflectionXY()
+	{
+		fireDir = -fireDir;		
+		pressPower *= 0.5f;
+		gravityForce *= 0.5f;
+	}
+
+	void ReflectionBall(GameObject* ob)
+	{
+		Vector2 dir;
+		dir = this->GetWorldPos() - ob->GetWorldPos();
+		dir.Normalize();
+		fireDir = dir;
+		
+	}
 };
 
