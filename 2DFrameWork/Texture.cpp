@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 Texture::~Texture()
 {
@@ -17,7 +17,7 @@ ID3D11ShaderResourceView* Texture::LoadTexture(wstring file)
 {
     auto iter = textureList.find(file);
 
-    //Áßº¹µÈ°Ô ¾ø´Ù.
+    //ì¤‘ë³µëœê²Œ ì—†ë‹¤.
     if (iter == textureList.end())
     {
         ID3D11ShaderResourceView* temp;
@@ -36,7 +36,7 @@ ID3D11ShaderResourceView* Texture::LoadTexture(wstring file)
         textureList[file].srv = temp;
         return temp;
     }
-    //±âÁ¸¿¡ ÇÒ´çµÇÀÖ´ø ÅØ½ºÃÄ¸¦ ¹İÈ¯
+    //ê¸°ì¡´ì— í• ë‹¹ë˜ìˆë˜ í…ìŠ¤ì³ë¥¼ ë°˜í™˜
     return iter->second.srv;
 }
 
@@ -44,15 +44,15 @@ bool Texture::DeleteTexture(wstring file)
 {
     auto iter = textureList.find(file);
 
-    //Áßº¹µÈ°Ô ¾ø´Ù.
+    //ì¤‘ë³µëœê²Œ ì—†ë‹¤.
     if (iter == textureList.end())
     {
         return false;
     }
-    //first°¡ Å°, second ¹ë·ù
+    //firstê°€ í‚¤, second ë°¸ë¥˜
     iter->second.srv->Release();
 
-    //¸Ê¿¡¼­µµ »èÁ¦
+    //ë§µì—ì„œë„ ì‚­ì œ
     textureList.erase(iter);
 
     return true;
