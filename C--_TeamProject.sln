@@ -11,11 +11,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game2\Game2.vcxproj
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contents", "Contents", "{0EC98764-9025-4AF9-8937-0EB5970059BA}"
-	ProjectSection(SolutionItems) = preProject
-		Contents\Images\bono.bmp = Contents\Images\bono.bmp
-		Contents\Images\bono.jpg = Contents\Images\bono.jpg
-		Contents\Images\bono.png = Contents\Images\bono.png
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{E3F02C0D-0DAD-4181-A968-85F48C12D251}"
 	ProjectSection(SolutionItems) = preProject
@@ -30,6 +25,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Txt", "Txt", "{BC1DD457-26F
 		Txt\삼각함수.txt = Txt\삼각함수.txt
 		Txt\좌표해상도.txt = Txt\좌표해상도.txt
 		Txt\행렬.txt = Txt\행렬.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Image", "Image", "{FC8A074E-0BCA-4013-A6C2-3CF042B6B11C}"
+	ProjectSection(SolutionItems) = preProject
+		Contents\Images\bono.bmp = Contents\Images\bono.bmp
+		Contents\Images\bono.jpg = Contents\Images\bono.jpg
+		Contents\Images\bono.png = Contents\Images\bono.png
 	EndProjectSection
 EndProject
 Global
@@ -59,6 +61,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FC8A074E-0BCA-4013-A6C2-3CF042B6B11C} = {0EC98764-9025-4AF9-8937-0EB5970059BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9E65A645-0ED0-45FC-8214-114C1DE27774}
