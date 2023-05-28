@@ -254,33 +254,47 @@ void Main::Update()
 	}
 	floatingBall[3]->Update();
 	
+	//관리자 모드
 	if (INPUT->KeyPress('Z'))
 	{
 		Golfball->hasAxis = true;
+		ADMIN_MODE = true;
 	}
 	if (INPUT->KeyPress('X'))
 	{
 		Golfball->hasAxis = false;
+		ADMIN_MODE = false;
 	}
+	 
+	
 
-	if (INPUT->KeyPress(VK_UP))
+	
+	
+	if (ADMIN_MODE)
 	{
-		CAM->position += UP * 500.0f * DELTA;
+		if (INPUT->KeyPress(VK_UP))
+		{
+			CAM->position += UP * 500.0f * DELTA;
+		}
+		if (INPUT->KeyPress(VK_DOWN))
+		{
+			CAM->position += DOWN * 500.0f * DELTA;
+		}
+		if (INPUT->KeyPress(VK_LEFT))
+		{
+			CAM->position += LEFT * 500.0f * DELTA;
+		}
+		if (INPUT->KeyPress(VK_RIGHT))
+		{
+			CAM->position += RIGHT * 500.0f * DELTA;;
+		}
 	}
-	if (INPUT->KeyPress(VK_DOWN))
-	{
-		CAM->position += DOWN * 500.0f * DELTA;
-	}
-	if (INPUT->KeyPress(VK_LEFT))
-	{
-		CAM->position += LEFT * 500.0f * DELTA;
-	}
-	if (INPUT->KeyPress(VK_RIGHT))
-	{
-		CAM->position += RIGHT * 500.0f * DELTA;;
-	}
+	else CAM->position.y = Golfball->GetWorldPos().y + 100.0f;
+
 	CAM->position.x = Utility::Saturate(CAM->position.x, -400.0f, 400.0f);
-	CAM->position.y = Utility::Saturate(CAM->position.y, 0.0f, 2000.0f);
+	CAM->position.y = Utility::Saturate(CAM->position.y, -200.0f, 2000.0f);
+
+	
 
 	for (int i = 0; i < MAPMAX; i++) {
 		map[i]->Update();
@@ -349,7 +363,7 @@ void Main::LateUpdate()
 		Golfball->Update();
 	}
 
-	for (int i = 0; i < 35; i++)
+	for (int i = 0; i < MAPMAX; i++)
 	{
 		map[i]->Collision(Golfball);
 	}
