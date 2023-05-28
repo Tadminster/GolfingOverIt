@@ -6,6 +6,7 @@ class Main : public Scene
 private:
 	class Wall* map[MAPMAX];
 	class Ball* Golfball;
+	class Ball_guideLine* ball_guideLine[5];
 	class Obstacle* floatingBall[FLBMAX];
 
 	Vector2 mousepoint;
