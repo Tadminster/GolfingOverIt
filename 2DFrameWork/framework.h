@@ -82,7 +82,7 @@ extern Application app;//Extern Global
 #include "Timer.h"
 #include "Camara.h"
 #include "Random.h"
-//#include "Texture.h"
+#include "Texture.h"
 //#include "Sound.h"
 //#include "SceneManager.h"
 
@@ -94,7 +94,7 @@ extern Application app;//Extern Global
 #include "ObStar.h"
 #include "ObCircle.h"
 #include "ObLine.h"
-//#include "ObImage.h"
+#include "ObImage.h"
 
 //Singleton Macro
 #define	D3D			Direct3D11::GetInstance()
@@ -105,6 +105,6 @@ extern Application app;//Extern Global
 #define TIMER		Timer::GetInstance()
 #define DELTA		Timer::GetInstance()->GetDeltaTime()
 #define RANDOM		Random::GetInstance()
-//#define TEXTURE		Texture::GetInstance()
+#define TEXTURE		Texture::GetInstance()
 //#define SOUND		Sound::GetInstance()
 //#define SCENE       SceneManager::GetInstance()
