@@ -6,6 +6,7 @@ class Main : public Scene
 private:
 	class Wall* map[MAPMAX];
 	class Ball* Golfball;
+	class Ball_guideLine* ball_guideLine[5];
 	class Obstacle* floatingBall[FLBMAX];
 
 	ObImage* backGroundImg;
@@ -21,10 +22,8 @@ private:
 	bool starting = false;
 	float pow;
 
-	bool ADMIN_MODE=false;
-	
+	bool ADMIN_MODE = false;
 
-	
 public:
 	Main();
 	~Main();

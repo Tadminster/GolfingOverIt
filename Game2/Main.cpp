@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "Wall.h"
 #include "Ball.h"
+#include "Ball_guideLine.h"
 #include "Obstacle.h"
 #include "Main.h"
 
@@ -8,14 +9,17 @@ Main::Main()
 {
 	for (int i = 0; i < MAPMAX; i++)
 		map[i] = new Wall();
-	for (int i = 0; i < FLBMAX; i++) 
+	for (int i = 0; i < FLBMAX; i++) {
 		floatingBall[i] = new Obstacle();
-	for (int i = 0; i < MAPMAX; i++) {
-		wallImg[i] = new ObImage(L"bono.jpg");
-		wallImg[i]->SetParentRT(*map[i]);
 	}
-	
+
 	Golfball = new Ball();
+	for (auto& guideLine : ball_guideLine)
+	{
+		guideLine = new Ball_guideLine();
+		guideLine->SetParentT(*Golfball);
+		guideLine->color = Color(1.0f, 0.3f, 0.3f, 0.2f);
+	}
 }
 
 Main::~Main()
@@ -24,28 +28,37 @@ Main::~Main()
 		delete map[i];
 	for (int i = 0; i < FLBMAX; i++)
 		delete floatingBall[i];
+	for (auto& guideLine : ball_guideLine)
+		delete guideLine;
 	delete Golfball;
+
 }
 void Main::Init()
 {
-	floatingBall[0]->flbpower = 200.0f;
-	floatingBall[0]->SetWorldPos(Vector2(0.0f, 380.0f));
-
-	floatingBall[1]->flbpower = 300.0f;
-	floatingBall[1]->SetWorldPos(Vector2(-200.0f, 700.0f));
-
-	floatingBall[2]->flbpower = 250.0f;
-	floatingBall[2]->SetWorldPos(Vector2(-100.0f, 1150.0f));
-
-	floatingBall[3]->flbpower = 400.0f;
-	floatingBall[3]->SetWorldPos(Vector2(-300.0f, 1500.0f));
-
+	// 공
 	Golfball->SetWorldPos(Vector2(-300,-100));
 	Golfball->fire(Vector2(-50.0f, 0.0f));
-	
+
+	// 공의 유도선
+	for (int i = 0; i < 5; i++)
+		ball_guideLine[i]->SetLocalPosX(30 + i * 25);
+
+	// 맵의 오브젝트
 	{
+		floatingBall[0]->flbpower = 200.0f;
+		floatingBall[0]->SetWorldPos(Vector2(0.0f, 380.0f));
+
+		floatingBall[1]->flbpower = 300.0f;
+		floatingBall[1]->SetWorldPos(Vector2(-200.0f, 700.0f));
+
+		floatingBall[2]->flbpower = 250.0f;
+		floatingBall[2]->SetWorldPos(Vector2(-100.0f, 1150.0f));
+
+		floatingBall[3]->flbpower = 400.0f;
+		floatingBall[3]->SetWorldPos(Vector2(-300.0f, 1500.0f));
+
 		map[0]->scale.x = 300.0f;
-		map[0]->scale.y = 50.0f; 
+		map[0]->scale.y = 50.0f;
 		map[0]->SetWorldPos(Vector2(-300.0f, -275));
 		map[1]->scale.x = 320.0f;
 		map[1]->scale.y = 150.0f;
@@ -197,19 +210,8 @@ void Main::Init()
 		map[34]->scale.x = 50.0f;
 		map[34]->scale.y = 50.0f;
 		map[34]->SetWorldPos(Vector2(0.0f, 2200));
-
-		map[36]->scale.x = 10.0f;
-		map[36]->scale.y = 2300.0f;
-		map[36]->SetWorldPos(Vector2(-400.0f, 0));
-
-		map[37]->scale.x = 10.0f;
-		map[37]->scale.y = 2300.0f;
-		map[37]->SetWorldPos(Vector2(400.0f, 0));
 	}
-	for (int i = 0; i < MAPMAX; i++) {
-		wallImg[i]->scale.x = map[i]->scale.x;
-		wallImg[i]->scale.y = map[i]->scale.y;
-	}
+}
 
 }
 
@@ -219,143 +221,156 @@ void Main::Release()
 
 void Main::Update()
 {
-	ImGui::Text("CAMERA_X: %f\n", CAM->position.x);
-	ImGui::Text("CAMERA_Y: %f\n", CAM->position.y);
-	ImGui::Text("\n");
-
-	ImGui::Text("BALL_X: %f\n", Golfball->GetWorldPos().x);
-	ImGui::Text("BALL_Y: %f\n", Golfball->GetWorldPos().y);
-	ImGui::Text("BALL_RIGHT: %f\n", Golfball->GetRight());
-	ImGui::Text("\n");
-	for (int i = 0; i < 19; i++)
+	// Debug 출력 창
 	{
-		map[i]->OnMouse();
-	}
-	if (floatingBall[0]->GetWorldPos().x <= -200.0f) {
-		floatingBall[0]->SetWorldPosX(-199.0f);
-		floatingBall[0]->ReflectionY();
-	}
-	else if (floatingBall[0]->GetWorldPos().x >= 300.0f) {
-		floatingBall[0]->SetWorldPosX(299.0f);
-		floatingBall[0]->ReflectionY();
-	}
-	floatingBall[0]->Update();
+		ImGui::Text("CAMERA_X: %f\n", CAM->position.x);
+		ImGui::Text("CAMERA_Y: %f\n", CAM->position.y);
+		ImGui::Text("\n");
 
-	if (floatingBall[1]->GetWorldPos().x <= -300.0f) {
-		floatingBall[1]->SetWorldPosX(-299.0f);
-		floatingBall[1]->ReflectionY();
+		ImGui::Text("BALL_X: %f\n", Golfball->GetWorldPos().x);
+		ImGui::Text("BALL_Y: %f\n", Golfball->GetWorldPos().y);
+		ImGui::Text("BALL_RIGHT: %f\n", Golfball->GetRight());
+		ImGui::Text("\n");
 	}
-	else if (floatingBall[1]->GetWorldPos().x >= 0.0f) {
-		floatingBall[1]->SetWorldPosX(-1.0f);
-		floatingBall[1]->ReflectionY();
-	}
-	floatingBall[1]->Update();
 
-	if (floatingBall[2]->GetWorldPos().x <= -200.0f) {
-		floatingBall[2]->SetWorldPosX(-199.0f);
-		floatingBall[2]->ReflectionY();
-	}
-	else if (floatingBall[2]->GetWorldPos().x >= 200.0f) {
-		floatingBall[2]->SetWorldPosX(199.0f);
-		floatingBall[2]->ReflectionY();
-	}
-	floatingBall[2]->Update();
-
-	if (floatingBall[3]->GetWorldPos().x <= -350.0f) {
-		floatingBall[3]->SetWorldPosX(-349.0f);
-		floatingBall[3]->ReflectionY();
-	}
-	else if (floatingBall[3]->GetWorldPos().x >= -50.0f) {
-		floatingBall[3]->SetWorldPosX(-51.0f);
-		floatingBall[3]->ReflectionY();
-	}
-	floatingBall[3]->Update();
-	
-	//관리자 모드
-	if (INPUT->KeyPress('Z'))
+	// 맵의 오브젝트
 	{
-		Golfball->hasAxis = true;
-		ADMIN_MODE = true;
-	}
-	if (INPUT->KeyPress('X'))
-	{
-		Golfball->hasAxis = false;
-		ADMIN_MODE = false;
-	}
-	 
-	
-
-	
-	
-	if (ADMIN_MODE)
-	{
-		if (INPUT->KeyPress(VK_UP))
+		for (int i = 0; i < 19; i++)
 		{
-			CAM->position += UP * 500.0f * DELTA;
+			map[i]->OnMouse();
 		}
-		if (INPUT->KeyPress(VK_DOWN))
-		{
-			CAM->position += DOWN * 500.0f * DELTA;
+		if (floatingBall[0]->GetWorldPos().x <= -200.0f) {
+			floatingBall[0]->SetWorldPosX(-199.0f);
+			floatingBall[0]->ReflectionY();
 		}
-		if (INPUT->KeyPress(VK_LEFT))
-		{
-			CAM->position += LEFT * 500.0f * DELTA;
+		else if (floatingBall[0]->GetWorldPos().x >= 300.0f) {
+			floatingBall[0]->SetWorldPosX(299.0f);
+			floatingBall[0]->ReflectionY();
 		}
-		if (INPUT->KeyPress(VK_RIGHT))
-		{
-			CAM->position += RIGHT * 500.0f * DELTA;;
+		floatingBall[0]->Update();
+
+		if (floatingBall[1]->GetWorldPos().x <= -300.0f) {
+			floatingBall[1]->SetWorldPosX(-299.0f);
+			floatingBall[1]->ReflectionY();
+		}
+		else if (floatingBall[1]->GetWorldPos().x >= 0.0f) {
+			floatingBall[1]->SetWorldPosX(-1.0f);
+			floatingBall[1]->ReflectionY();
+		}
+		floatingBall[1]->Update();
+
+		if (floatingBall[2]->GetWorldPos().x <= -200.0f) {
+			floatingBall[2]->SetWorldPosX(-199.0f);
+			floatingBall[2]->ReflectionY();
+		}
+		else if (floatingBall[2]->GetWorldPos().x >= 200.0f) {
+			floatingBall[2]->SetWorldPosX(199.0f);
+			floatingBall[2]->ReflectionY();
+		}
+		floatingBall[2]->Update();
+
+		if (floatingBall[3]->GetWorldPos().x <= -350.0f) {
+			floatingBall[3]->SetWorldPosX(-349.0f);
+			floatingBall[3]->ReflectionY();
+		}
+		else if (floatingBall[3]->GetWorldPos().x >= -50.0f) {
+			floatingBall[3]->SetWorldPosX(-51.0f);
+			floatingBall[3]->ReflectionY();
+		}
+		floatingBall[3]->Update();
+
+		for (int i = 0; i < MAPMAX; i++) {
+			map[i]->Update();
 		}
 	}
-	else CAM->position.y = Golfball->GetWorldPos().y + 100.0f;
 
+	// 관리자 모드
+	{
+		if (INPUT->KeyPress('Z'))
+		{
+			Golfball->hasAxis = true;
+			ADMIN_MODE = true;
+		}
+		if (INPUT->KeyPress('X'))
+		{
+			Golfball->hasAxis = false;
+			ADMIN_MODE = false;
+		}
+
+		if (ADMIN_MODE)
+		{
+			if (INPUT->KeyPress(VK_UP))
+			{
+				CAM->position += UP * 500.0f * DELTA;
+			}
+			if (INPUT->KeyPress(VK_DOWN))
+			{
+				CAM->position += DOWN * 500.0f * DELTA;
+			}
+			if (INPUT->KeyPress(VK_LEFT))
+			{
+				CAM->position += LEFT * 500.0f * DELTA;
+			}
+			if (INPUT->KeyPress(VK_RIGHT))
+			{
+				CAM->position += RIGHT * 500.0f * DELTA;;
+			}
+		}
+		else
+		{
+			CAM->position.y = Golfball->GetWorldPos().y + 100.0f;
+			CAM->position.x = Golfball->GetWorldPos().x;
+		}
+	}
+
+	// 카메라가 공에 따라가게
 	CAM->position.x = Utility::Saturate(CAM->position.x, -400.0f, 400.0f);
 	CAM->position.y = Utility::Saturate(CAM->position.y, -200.0f, 2000.0f);
 
-
-	if (Golfball->stopcheck())
+	// 공의 클릭 관련
 	{
-		Golfball->color = Vector4(1, 1, 1, 1);
-		if (Golfball->Intersect(INPUT->GetWorldMousePos()))
+		if (Golfball->stopcheck())
 		{
-			if (INPUT->KeyDown(VK_LBUTTON))
+			Golfball->color = Vector4(1, 1, 1, 1);
+			if (Golfball->Intersect(INPUT->GetWorldMousePos()))
 			{
-				onClick = true;
-				point = Golfball->GetWorldPos();
+				if (INPUT->KeyDown(VK_LBUTTON))
+				{
+					onClick = true;
+					point = Golfball->GetWorldPos();
+				}
 			}
-		}
+			if (onClick)
+			{
+				firepower = point - INPUT->GetWorldMousePos();
+				//Golfball->SetgravityForve(0.0f);
 		if (onClick)
-		{	
-			firepower = point-INPUT->GetWorldMousePos();
-			//Golfball->SetgravityForve(0.0f);
-
-			if (INPUT->KeyUp(VK_LBUTTON))
-			{	
-				Golfball->fire(firepower);
-				Golfball->Update();
-				onClick = false;
-				
+				if (INPUT->KeyUp(VK_LBUTTON))
+				{
+					Golfball->fire(firepower);
+					Golfball->Update();
+					onClick = false;
+				}
 			}
 		}
-		
+		else
+		{
+			Golfball->color = Vector4(0, 0, 0, 1);
+			Golfball->Update();
+		}
+
+		if (starting == 0) Golfball->Update();
 	}
-	else
-	{
-		Golfball->color = Vector4(0, 0, 0, 1);
-		Golfball->Update();
-	}
-	for (int i = 0; i < MAPMAX; i++) {
-		wallImg[i]->Update();
-	}
+}
 	for (int i = 0; i < MAPMAX; i++) 
 	{
 		map[i]->Update();
 	}
 
-	if(starting==0)Golfball->Update();
-}
 
 void Main::LateUpdate()
 {
+	// 임시벽
 	if (Golfball->GetWorldPos().y < -300.0f + 10.0f)
 	{
 		Golfball->SetWorldPosY(-300.0f + 10.0f);
@@ -377,30 +392,46 @@ void Main::LateUpdate()
 		Golfball->Update();
 	}
 
+
+
 	for (int i = 0; i < MAPMAX; i++)
 	{
 		map[i]->Collision(Golfball);
 	}
-	//for (auto& wall : map)
-	//{
-	//	wall->Collision(Golfball);
-	//}
 
-}
+	for (int i = 0; i < FLBMAX; i++)
+	{
+		if (floatingBall[i]->Intersect(Golfball)) Golfball->ReflectionBall(floatingBall[i]);
+	}
+
+	// 유도선
+	if (onClick)
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			//Vector2 direction = Golfball->GetWorldPos() - INPUT->GetWorldMousePos();
+			Vector2 direction = INPUT->GetWorldMousePos() - Golfball->GetWorldPos();
+			ball_guideLine[i]->rotation2.z = atan2f(direction.y, direction.x) + PI;
+			//ball_guideLine[i]->rotation.z += 3 * ToRadian;
+			ball_guideLine[i]->Update();
+		}
+	}
 
 void Main::Render()
 {
 	
 	for (int i = 0; i < MAPMAX; i++) 
 	{
-		map[i]->Render();
-	}
-	for (int i = 0; i < FLBMAX; i++) 
+	
 		floatingBall[i]->Render();
 	for (int i = 0; i < MAPMAX; i++) {
 		wallImg[i]->Render();
 	}
 	Golfball->Render();
+
+	if (onClick)
+		for (auto& guideLine : ball_guideLine)
+			guideLine->Render();
 }
 
 void Main::ResizeScreen()

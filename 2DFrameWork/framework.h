@@ -108,4 +108,4 @@ extern Application app;//Extern Global
 #define RANDOM		Random::GetInstance()
 #define TEXTURE		Texture::GetInstance()
 //#define SOUND		Sound::GetInstance()
-//#define SCENE       SceneManager::GetInstance()
+//#define SCENE     SceneManager::GetInstance()
