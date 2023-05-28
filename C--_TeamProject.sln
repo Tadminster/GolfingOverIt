@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32002.261
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2DFrameWork", "2DFrameWork\2DFrameWork.vcxproj", "{C2138BC9-A195-455F-91A6-5FF469EB5E61}"
 EndProject
@@ -11,6 +11,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game2\Game2.vcxproj
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contents", "Contents", "{0EC98764-9025-4AF9-8937-0EB5970059BA}"
+	ProjectSection(SolutionItems) = preProject
+		Contents\Images\bono.bmp = Contents\Images\bono.bmp
+		Contents\Images\bono.jpg = Contents\Images\bono.jpg
+		Contents\Images\bono.png = Contents\Images\bono.png
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{E3F02C0D-0DAD-4181-A968-85F48C12D251}"
 	ProjectSection(SolutionItems) = preProject
