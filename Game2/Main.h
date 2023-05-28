@@ -1,5 +1,5 @@
 ﻿#pragma once
-#define MAPMAX 36
+#define MAPMAX 38
 #define FLBMAX 4
 class Main : public Scene
 {

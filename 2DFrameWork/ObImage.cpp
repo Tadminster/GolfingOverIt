@@ -218,7 +218,7 @@ void ObImage::Render()
     }
     else
     {
-        D3D11_MAPPED_SUBRESOURCE mappedResource;
+        D3D11_MAPPED_SUBRESOURCE mappedResource = {};
         D3D->GetDC()->Map(uvBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
         memcpy_s(mappedResource.pData, sizeof(Vector4), &uv, sizeof(Vector4));
         D3D->GetDC()->Unmap(uvBuffer, 0);
