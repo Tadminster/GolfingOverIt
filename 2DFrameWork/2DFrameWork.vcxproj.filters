@@ -53,6 +53,9 @@
     <ClInclude Include="Texture.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="ObImage.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -110,6 +113,9 @@
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="ObImage.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

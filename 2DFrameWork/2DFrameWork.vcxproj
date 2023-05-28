@@ -165,6 +165,7 @@
     <ClInclude Include="Gui.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="ObCircle.h" />
+    <ClInclude Include="ObImage.h" />
     <ClInclude Include="ObLine.h" />
     <ClInclude Include="ObRect.h" />
     <ClInclude Include="ObStar.h" />
@@ -184,6 +185,7 @@
     <ClCompile Include="Gui.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="ObCircle.cpp" />
+    <ClCompile Include="ObImage.cpp" />
     <ClCompile Include="ObLine.cpp" />
     <ClCompile Include="ObRect.cpp" />
     <ClCompile Include="ObStar.cpp" />

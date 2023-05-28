@@ -82,7 +82,7 @@ extern Application app;//Extern Global
 #include "Timer.h"
 #include "Camara.h"
 #include "Random.h"
-//#include "Texture.h"
+#include "Texture.h"
 //#include "Sound.h"
 //#include "SceneManager.h"
 
