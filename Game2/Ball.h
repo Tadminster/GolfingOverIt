@@ -43,8 +43,8 @@ public:
 	void ReflectionXY()
 	{
 		fireDir = -fireDir;		
-		pressPower *= 0.5f;
-		gravityForce *= 0.5f;
+		pressPower *= 0.75f;
+		gravityForce *= 0.75f;
 	}
 
 	void ReflectionBall(GameObject* ob)
@@ -53,6 +53,8 @@ public:
 		dir = this->GetWorldPos() - ob->GetWorldPos();
 		dir.Normalize();
 		fireDir = dir;
+		pressPower *= 0.75f;
+		gravityForce *= 0.75f;
 		
 	}
 };

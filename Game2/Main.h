@@ -7,6 +7,7 @@ private:
 	class Wall* map[MAPMAX];
 	class Ball* Golfball;
 	class Obstacle* floatingBall[FLBMAX];
+	class ObRect* Goal;
 
 	Vector2 mousepoint;
 	Vector2 ballpoint;
@@ -16,6 +17,7 @@ private:
 	bool isStop= false;
 	bool onClick = false;
 	bool starting = false;
+	bool gameover = false;
 	float pow;
 
 	bool ADMIN_MODE=false;

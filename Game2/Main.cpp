@@ -13,6 +13,7 @@ Main::Main()
 	}
 	
 	Golfball = new Ball();
+	Goal = new ObRect();
 }
 
 Main::~Main()
@@ -22,6 +23,7 @@ Main::~Main()
 	for (int i = 0; i < FLBMAX; i++)
 		delete floatingBall[i];
 	delete Golfball;
+	delete Goal;
 }
 void Main::Init()
 {
@@ -40,6 +42,8 @@ void Main::Init()
 	Golfball->SetWorldPos(Vector2(-300,-100));
 	Golfball->fire(Vector2(-50.0f, 0.0f));
 
+	Goal->SetWorldPos(Vector2(0.0f, 2240.0f));
+	Goal->scale = Vector2(20.0f,20.0f);
 	//맵
 	{
 		map[0]->scale.x = 300.0f;
@@ -208,6 +212,10 @@ void Main::Update()
 	ImGui::Text("CAMERA_Y: %f\n", CAM->position.y);
 	ImGui::Text("\n");
 
+	ImGui::Text("MOUSE_X: %f\n", INPUT->GetWorldMousePos().x);
+	ImGui::Text("MOUSE_Y: %f\n", INPUT->GetWorldMousePos().y);
+	ImGui::Text("\n");
+
 	ImGui::Text("BALL_X: %f\n", Golfball->GetWorldPos().x);
 	ImGui::Text("BALL_Y: %f\n", Golfball->GetWorldPos().y);
 	ImGui::Text("BALL_RIGHT: %f\n", Golfball->GetRight());
@@ -344,6 +352,8 @@ void Main::Update()
 	}
 
 	if(starting==0)Golfball->Update();
+
+	Goal->Update();
 }
 
 void Main::LateUpdate()
@@ -369,7 +379,7 @@ void Main::LateUpdate()
 		Golfball->Update();
 	}
 
-
+	if (Goal->Intersect(Golfball)) gameover = true;
 
 	for (int i = 0; i < MAPMAX; i++)
 	{
@@ -397,6 +407,7 @@ void Main::Render()
 		floatingBall[i]->Render();
 	
 	Golfball->Render();
+	Goal->Render();
 }
 
 void Main::ResizeScreen()
