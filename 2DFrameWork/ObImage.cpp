@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 ID3D11Buffer* ObImage::vertexBuffer = nullptr;
 ID3D11Buffer* ObImage::uvBuffer = nullptr;
@@ -9,7 +9,7 @@ void ObImage::CreateStaticMember()
 
     Vertex = new VertexPT[4];
     //VertexCount = 4;
-    //½Ã°è¹æÇâÀ¸·Î Á¤Á¡Âï±â
+    //ì‹œê³„ë°©í–¥ìœ¼ë¡œ ì •ì ì°ê¸°
     Vertex[0].position.x = -0.5f;
     Vertex[0].position.y = -0.5f;
     Vertex[0].uv = Vector2(0.0f, 1.0f);
@@ -30,16 +30,16 @@ void ObImage::CreateStaticMember()
     {
         D3D11_BUFFER_DESC desc;
         desc = { 0 };
-        desc.Usage = D3D11_USAGE_DEFAULT;//¹öÆÛ¸¦ ÀĞ°í ¾²´Â ¹æ¹ı
-        desc.ByteWidth = sizeof(VertexPT) * 4; //¹öÆÛ Å©±â (¹ÙÀÌÆ®)ÀÔ´Ï´Ù.
-        desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;//¹öÆÛ°¡ ÆÄÀÌÇÁ ¶óÀÎ¿¡ ¹ÙÀÎµùµÇ´Â ¹æ¹ıÀ» ½Äº°ÇÏ½Ê½Ã¿À
+        desc.Usage = D3D11_USAGE_DEFAULT;//ë²„í¼ë¥¼ ì½ê³  ì“°ëŠ” ë°©ë²•
+        desc.ByteWidth = sizeof(VertexPT) * 4; //ë²„í¼ í¬ê¸° (ë°”ì´íŠ¸)ì…ë‹ˆë‹¤.
+        desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;//ë²„í¼ê°€ íŒŒì´í”„ ë¼ì¸ì— ë°”ì¸ë”©ë˜ëŠ” ë°©ë²•ì„ ì‹ë³„í•˜ì‹­ì‹œì˜¤
 
         D3D11_SUBRESOURCE_DATA data = { 0 };
-        //ÇÏÀ§ ¸®¼Ò½º¸¦ ÃÊ±âÈ­ÇÏ±âÀ§ÇÑ µ¥ÀÌÅÍ¸¦ ÁöÁ¤ÇÕ´Ï´Ù.
+        //í•˜ìœ„ ë¦¬ì†ŒìŠ¤ë¥¼ ì´ˆê¸°í™”í•˜ê¸°ìœ„í•œ ë°ì´í„°ë¥¼ ì§€ì •í•©ë‹ˆë‹¤.
         data.pSysMem = Vertex;
-        //ÃÊ±âÈ­ µ¥ÀÌÅÍÀÇ Æ÷ÀÎÅÍ.
+        //ì´ˆê¸°í™” ë°ì´í„°ì˜ í¬ì¸í„°.
 
-        //¹öÆÛ ¸¸µé±â
+        //ë²„í¼ ë§Œë“¤ê¸°
         HRESULT hr = D3D->GetDevice()->CreateBuffer(&desc, &data, &vertexBuffer);
         assert(SUCCEEDED(hr));
     }
@@ -50,7 +50,7 @@ void ObImage::CreateStaticMember()
         D3D11_BUFFER_DESC desc = { 0 };
         desc.ByteWidth = sizeof(Vector4);
         desc.Usage = D3D11_USAGE_DYNAMIC;
-        desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//»ó¼ö¹öÆÛ
+        desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ìƒìˆ˜ë²„í¼
         desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
         desc.MiscFlags = 0;
         desc.StructureByteStride = 0;
@@ -75,8 +75,8 @@ void ObImage::PlayAnim()
     {
         if (TIMER->GetTick(animTime, animInterval))
         {
-            //Àç»ı°£°İÀÌ Áö³µÀ» ¶§
-            if (animXAxis) //°¡·ÎÀç»ı
+            //ì¬ìƒê°„ê²©ì´ ì§€ë‚¬ì„ ë•Œ
+            if (animXAxis) //ê°€ë¡œì¬ìƒ
             {
                 if (animState == ANIMSTATE::LOOP)
                 {
@@ -113,7 +113,7 @@ void ObImage::PlayAnim()
                     }
                 }
             }
-            else //¼¼·ÎÀç»ı
+            else //ì„¸ë¡œì¬ìƒ
             {
                 if (animState == ANIMSTATE::LOOP)
                 {
@@ -167,7 +167,7 @@ void ObImage::PlayAnim()
 
 ObImage::ObImage(wstring file)
 {
-    //±âº» »ùÇÃ·¯ °ª
+    //ê¸°ë³¸ ìƒ˜í”ŒëŸ¬ ê°’
     samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
     samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
     samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -179,14 +179,14 @@ ObImage::ObImage(wstring file)
     samplerDesc.MinLOD = -FLT_MAX;
     samplerDesc.MaxLOD = FLT_MAX;
 
-    //ÇÏ³ª ÀÌ»óÀÇ »ùÇÃ·¯ ¸¸µé¾î µÎ±â
+    //í•˜ë‚˜ ì´ìƒì˜ ìƒ˜í”ŒëŸ¬ ë§Œë“¤ì–´ ë‘ê¸°
     D3D->GetDevice()->CreateSamplerState(&samplerDesc, &sampler);
 
-    //ÅØ½ºÃÄ ·Îµå
+    //í…ìŠ¤ì³ ë¡œë“œ
     SRV = TEXTURE->LoadTexture(file);
     imageSize = TEXTURE->GetTextureSize(file);
 
-    //           (ÃÖ¼ÒÁÂÇ¥)   (ÃÖ´ëÁÂÇ¥)
+    //           (ìµœì†Œì¢Œí‘œ)   (ìµœëŒ€ì¢Œí‘œ)
     uv = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
     animTime = 0.0f;
     animInterval = 0.0f;
