@@ -69,7 +69,7 @@ void Main::Init()
 		map[1]->scale.x = 320.0f;
 		map[1]->scale.y = 150.0f;
 		map[1]->rotation.z = 10.0f * ToRadian;
-		map[1]->SetWorldPos(Vector2(-5.0f, -300));
+		map[1]->SetWorldPos(Vector2(0.0f, -300));
 		map[2]->scale.x = 300.0f;
 		map[2]->scale.y = 250.0f;
 		map[2]->SetWorldPos(Vector2(250.0f, -330));
