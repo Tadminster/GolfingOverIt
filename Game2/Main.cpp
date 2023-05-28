@@ -8,9 +8,9 @@ Main::Main()
 {
 	for (int i = 0; i < MAPMAX; i++)
 		map[i] = new Wall();
-	for (int i = 0; i < FLBMAX; i++) {
+	for (int i = 0; i < FLBMAX; i++) 
 		floatingBall[i] = new Obstacle();
-	}
+	
 	Golfball = new Ball();
 }
 

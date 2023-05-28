@@ -8,6 +8,9 @@ private:
 	class Ball* Golfball;
 	class Obstacle* floatingBall[FLBMAX];
 
+	ObImage* backGroundImg;
+	ObImage* wallImg[MAPMAX];
+
 	Vector2 mousepoint;
 	Vector2 ballpoint;
 	Vector2 point;

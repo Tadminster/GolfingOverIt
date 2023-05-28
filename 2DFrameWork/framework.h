@@ -94,6 +94,7 @@ extern Application app;//Extern Global
 #include "ObStar.h"
 #include "ObCircle.h"
 #include "ObLine.h"
+#include "ObImage.h"
 //#include "ObImage.h"
 
 //Singleton Macro
@@ -105,6 +106,6 @@ extern Application app;//Extern Global
 #define TIMER		Timer::GetInstance()
 #define DELTA		Timer::GetInstance()->GetDeltaTime()
 #define RANDOM		Random::GetInstance()
-//#define TEXTURE		Texture::GetInstance()
+#define TEXTURE		Texture::GetInstance()
 //#define SOUND		Sound::GetInstance()
 //#define SCENE       SceneManager::GetInstance()
