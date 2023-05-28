@@ -11,7 +11,6 @@ Main::Main()
 	for (int i = 0; i < FLBMAX; i++) {
 		floatingBall[i] = new Obstacle();
 	}
-	
 	Golfball = new Ball();
 }
 
@@ -349,7 +348,7 @@ void Main::LateUpdate()
 		Golfball->Update();
 	}
 
-	for (int i = 0; i < 35; i++)
+	for (int i = 0; i < MAPMAX; i++)
 	{
 		map[i]->Collision(Golfball);
 	}
