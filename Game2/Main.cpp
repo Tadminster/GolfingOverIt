@@ -12,6 +12,10 @@ Main::Main()
 	for (int i = 0; i < FLBMAX; i++) {
 		floatingBall[i] = new Obstacle();
 	}
+	for (int i = 0; i < MAPMAX; i++) {
+		wallImg[i] = new ObImage(L"bono.bmp");
+		wallImg[i]->SetParentRT(*map[i]);
+	}
 
 	Golfball = new Ball();
 	for (auto& guideLine : ball_guideLine)
@@ -28,6 +32,8 @@ Main::~Main()
 		delete map[i];
 	for (int i = 0; i < FLBMAX; i++)
 		delete floatingBall[i];
+	for (int i = 0; i < MAPMAX; i++)
+		delete wallImg[i];
 	for (auto& guideLine : ball_guideLine)
 		delete guideLine;
 	delete Golfball;
@@ -36,7 +42,7 @@ Main::~Main()
 void Main::Init()
 {
 	// 공
-	Golfball->SetWorldPos(Vector2(-300,-100));
+	Golfball->SetWorldPos(Vector2(-300,50));
 	Golfball->fire(Vector2(-50.0f, 0.0f));
 
 	// 공의 유도선
@@ -210,9 +216,21 @@ void Main::Init()
 		map[34]->scale.x = 50.0f;
 		map[34]->scale.y = 50.0f;
 		map[34]->SetWorldPos(Vector2(0.0f, 2200));
-	}
-}
 
+		map[36]->scale.x = 10.0f;
+		map[36]->scale.y = 4600.0f;
+		map[36]->pivot = OFFSET_B;
+		map[36]->SetWorldPos(Vector2(-400.0f, 0.0f));
+
+		map[37]->scale.x = 10.0f;
+		map[37]->scale.y = 4600.0f;
+		map[37]->pivot = OFFSET_B;
+		map[37]->SetWorldPos(Vector2(400.0f, 0.0f));
+	}
+	for (int i = 0; i < MAPMAX; i++) {
+		wallImg[i]->scale.x = map[i]->scale.x;
+		wallImg[i]->scale.y = map[i]->scale.y;
+	}
 }
 
 void Main::Release()
@@ -278,10 +296,6 @@ void Main::Update()
 			floatingBall[3]->ReflectionY();
 		}
 		floatingBall[3]->Update();
-
-		for (int i = 0; i < MAPMAX; i++) {
-			map[i]->Update();
-		}
 	}
 
 	// 관리자 모드
@@ -361,12 +375,14 @@ void Main::Update()
 
 		if (starting == 0) Golfball->Update();
 	}
-}
-	for (int i = 0; i < MAPMAX; i++) 
+	for (int i = 0; i < MAPMAX; i++) {
+		wallImg[i]->Update();
+	}
+	for (int i = 0; i < MAPMAX; i++)
 	{
 		map[i]->Update();
 	}
-
+}
 
 void Main::LateUpdate()
 {
@@ -387,7 +403,7 @@ void Main::LateUpdate()
 	}
 	else if (Golfball->GetWorldPos().x > 400.0f - 10.0f)
 	{
-		Golfball->SetWorldPosX(400.0f -10.0f);
+		Golfball->SetWorldPosX(400.0f - 10.0f);
 		Golfball->ReflectionY();
 		Golfball->Update();
 	}
@@ -416,22 +432,20 @@ void Main::LateUpdate()
 			ball_guideLine[i]->Update();
 		}
 	}
+}
 
 void Main::Render()
 {
-	
-	for (int i = 0; i < MAPMAX; i++) 
+	for (int i = 0; i < MAPMAX; i++) wallImg[i]->Render();
+	for (int i = 0; i < FLBMAX; i++) floatingBall[i]->Render();
+	for (int i = 0; i < MAPMAX; i++)
 	{
-	
-		floatingBall[i]->Render();
-	for (int i = 0; i < MAPMAX; i++) {
-		wallImg[i]->Render();
-	}
-	Golfball->Render();
+		Golfball->Render();
 
-	if (onClick)
-		for (auto& guideLine : ball_guideLine)
-			guideLine->Render();
+		if (onClick)
+			for (auto& guideLine : ball_guideLine)
+				guideLine->Render();
+	}
 }
 
 void Main::ResizeScreen()
