@@ -57,11 +57,6 @@ void Main::Init()
 		floatingBall[3]->flbpower = 400.0f;
 		floatingBall[3]->SetWorldPos(Vector2(-300.0f, 1500.0f));
 
-	Golfball->SetWorldPos(Vector2(-300,-100));
-	Golfball->fire(Vector2(-50.0f, 0.0f));
-
-	//맵
-	{
 		map[0]->scale.x = 300.0f;
 		map[0]->scale.y = 50.0f;
 		map[0]->SetWorldPos(Vector2(-300.0f, -275));
@@ -287,50 +282,48 @@ void Main::Update()
 		}
 	}
 
-	//관리자 모드
-	if (INPUT->KeyPress('Z'))
+	// 관리자 모드
 	{
-		Golfball->hasAxis = true;
-		ADMIN_MODE = true;
-	}
-	if (INPUT->KeyPress('X'))
-	{
-		Golfball->hasAxis = false;
-		ADMIN_MODE = false;
-	}
-	 
-	
+		if (INPUT->KeyPress('Z'))
+		{
+			Golfball->hasAxis = true;
+			ADMIN_MODE = true;
+		}
+		if (INPUT->KeyPress('X'))
+		{
+			Golfball->hasAxis = false;
+			ADMIN_MODE = false;
+		}
 
-	
-	
-	if (ADMIN_MODE)
-	{
-		if (INPUT->KeyPress(VK_UP))
+		if (ADMIN_MODE)
 		{
-			CAM->position += UP * 500.0f * DELTA;
+			if (INPUT->KeyPress(VK_UP))
+			{
+				CAM->position += UP * 500.0f * DELTA;
+			}
+			if (INPUT->KeyPress(VK_DOWN))
+			{
+				CAM->position += DOWN * 500.0f * DELTA;
+			}
+			if (INPUT->KeyPress(VK_LEFT))
+			{
+				CAM->position += LEFT * 500.0f * DELTA;
+			}
+			if (INPUT->KeyPress(VK_RIGHT))
+			{
+				CAM->position += RIGHT * 500.0f * DELTA;;
+			}
 		}
-		if (INPUT->KeyPress(VK_DOWN))
+		else
 		{
-			CAM->position += DOWN * 500.0f * DELTA;
+			CAM->position.y = Golfball->GetWorldPos().y + 100.0f;
+			CAM->position.x = Golfball->GetWorldPos().x;
 		}
-		if (INPUT->KeyPress(VK_LEFT))
-		{
-			CAM->position += LEFT * 500.0f * DELTA;
-		}
-		if (INPUT->KeyPress(VK_RIGHT))
-		{
-			CAM->position += RIGHT * 500.0f * DELTA;;
-		}
-	}
-	else
-	{
-		CAM->position.y = Golfball->GetWorldPos().y + 100.0f;
-		CAM->position.x = Golfball->GetWorldPos().x ;
 	}
 
-		CAM->position.x = Utility::Saturate(CAM->position.x, -400.0f, 400.0f);
-		CAM->position.y = Utility::Saturate(CAM->position.y, -200.0f, 2000.0f);
-	}
+	// 카메라가 공에 따라가게
+	CAM->position.x = Utility::Saturate(CAM->position.x, -400.0f, 400.0f);
+	CAM->position.y = Utility::Saturate(CAM->position.y, -200.0f, 2000.0f);
 
 	// 공의 클릭 관련
 	{
@@ -355,7 +348,6 @@ void Main::Update()
 					Golfball->fire(firepower);
 					Golfball->Update();
 					onClick = false;
-
 				}
 			}
 		}
@@ -368,6 +360,7 @@ void Main::Update()
 		if (starting == 0) Golfball->Update();
 	}
 }
+
 
 void Main::LateUpdate()
 {
