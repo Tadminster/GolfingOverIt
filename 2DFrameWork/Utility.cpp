@@ -179,6 +179,20 @@ int Utility::IntersectRectCircleS(RECT& rc, CIRCLE& cc)
         return 4;
     }
 
+    Vector2 edge[4];
+    edge[0] = Vector2(rc.min.x, rc.max.y);
+    edge[1] = Vector2(rc.min.x, rc.min.y);
+    edge[2] = Vector2(rc.max.x, rc.min.y);
+    edge[3] = Vector2(rc.max.x, rc.max.y);
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (IntersectCircleCoord(cc, edge[i]))
+        {
+            return 5;
+        }
+    }
+
     return 0;
 }
 
