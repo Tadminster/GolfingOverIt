@@ -11,7 +11,7 @@ WPARAM Window::Run(Scene* main)
 	ObLine::CreateStaticMember();
 	ObCircle::CreateStaticMember();
 	ObStar::CreateStaticMember();
-	//ObImage::CreateStaticMember();
+	ObImage::CreateStaticMember();
 	main->Init();
 	MSG msg = { 0 };
 	while (true)
@@ -24,7 +24,7 @@ WPARAM Window::Run(Scene* main)
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		else //��������
+		else //한프레임
 		{
 			TIMER->Chronometry(app.fixFrame);
 			INPUT->Update();
@@ -48,7 +48,7 @@ WPARAM Window::Run(Scene* main)
 	ObLine::DeleteStaticMember();
 	ObCircle::DeleteStaticMember();
 	ObStar::DeleteStaticMember();
-	//ObImage::DeleteStaticMember();
+	ObImage::DeleteStaticMember();
 
 	main->Release();
 	TIMER->DeleteSingleton();
