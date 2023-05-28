@@ -18,11 +18,11 @@ Main::Main()
 	}
 
 	Golfball = new Ball();
-	for (auto& guideLine : ball_guideLine)
+	for (int i = 0; i < 5; i++)
 	{
-		guideLine = new Ball_guideLine();
-		guideLine->SetParentT(*Golfball);
-		guideLine->color = Color(1.0f, 0.3f, 0.3f, 0.2f);
+		ball_guideLine[i] = new Ball_guideLine();
+		ball_guideLine[i]->SetParentT(*Golfball);
+		ball_guideLine[i]->color = Color(0.0f + i * 0.2f, 0.8f - i * 0.1f, 0.1f, 0.5f);
 	}
 }
 
@@ -47,7 +47,7 @@ void Main::Init()
 
 	// 공의 유도선
 	for (int i = 0; i < 5; i++)
-		ball_guideLine[i]->SetLocalPosX(30 + i * 25);
+		ball_guideLine[i]->SetLocalPosX(30 + i * 40);
 
 	// 맵의 오브젝트
 	{
@@ -249,6 +249,9 @@ void Main::Update()
 		ImGui::Text("BALL_Y: %f\n", Golfball->GetWorldPos().y);
 		ImGui::Text("BALL_RIGHT: %f\n", Golfball->GetRight());
 		ImGui::Text("\n");
+
+		ImGui::Text("MOUSE_X: %f\n", INPUT->GetWorldMousePos().x);
+		ImGui::Text("MOUSE_Y: %f\n", INPUT->GetWorldMousePos().y);
 	}
 
 	// 맵의 오브젝트
@@ -443,8 +446,17 @@ void Main::Render()
 		Golfball->Render();
 
 		if (onClick)
-			for (auto& guideLine : ball_guideLine)
-				guideLine->Render();
+			for (int i = 0; i < 5; i++)
+			{
+				Vector2 distance = (Golfball->GetWorldPos() - INPUT->GetWorldMousePos());
+				ImGui::Text("d: %f\n", distance.Length());
+				ImGui::Text("d: %f\n", distance.Length() / 50.f);
+				if (distance.Length() / 100.f > i)
+				{
+
+					ball_guideLine[i]->Render();
+				}
+			}
 	}
 }
 
