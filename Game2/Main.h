@@ -19,11 +19,8 @@ private:
 	bool starting = false;
 	float pow;
 
-	bool ADMIN_MODE=false;
-	
-	ObImage* bg;
+	bool ADMIN_MODE = false;
 
-	
 public:
 	Main();
 	~Main();

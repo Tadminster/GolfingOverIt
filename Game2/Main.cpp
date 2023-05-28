@@ -7,8 +7,6 @@
 
 Main::Main()
 {
-	bg = new ObImage(L"bono.bmp");
-
 	for (int i = 0; i < MAPMAX; i++)
 		map[i] = new Wall();
 	for (int i = 0; i < FLBMAX; i++) {
@@ -37,15 +35,6 @@ Main::~Main()
 }
 void Main::Init()
 {
-	bg->scale.x = app.GetHalfWidth();
-	bg->scale.y = app.GetHalfHeight();
-	//bg->collider = COLLIDER::CIRCLE;
-
-	bg->uv.x = 288.0f / bg->imageSize.x;
-	bg->uv.y = 160.0f / bg->imageSize.y;
-	bg->uv.z = 495.0f / bg->imageSize.x;
-	bg->uv.w = 292.0f / bg->imageSize.y;
-
 	// 공
 	Golfball->SetWorldPos(Vector2(-300,-100));
 	Golfball->fire(Vector2(-50.0f, 0.0f));
@@ -230,8 +219,6 @@ void Main::Release()
 
 void Main::Update()
 {
-	bg->Update();
-
 	// Debug 출력 창
 	{
 		ImGui::Text("CAMERA_X: %f\n", CAM->position.x);
@@ -427,8 +414,6 @@ void Main::LateUpdate()
 
 void Main::Render()
 {
-	bg->Render();
-
 	for (int i = 0; i < MAPMAX; i++) 
 	{
 		map[i]->Render();
