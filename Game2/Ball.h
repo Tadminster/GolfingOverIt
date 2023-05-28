@@ -1,7 +1,7 @@
 ﻿#pragma once
 class Ball : public ObCircle
 {
-private:
+public:
 	Vector2		fireDir;
 	float		pressPower;
 	Vector2		velocity;
@@ -29,16 +29,16 @@ public:
 	{
 		fireDir.x = -fireDir.x;
 		
-		pressPower *= 0.5f;
-		gravityForce *= 0.5f;
+		pressPower *= 0.75f;
+		gravityForce *= 0.75f;
 	}
 	void ReflectionX()
 	{
 		fireDir.y = -fireDir.y;
 		gravityForce = -gravityForce;
 		
-		pressPower *= 0.5f;
-		gravityForce *= 0.5f;
+		pressPower *= 0.75f;
+		gravityForce *= 0.75f;
 	}
 };
 

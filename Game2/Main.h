@@ -21,11 +21,10 @@ private:
 	bool starting = false;
 	float pow;
 
-	bool hi;
-	bool hello;
+	bool ADMIN_MODE=false;
+	
 
-	int donghwa;
-	int chenhee;
+	
 public:
 	Main();
 	~Main();
