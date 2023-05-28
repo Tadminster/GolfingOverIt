@@ -65,7 +65,7 @@ void Main::Init()
 
 		map[0]->scale.x = 300.0f;
 		map[0]->scale.y = 50.0f;
-		map[0]->SetWorldPos(Vector2(-300.0f, -275));
+		map[0]->SetWorldPos(Vector2(-250.0f, -275));
 		map[1]->scale.x = 320.0f;
 		map[1]->scale.y = 150.0f;
 		map[1]->rotation.z = 10.0f * ToRadian;
@@ -217,15 +217,15 @@ void Main::Init()
 		map[34]->scale.y = 50.0f;
 		map[34]->SetWorldPos(Vector2(0.0f, 2200));
 
-		map[36]->scale.x = 10.0f;
+		map[36]->scale.x = 100.0f;
 		map[36]->scale.y = 4600.0f;
 		map[36]->pivot = OFFSET_B;
-		map[36]->SetWorldPos(Vector2(-400.0f, 0.0f));
+		map[36]->SetWorldPos(Vector2(-450.0f, 0.0f));
 
-		map[37]->scale.x = 10.0f;
+		map[37]->scale.x = 100.0f;
 		map[37]->scale.y = 4600.0f;
 		map[37]->pivot = OFFSET_B;
-		map[37]->SetWorldPos(Vector2(400.0f, 0.0f));
+		map[37]->SetWorldPos(Vector2(450.0f, 0.0f));
 	}
 	for (int i = 0; i < MAPMAX; i++) {
 		wallImg[i]->scale.x = map[i]->scale.x;
