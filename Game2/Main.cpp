@@ -2,6 +2,7 @@
 #include "Wall.h"
 #include "Ball.h"
 #include "Ball_guideLine.h"
+#include "Ball_trail.h"
 #include "Obstacle.h"
 #include "Main.h"
 
@@ -17,13 +18,14 @@ Main::Main()
 		wallImg[i]->SetParentRT(*map[i]);
 	}
 
-	Golfball = new Ball();
-	for (auto& guideLine : ball_guideLine)
+	golfBall = new Ball();
+	for (int i = 0; i < 5; i++)
 	{
-		guideLine = new Ball_guideLine();
-		guideLine->SetParentT(*Golfball);
-		guideLine->color = Color(1.0f, 0.3f, 0.3f, 0.2f);
+		ball_guideLine[i] = new Ball_guideLine();
+		ball_guideLine[i]->SetParentT(*golfBall);
+		ball_guideLine[i]->color = Color(0.0f + i * 0.2f, 0.8f - i * 0.1f, 0.1f, 0.5f);
 	}
+	goal = new ObRect();
 }
 
 Main::~Main()
@@ -36,18 +38,19 @@ Main::~Main()
 		delete wallImg[i];
 	for (auto& guideLine : ball_guideLine)
 		delete guideLine;
-	delete Golfball;
+	delete golfBall;
+	delete goal;
 
 }
 void Main::Init()
 {
 	// 공
-	Golfball->SetWorldPos(Vector2(-300,50));
-	Golfball->fire(Vector2(-50.0f, 0.0f));
+	golfBall->SetWorldPos(Vector2(-300,50));
+	golfBall->fire(Vector2(-50.0f, 0.0f));
 
 	// 공의 유도선
 	for (int i = 0; i < 5; i++)
-		ball_guideLine[i]->SetLocalPosX(30 + i * 25);
+		ball_guideLine[i]->SetLocalPosX(30 + i * 40);
 
 	// 맵의 오브젝트
 	{
@@ -65,11 +68,11 @@ void Main::Init()
 
 		map[0]->scale.x = 300.0f;
 		map[0]->scale.y = 50.0f;
-		map[0]->SetWorldPos(Vector2(-300.0f, -275));
+		map[0]->SetWorldPos(Vector2(-250.0f, -275));
 		map[1]->scale.x = 320.0f;
 		map[1]->scale.y = 150.0f;
 		map[1]->rotation.z = 10.0f * ToRadian;
-		map[1]->SetWorldPos(Vector2(-5.0f, -300));
+		map[1]->SetWorldPos(Vector2(0.0f, -300));
 		map[2]->scale.x = 300.0f;
 		map[2]->scale.y = 250.0f;
 		map[2]->SetWorldPos(Vector2(250.0f, -330));
@@ -217,20 +220,25 @@ void Main::Init()
 		map[34]->scale.y = 50.0f;
 		map[34]->SetWorldPos(Vector2(0.0f, 2200));
 
-		map[36]->scale.x = 10.0f;
+		map[36]->scale.x = 100.0f;
 		map[36]->scale.y = 4600.0f;
 		map[36]->pivot = OFFSET_B;
-		map[36]->SetWorldPos(Vector2(-400.0f, 0.0f));
+		map[36]->SetWorldPos(Vector2(-450.0f, 0.0f));
 
-		map[37]->scale.x = 10.0f;
+		map[37]->scale.x = 100.0f;
 		map[37]->scale.y = 4600.0f;
 		map[37]->pivot = OFFSET_B;
-		map[37]->SetWorldPos(Vector2(400.0f, 0.0f));
+		map[37]->SetWorldPos(Vector2(450.0f, 0.0f));
 	}
 	for (int i = 0; i < MAPMAX; i++) {
 		wallImg[i]->scale.x = map[i]->scale.x;
 		wallImg[i]->scale.y = map[i]->scale.y;
 	}
+
+	//골대
+	goal->SetWorldPos(Vector2(0.0f, 2240.0f));
+	goal->scale = Vector2(20.0f, 20.0f);
+	goal->color = Vector4(0, 0, 0, 1);
 }
 
 void Main::Release()
@@ -245,10 +253,13 @@ void Main::Update()
 		ImGui::Text("CAMERA_Y: %f\n", CAM->position.y);
 		ImGui::Text("\n");
 
-		ImGui::Text("BALL_X: %f\n", Golfball->GetWorldPos().x);
-		ImGui::Text("BALL_Y: %f\n", Golfball->GetWorldPos().y);
-		ImGui::Text("BALL_RIGHT: %f\n", Golfball->GetRight());
+		ImGui::Text("BALL_X: %f\n", golfBall->GetWorldPos().x);
+		ImGui::Text("BALL_Y: %f\n", golfBall->GetWorldPos().y);
+		ImGui::Text("BALL_RIGHT: %f\n", golfBall->GetRight());
 		ImGui::Text("\n");
+
+		ImGui::Text("MOUSE_X: %f\n", INPUT->GetWorldMousePos().x);
+		ImGui::Text("MOUSE_Y: %f\n", INPUT->GetWorldMousePos().y);
 	}
 
 	// 맵의 오브젝트
@@ -302,12 +313,12 @@ void Main::Update()
 	{
 		if (INPUT->KeyPress('Z'))
 		{
-			Golfball->hasAxis = true;
+			golfBall->hasAxis = true;
 			ADMIN_MODE = true;
 		}
 		if (INPUT->KeyPress('X'))
 		{
-			Golfball->hasAxis = false;
+			golfBall->hasAxis = false;
 			ADMIN_MODE = false;
 		}
 
@@ -332,8 +343,8 @@ void Main::Update()
 		}
 		else
 		{
-			CAM->position.y = Golfball->GetWorldPos().y + 100.0f;
-			CAM->position.x = Golfball->GetWorldPos().x;
+			CAM->position.y = golfBall->GetWorldPos().y + 100.0f;
+			CAM->position.x = golfBall->GetWorldPos().x;
 		}
 	}
 
@@ -343,38 +354,77 @@ void Main::Update()
 
 	// 공의 클릭 관련
 	{
-		if (Golfball->stopcheck())
+		// 공이 멈췄을 때
+		if (golfBall->stopcheck())
 		{
-			Golfball->color = Vector4(1, 1, 1, 1);
-			if (Golfball->Intersect(INPUT->GetWorldMousePos()))
+			golfBall->color = Color(1.f, 1.f, 1.f, 1.f);	// 색상을 검정으로
+
+			// 마우스가 공위에 있으면
+			if (golfBall->Intersect(INPUT->GetWorldMousePos()))
 			{
+				// 좌클을 누르면
 				if (INPUT->KeyDown(VK_LBUTTON))
 				{
-					onClick = true;
-					point = Golfball->GetWorldPos();
+					onClick = true;						// 클릭 신호를 주고
+					point = golfBall->GetWorldPos();	// 공의 위치를 저장
 				}
 			}
+			// 공을 클릭했으면
 			if (onClick)
 			{
-				firepower = point - INPUT->GetWorldMousePos();
-				//Golfball->SetgravityForve(0.0f);
-		if (onClick)
+				// 유도선을 그려줌
+				for (int i = 0; i < 5; i++)
+				{
+					Vector2 direction = INPUT->GetWorldMousePos() - point;						// 계산에 쓰일 벡터
+					ball_guideLine[i]->rotation2.z = atan2f(direction.y, direction.x) + PI;		// 유도선 방향 계산
+					ball_guideLine[i]->Update();												
+				}
+				// 클릭을 떼면 발사
 				if (INPUT->KeyUp(VK_LBUTTON))
 				{
-					Golfball->fire(firepower);
-					Golfball->Update();
+					firepower = point - INPUT->GetWorldMousePos();
+					golfBall->fire(firepower);
+					golfBall->Update();
 					onClick = false;
 				}
 			}
 		}
 		else
 		{
-			Golfball->color = Vector4(0, 0, 0, 1);
-			Golfball->Update();
+			golfBall->color = Color(0.f, 0.f, 0.f, 1.f);
+			golfBall->Update();
 		}
 
-		if (starting == 0) Golfball->Update();
+		if (starting == 0) golfBall->Update();
 	}
+
+
+	// 궤적 관련
+	{
+		//ImGui::Text("TRAIL COUNT: %d\n", trail.size());
+		// 궤적 생성
+		if (!golfBall->isStop)
+		{
+			trail.push_back(Ball_trail(golfBall->GetWorldPos()));
+			for (auto& trail : this->trail)
+				trail.Update();
+		}
+
+		// 궤적의 지속시간이 경과되면 삭제
+		trail.erase
+		(
+			std::remove_if
+			(
+				trail.begin(),
+				trail.end(),
+				[](Ball_trail& t) { return t.timeOut(); }
+			),
+			trail.end()
+		);
+	}
+
+
+
 	for (int i = 0; i < MAPMAX; i++) {
 		wallImg[i]->Update();
 	}
@@ -382,56 +432,47 @@ void Main::Update()
 	{
 		map[i]->Update();
 	}
+
+	goal->Update();
 }
 
 void Main::LateUpdate()
 {
 	// 임시벽
-	if (Golfball->GetWorldPos().y < -300.0f + 10.0f)
+	if (golfBall->GetWorldPos().y < -300.0f + 10.0f)
 	{
-		Golfball->SetWorldPosY(-300.0f + 10.0f);
-		Golfball->ReflectionX();
-		Golfball->Update();
+		golfBall->SetWorldPosY(-300.0f + 10.0f);
+		golfBall->ReflectionX();
+		golfBall->Update();
 	}
 
-	if (Golfball->GetWorldPos().x < -400.0f + 10.0f)
+	if (golfBall->GetWorldPos().x < -400.0f + 10.0f)
 	{
-		Golfball->SetWorldPosX(-400.0f + 10.0f);
-		Golfball->ReflectionY();
-		Golfball->Update();
+		golfBall->SetWorldPosX(-400.0f + 10.0f);
+		golfBall->ReflectionY();
+		golfBall->Update();
 		starting = true;
 	}
-	else if (Golfball->GetWorldPos().x > 400.0f - 10.0f)
+	else if (golfBall->GetWorldPos().x > 400.0f - 10.0f)
 	{
-		Golfball->SetWorldPosX(400.0f - 10.0f);
-		Golfball->ReflectionY();
-		Golfball->Update();
+		golfBall->SetWorldPosX(400.0f - 10.0f);
+		golfBall->ReflectionY();
+		golfBall->Update();
 	}
 
 
-
+	//벽충돌
 	for (int i = 0; i < MAPMAX; i++)
 	{
-		map[i]->Collision(Golfball);
+		map[i]->Collision(golfBall);
 	}
-
+	//방해물충돌
 	for (int i = 0; i < FLBMAX; i++)
 	{
-		if (floatingBall[i]->Intersect(Golfball)) Golfball->ReflectionBall(floatingBall[i]);
+		if (floatingBall[i]->Intersect(golfBall)) golfBall->ReflectionBall(floatingBall[i]);
 	}
-
-	// 유도선
-	if (onClick)
-	{
-		for (int i = 0; i < 5; i++)
-		{
-			//Vector2 direction = Golfball->GetWorldPos() - INPUT->GetWorldMousePos();
-			Vector2 direction = INPUT->GetWorldMousePos() - Golfball->GetWorldPos();
-			ball_guideLine[i]->rotation2.z = atan2f(direction.y, direction.x) + PI;
-			//ball_guideLine[i]->rotation.z += 3 * ToRadian;
-			ball_guideLine[i]->Update();
-		}
-	}
+	//골대충돌
+	if (goal->Intersect(golfBall)) isGameOver = true;
 }
 
 void Main::Render()
@@ -440,12 +481,25 @@ void Main::Render()
 	for (int i = 0; i < FLBMAX; i++) floatingBall[i]->Render();
 	for (int i = 0; i < MAPMAX; i++)
 	{
-		Golfball->Render();
+		golfBall->Render();
 
 		if (onClick)
-			for (auto& guideLine : ball_guideLine)
-				guideLine->Render();
+			for (int i = 0; i < 5; i++)
+			{
+				Vector2 distance = (golfBall->GetWorldPos() - INPUT->GetWorldMousePos());
+				//ImGui::Text("d: %f\n", distance.Length());
+				//ImGui::Text("d: %f\n", distance.Length() / 60.f);
+				if (distance.Length() / 100.f > i)
+				{
+					ball_guideLine[i]->Render();
+				}
+			}
 	}
+
+	for (auto& trail : this->trail)
+		trail.Render();
+
+	goal->Render();
 }
 
 void Main::ResizeScreen()

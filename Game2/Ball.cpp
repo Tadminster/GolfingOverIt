@@ -8,6 +8,7 @@ Ball::Ball()
     fireDir = Vector2(0, 0);
     pressPower = 1.0f;
     hasAxis = false;
+    gravityDir = DOWN;
 }
 
 Ball::~Ball()
@@ -19,13 +20,10 @@ void Ball::Update()
     
     gravityForce += 500.0f * DELTA;
 
-     velocity = (fireDir * pressPower
-        + gravityDir * gravityForce);
+    velocity = (fireDir * pressPower + gravityDir * gravityForce);
     MoveWorldPos(velocity * DELTA);
 
     rotation.z = atan2f(velocity.y, velocity.x);
-
-    
 
     ObCircle::Update();
 }
@@ -39,10 +37,9 @@ void Ball::Render()
 
 void Ball::fire(Vector2 dir)
 { 
-    if(dir.Length()*5 >500.0f) pressPower = 500.0f;  
-    else  pressPower = dir.Length()*5 ;
+    pressPower = min(dir.Length() * 2.0f, 550.f);
     dir.Normalize();
-    fireDir =dir;
+    fireDir = dir;
 }
 
 bool Ball::stopcheck()

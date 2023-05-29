@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Ball_guideLine.h" />
+    <ClInclude Include="Ball_trail.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MapObject.h" />
     <ClInclude Include="Obstacle.h" />
@@ -30,6 +31,7 @@
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Ball_guideLine.cpp" />
+    <ClCompile Include="Ball_trail.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MapObject.cpp" />
     <ClCompile Include="Obstacle.cpp" />
