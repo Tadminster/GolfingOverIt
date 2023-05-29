@@ -8,6 +8,7 @@ private:
 	class Ball* golfBall;
 	class Ball_guideLine* ball_guideLine[5];
 	class Obstacle* floatingBall[FLBMAX];
+	class ObRect* goal;
 
 	vector<class Ball_trail> trail;
 
@@ -21,6 +22,7 @@ private:
 	
 	bool onClick = false;
 	bool starting = false;
+	bool isGameOver = false;
 	float pow;
 
 	bool ADMIN_MODE = false;
