@@ -8,6 +8,7 @@ private:
 	class Ball* golfBall;
 	class Ball_guideLine* ball_guideLine[5];
 	class Obstacle* floatingBall[FLBMAX];
+	class ObRect* goal;
 
 	ObImage* backGroundImg;
 	ObImage* wallImg[MAPMAX];
@@ -20,6 +21,7 @@ private:
 	bool isStop= false;
 	bool onClick = false;
 	bool starting = false;
+	bool isGameOver = false;
 	float pow;
 
 	bool ADMIN_MODE = false;

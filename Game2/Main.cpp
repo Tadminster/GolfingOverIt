@@ -24,6 +24,7 @@ Main::Main()
 		ball_guideLine[i]->SetParentT(*golfBall);
 		ball_guideLine[i]->color = Color(0.0f + i * 0.2f, 0.8f - i * 0.1f, 0.1f, 0.5f);
 	}
+	goal = new ObRect();
 }
 
 Main::~Main()
@@ -37,6 +38,7 @@ Main::~Main()
 	for (auto& guideLine : ball_guideLine)
 		delete guideLine;
 	delete golfBall;
+	delete goal;
 
 }
 void Main::Init()
@@ -231,6 +233,11 @@ void Main::Init()
 		wallImg[i]->scale.x = map[i]->scale.x;
 		wallImg[i]->scale.y = map[i]->scale.y;
 	}
+
+	//골대
+	goal->SetWorldPos(Vector2(0.0f, 2240.0f));
+	goal->scale = Vector2(20.0f, 20.0f);
+	goal->color = Vector4(0, 0, 0, 1);
 }
 
 void Main::Release()
@@ -396,6 +403,8 @@ void Main::Update()
 	{
 		map[i]->Update();
 	}
+
+	goal->Update();
 }
 
 void Main::LateUpdate()
@@ -423,16 +432,18 @@ void Main::LateUpdate()
 	}
 
 
-
+	//벽충돌
 	for (int i = 0; i < MAPMAX; i++)
 	{
 		map[i]->Collision(golfBall);
 	}
-
+	//방해물충돌
 	for (int i = 0; i < FLBMAX; i++)
 	{
 		if (floatingBall[i]->Intersect(golfBall)) golfBall->ReflectionBall(floatingBall[i]);
 	}
+	//골대충돌
+	if (goal->Intersect(golfBall)) isGameOver = true;
 
 	// 유도선
 	//if (onClick)
@@ -467,6 +478,7 @@ void Main::Render()
 				}
 			}
 	}
+	goal->Render();
 }
 
 void Main::ResizeScreen()
