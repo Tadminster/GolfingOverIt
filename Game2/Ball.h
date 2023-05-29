@@ -6,9 +6,8 @@ public:
 	float		pressPower;
 	Vector2		velocity;
 	float		gravityForce;
-	Vector2		gravityDir = DOWN;
+	Vector2		gravityDir;
 	
-
 	bool isStop;
 
 public:

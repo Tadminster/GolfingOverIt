@@ -7,6 +7,7 @@
     <ClInclude Include="Wall.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Ball_guideLine.h" />
+    <ClInclude Include="Ball_trail.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -14,5 +15,6 @@
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Ball_guideLine.cpp" />
+    <ClCompile Include="Ball_trail.cpp" />
   </ItemGroup>
 </Project>

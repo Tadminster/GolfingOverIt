@@ -2,6 +2,7 @@
 #include "Wall.h"
 #include "Ball.h"
 #include "Ball_guideLine.h"
+#include "Ball_trail.h"
 #include "Obstacle.h"
 #include "Main.h"
 
@@ -389,6 +390,34 @@ void Main::Update()
 
 		if (starting == 0) golfBall->Update();
 	}
+
+
+	// 궤적 관련
+	{
+		//ImGui::Text("TRAIL COUNT: %d\n", trail.size());
+		// 궤적 생성
+		if (!golfBall->isStop)
+		{
+			trail.push_back(Ball_trail(golfBall->GetWorldPos()));
+			for (auto& trail : this->trail)
+				trail.Update();
+		}
+
+		// 궤적의 지속시간이 경과되면 삭제
+		trail.erase
+		(
+			std::remove_if
+			(
+				trail.begin(),
+				trail.end(),
+				[](Ball_trail& t) { return t.timeOut(); }
+			),
+			trail.end()
+		);
+	}
+
+
+
 	for (int i = 0; i < MAPMAX; i++) {
 		wallImg[i]->Update();
 	}
@@ -433,17 +462,6 @@ void Main::LateUpdate()
 	{
 		if (floatingBall[i]->Intersect(golfBall)) golfBall->ReflectionBall(floatingBall[i]);
 	}
-
-	// 유도선
-	//if (onClick)
-	//{
-	//	for (int i = 0; i < 5; i++)
-	//	{
-	//		Vector2 direction = INPUT->GetWorldMousePos() - Golfball->GetWorldPos();
-	//		ball_guideLine[i]->rotation2.z = atan2f(direction.y, direction.x) + PI;
-	//		ball_guideLine[i]->Update();
-	//	}
-	//}
 }
 
 void Main::Render()
@@ -458,15 +476,17 @@ void Main::Render()
 			for (int i = 0; i < 5; i++)
 			{
 				Vector2 distance = (golfBall->GetWorldPos() - INPUT->GetWorldMousePos());
-				ImGui::Text("d: %f\n", distance.Length());
-				ImGui::Text("d: %f\n", distance.Length() / 60.f);
+				//ImGui::Text("d: %f\n", distance.Length());
+				//ImGui::Text("d: %f\n", distance.Length() / 60.f);
 				if (distance.Length() / 100.f > i)
 				{
-
 					ball_guideLine[i]->Render();
 				}
 			}
 	}
+
+	for (auto& trail : this->trail)
+		trail.Render();
 }
 
 void Main::ResizeScreen()

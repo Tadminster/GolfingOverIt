@@ -9,6 +9,8 @@ private:
 	class Ball_guideLine* ball_guideLine[5];
 	class Obstacle* floatingBall[FLBMAX];
 
+	vector<class Ball_trail> trail;
+
 	ObImage* backGroundImg;
 	ObImage* wallImg[MAPMAX];
 
@@ -17,7 +19,6 @@ private:
 	Vector2 point;
 	Vector2 firepower;
 	
-	bool isStop= false;
 	bool onClick = false;
 	bool starting = false;
 	float pow;
