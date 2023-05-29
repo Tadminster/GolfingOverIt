@@ -9,6 +9,7 @@ private:
 	class Ball* golfBall;
 	class Ball_guideLine* ball_guideLine[5];
 	class ObRect* goal;
+	ObImage* goal_skin;
 
 	vector<class Ball_trail> trail;
 

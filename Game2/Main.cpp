@@ -20,6 +20,8 @@ Main::Main()
 		ball_guideLine[i]->color = Color(0.0f + i * 0.2f, 0.8f - i * 0.1f, 0.1f, 0.5f);
 	}
 	goal = new ObRect();
+	goal_skin = new ObImage(L"goal_skin.png");
+	goal_skin->SetParentRT(*goal);
 }
 
 Main::~Main()
@@ -53,6 +55,9 @@ void Main::Init()
 	goal->SetWorldPos(Vector2(0.0f, 2240.0f));
 	goal->scale = Vector2(25.0f, 25.0f);
 	goal->color = Vector4(0, 0, 0, 1);
+
+	goal_skin->scale.x = goal->scale.x * 3.5f;
+	goal_skin->scale.y = goal->scale.y * 3.0f;
 }
 
 void Main::Release()
@@ -204,6 +209,7 @@ void Main::Update()
 		);
 	}
 	goal->Update();
+	goal_skin->Update();
 	
 }
 
@@ -276,7 +282,8 @@ void Main::Render()
 	for (auto& trail : this->trail)
 		trail.Render();
 
-	goal->Render();
+	//goal->Render();
+	goal_skin->Render();
 }
 
 void Main::ResizeScreen()
