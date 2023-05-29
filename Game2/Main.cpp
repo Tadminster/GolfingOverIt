@@ -112,7 +112,7 @@ void Main::Update()
 	// 카메라가 공에 따라가게
 	CAM->position.y = golfBall->GetWorldPos().y + 100.0f;
 	CAM->position.x = golfBall->GetWorldPos().x;
-	CAM->position.x = Utility::Saturate(CAM->position.x, -400.0f, 400.0f);
+	CAM->position.x = Utility::Saturate(CAM->position.x, -100.0f, 100.0f);
 	CAM->position.y = Utility::Saturate(CAM->position.y, -200.0f, 2000.0f);
 
 	// 공의 클릭 관련
@@ -154,7 +154,7 @@ void Main::Update()
 		}
 		else
 		{
-			golfBall->color = Color(0.f, 0.f, 0.f, 1.f);
+			golfBall->color = Color(0.5f, 0.5f, 0.5f, 1.0f);
 			golfBall->Update();
 		}
 
