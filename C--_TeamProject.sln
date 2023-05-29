@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33328.57
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2DFrameWork", "2DFrameWork\2DFrameWork.vcxproj", "{C2138BC9-A195-455F-91A6-5FF469EB5E61}"
 EndProject
@@ -41,6 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Image", "Image", "{FC8A074E
 		Contents\Images\Ground_max.jpg = Contents\Images\Ground_max.jpg
 		Contents\Images\leftwall.jpg = Contents\Images\leftwall.jpg
 		Contents\Images\rightwall.jpg = Contents\Images\rightwall.jpg
+		Contents\Images\script.png = Contents\Images\script.png
 		Contents\Images\wallImgRock.jpg = Contents\Images\wallImgRock.jpg
 	EndProjectSection
 EndProject

@@ -51,7 +51,7 @@ void Main::Init()
 
 	//골대
 	goal->SetWorldPos(Vector2(0.0f, 2240.0f));
-	goal->scale = Vector2(20.0f, 20.0f);
+	goal->scale = Vector2(25.0f, 25.0f);
 	goal->color = Vector4(0, 0, 0, 1);
 }
 

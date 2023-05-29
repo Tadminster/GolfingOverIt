@@ -4,6 +4,10 @@ class Ending
 public:
 	class ObRect* bonoBono;
 	ObImage* bonoBono_skin;
+	ObImage* bonoBono_script;
+
+	float creationTime;
+	float duration;
 
 	bool stage[5];
 
