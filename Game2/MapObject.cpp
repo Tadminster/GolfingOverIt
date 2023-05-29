@@ -138,12 +138,12 @@ void MapObject::Init()
 
 		map[10]->scale.x = 100.0f;
 		map[10]->scale.y = 20.0f;
-		map[10]->rotation.z = 60.0f * ToRadian;
-		map[10]->SetWorldPos(Vector2(300.0f, 750));
+		map[10]->rotation.z = 90.0f * ToRadian;
+		map[10]->SetWorldPos(Vector2(330.0f, 750));
 
 		map[11]->scale.x = 90.0f;
 		map[11]->scale.y = 20.0f;
-		map[11]->SetWorldPos(Vector2(360.0f, 790));
+		map[11]->SetWorldPos(Vector2(370.0f, 790));
 
 		map[12]->scale.x = 150.0f;
 		map[12]->scale.y = 30.0f;
