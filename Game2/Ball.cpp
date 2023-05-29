@@ -39,7 +39,7 @@ void Ball::Render()
 
 void Ball::fire(Vector2 dir)
 { 
-    pressPower = min(dir.Length() * 5, 500.f);
+    pressPower = min(dir.Length() * 2.0f, 550.f);
     dir.Normalize();
     fireDir =dir;
 }

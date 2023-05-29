@@ -450,7 +450,7 @@ void Main::Render()
 			{
 				Vector2 distance = (Golfball->GetWorldPos() - INPUT->GetWorldMousePos());
 				ImGui::Text("d: %f\n", distance.Length());
-				ImGui::Text("d: %f\n", distance.Length() / 50.f);
+				ImGui::Text("d: %f\n", distance.Length() / 60.f);
 				if (distance.Length() / 100.f > i)
 				{
 
