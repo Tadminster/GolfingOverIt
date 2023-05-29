@@ -5,6 +5,7 @@ class Main : public Scene
 {
 private:
 	class MapObject* mapObj;
+	class Ending* ending;
 	class Ball* golfBall;
 	class Ball_guideLine* ball_guideLine[5];
 	class ObRect* goal;

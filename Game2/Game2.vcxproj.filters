@@ -8,6 +8,8 @@
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Ball_guideLine.h" />
     <ClInclude Include="MapObject.h" />
+    <ClInclude Include="Ball_trail.h" />
+    <ClInclude Include="Ending.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -16,5 +18,7 @@
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Ball_guideLine.cpp" />
     <ClCompile Include="MapObject.cpp" />
+    <ClCompile Include="Ball_trail.cpp" />
+    <ClCompile Include="Ending.cpp" />
   </ItemGroup>
 </Project>

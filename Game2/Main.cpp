@@ -5,11 +5,13 @@
 #include "Ball_trail.h"
 #include "Obstacle.h"
 #include "MapObject.h"
+#include "Ending.h"
 #include "Main.h"
 
 Main::Main()
 {
 	mapObj = new MapObject();
+	ending = new Ending();
 	golfBall = new Ball();
 	for (int i = 0; i < 5; i++)
 	{
@@ -26,8 +28,11 @@ Main::~Main()
 		delete guideLine;
 	delete golfBall;
 	delete goal;
-
+	
+	delete ending;
+	delete mapObj;
 }
+
 void Main::Init()
 {
 	// 공
@@ -40,6 +45,9 @@ void Main::Init()
 
 	// 맵의 오브젝트
 	mapObj->Init();
+
+	// 엔딩
+	ending->Init();
 
 	//골대
 	goal->SetWorldPos(Vector2(0.0f, 2240.0f));
@@ -70,6 +78,9 @@ void Main::Update()
 
 	// 맵의 오브젝트
 	mapObj->Update();
+
+	// 엔딩
+	ending->Update();
 
 	// 관리자 모드
 	{
@@ -193,6 +204,7 @@ void Main::Update()
 		);
 	}
 	goal->Update();
+	
 }
 
 void Main::LateUpdate()
@@ -237,6 +249,7 @@ void Main::LateUpdate()
 void Main::Render()
 {
 	mapObj->Render();
+	ending->Render();
 	for (int i = 0; i < MAPMAX; i++)
 	{
 		golfBall->Render();
