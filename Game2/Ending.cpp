@@ -70,11 +70,11 @@ void Ending::Update(Ball* ball)
 	}
 	if (this->stage[2])
 	{
-		ImGui::Text("\n");
-		ImGui::Text("WORLD_TIME: %f\n", TIMER->GetWorldTime());
-		ImGui::Text("creationTime_TIME: %f\n", creationTime);
-		ImGui::Text("duration: %f\n", duration);
-		ImGui::Text("timeOut: %f\n", creationTime + duration);
+		//ImGui::Text("\n");
+		//ImGui::Text("WORLD_TIME: %f\n", TIMER->GetWorldTime());
+		//ImGui::Text("creationTime_TIME: %f\n", creationTime);
+		//ImGui::Text("duration: %f\n", duration);
+		//ImGui::Text("timeOut: %f\n", creationTime + duration);
 
 		if (TIMER->GetWorldTime() >= creationTime + duration)
 		{
@@ -88,6 +88,9 @@ void Ending::Update(Ball* ball)
 	{
 		if (ball->isStop && ball->GetWorldPos().y < -30)
 		{
+			bonoBono_script->scale.x = 0.0f;
+			bonoBono_script->scale.y = 0.0f;
+
 			ball->fire(LEFT * Vector2(1000.f, 1000.f));
 			this->stage[3] = false;
 		}

@@ -251,6 +251,8 @@ void Main::LateUpdate()
 	//골대충돌
 	if (goal->Intersect(golfBall) && !isGameOver)
 	{
+		ADMIN_MODE = false;
+		golfBall->hasAxis = false;
 		golfBall->stop = true;
 		isGameOver = true;
 		ending->stage[0] = true;
