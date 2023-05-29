@@ -13,7 +13,7 @@ Main::Main()
 		floatingBall[i] = new Obstacle();
 	}
 	for (int i = 0; i < MAPMAX; i++) {
-		wallImg[i] = new ObImage(L"bono.bmp");
+		wallImg[i] = new ObImage(L"1234.png");
 		wallImg[i]->SetParentRT(*map[i]);
 	}
 
