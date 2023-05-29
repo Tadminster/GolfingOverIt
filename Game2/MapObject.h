@@ -4,11 +4,12 @@
 class MapObject
 {
 private:
-	class Wall* map[MAPMAX];
-	class Obstacle* floatingBall[FLBMAX];
-	ObImage* backGroundImg;
+	ObImage* backGroundImg[3];
 	ObImage* wallImg[MAPMAX];
 public:
+	class Wall* map[MAPMAX];
+	class Obstacle* floatingBall[FLBMAX];
+
 	MapObject();
 	~MapObject();
 	void Init();

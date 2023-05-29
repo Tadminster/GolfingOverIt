@@ -4,16 +4,17 @@
 class Main : public Scene
 {
 private:
-	class Wall* map[MAPMAX];
+	class MapObject* mapObj;
 	class Ball* golfBall;
 	class Ball_guideLine* ball_guideLine[5];
-	class Obstacle* floatingBall[FLBMAX];
+	/*class Wall* map[MAPMAX];
+	class Obstacle* floatingBall[FLBMAX];*/
 	class ObRect* goal;
 
 	vector<class Ball_trail> trail;
 
-	ObImage* backGroundImg;
-	ObImage* wallImg[MAPMAX];
+	/*ObImage* backGroundImg;
+	ObImage* wallImg[MAPMAX];*/
 
 	Vector2 mousepoint;
 	Vector2 ballpoint;

@@ -5,19 +5,32 @@
 
 MapObject::MapObject()
 {
+	//backGroundImg[0] = new ObImage(L"bg.png");
+	backGroundImg[1] = new ObImage(L"bg2.png");
+
 	for (int i = 0; i < MAPMAX; i++)
 		map[i] = new Wall();
 	for (int i = 0; i < FLBMAX; i++) {
 		floatingBall[i] = new Obstacle();
 	}
-	for (int i = 0; i < MAPMAX; i++) {
-		wallImg[i] = new ObImage(L"bono.bmp");
+	for (int i = 0; i < 4; i++) {
+		wallImg[i] = new ObImage(L"wallImgRock.jpg");
+		wallImg[i]->SetParentRT(*map[i]);
+	}
+	for (int i = 4; i < 36; i++) {
+		wallImg[i] = new ObImage(L"1234.png");
+		wallImg[i]->SetParentRT(*map[i]);
+	}
+	for (int i = 36; i < 38; i++) {
+		wallImg[i] = new ObImage(L"wallImgRock.jpg");
 		wallImg[i]->SetParentRT(*map[i]);
 	}
 }
 
 MapObject::~MapObject()
 {
+	//delete backGroundImg[0];
+	delete backGroundImg[1];
 	for (int i = 0; i < MAPMAX; i++)
 		delete map[i];
 	for (int i = 0; i < FLBMAX; i++)
@@ -195,21 +208,26 @@ void MapObject::Init()
 		map[34]->scale.y = 50.0f;
 		map[34]->SetWorldPos(Vector2(0.0f, 2200));
 
-		map[36]->scale.x = 10.0f;
+		map[36]->scale.x = 100.0f;
 		map[36]->scale.y = 4600.0f;
 		map[36]->pivot = OFFSET_B;
-		map[36]->SetWorldPos(Vector2(-400.0f, 0.0f));
+		map[36]->SetWorldPos(Vector2(-450.0f, 0.0f));
 
-		map[37]->scale.x = 10.0f;
+		map[37]->scale.x = 100.0f;
 		map[37]->scale.y = 4600.0f;
 		map[37]->pivot = OFFSET_B;
-		map[37]->SetWorldPos(Vector2(400.0f, 0.0f));
+		map[37]->SetWorldPos(Vector2(450.0f, 0.0f));
 	}
 	for (int i = 0; i < MAPMAX; i++) {
 		wallImg[i]->scale.x = map[i]->scale.x;
 		wallImg[i]->scale.y = map[i]->scale.y;
 	}
-	
+	/*backGroundImg[0]->scale.x = backGroundImg[0]->imageSize.x;
+	backGroundImg[0]->scale.y = backGroundImg[0]->imageSize.y;*/
+	backGroundImg[1]->SetWorldPos(Vector2(0.0f, 900.0f));
+	backGroundImg[1]->scale.x = app.GetWidth();
+	backGroundImg[1]->scale.y = 2800;
+	;
 }
 
 void MapObject::Update()
@@ -264,6 +282,8 @@ void MapObject::Update()
 	{
 		map[i]->Update();
 	}
+	//backGroundImg[0]->Update();
+	backGroundImg[1]->Update();
 }
 
 void MapObject::LateUpdate()
@@ -273,6 +293,9 @@ void MapObject::LateUpdate()
 
 void MapObject::Render()
 {
+	//backGroundImg[0]->Render();
+	backGroundImg[1]->Render();
 	for (int i = 0; i < MAPMAX; i++) wallImg[i]->Render();
 	for (int i = 0; i < FLBMAX; i++) floatingBall[i]->Render();
+	//for (int i = 0; i < MAPMAX; i++) map[i]->Render();
 }
