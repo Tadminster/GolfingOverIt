@@ -80,7 +80,7 @@ void Main::Update()
 	mapObj->Update();
 
 	// 엔딩
-	ending->Update();
+	ending->Update(golfBall);
 
 	// 관리자 모드
 	{
@@ -243,7 +243,13 @@ void Main::LateUpdate()
 		if (mapObj->floatingBall[i]->Intersect(golfBall)) golfBall->ReflectionBall(mapObj->floatingBall[i]);
 	}
 	//골대충돌
-	if (goal->Intersect(golfBall)) isGameOver = true;
+	if (goal->Intersect(golfBall) && !isGameOver)
+	{
+		golfBall->stop = true;
+		isGameOver = true;
+		ending->stage[0] = true;
+	}
+
 }
 
 void Main::Render()

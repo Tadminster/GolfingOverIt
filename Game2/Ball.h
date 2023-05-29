@@ -8,6 +8,7 @@ public:
 	float		gravityForce;
 	Vector2		gravityDir;
 	
+	bool stop;
 	bool isStop;
 
 public:

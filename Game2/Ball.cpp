@@ -9,6 +9,7 @@ Ball::Ball()
     pressPower = 1.0f;
     hasAxis = false;
     gravityDir = DOWN;
+    stop = false;
 }
 
 Ball::~Ball()
@@ -18,8 +19,18 @@ Ball::~Ball()
 void Ball::Update()
 {
     
-    gravityForce += 500.0f * DELTA;
 
+    if (stop)
+    {
+        pressPower = 0.0f;
+        gravityForce = 0.0f;
+        //MoveWorldPos(Vector2(0.0f, 0.0f));
+    }
+    else
+    {
+        gravityForce += 500.0f * DELTA;
+    }
+     
     velocity = (fireDir * pressPower + gravityDir * gravityForce);
     MoveWorldPos(velocity * DELTA);
 
@@ -27,6 +38,7 @@ void Ball::Update()
 
     ObCircle::Update();
 }
+
 
 void Ball::Render()
 {

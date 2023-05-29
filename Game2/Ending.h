@@ -11,7 +11,7 @@ public:
 	Ending();
 	~Ending();
 	void Init();
-	void Update();
+	void Update(Ball* ball);
 	void LateUpdate();
 	void Render();
 };

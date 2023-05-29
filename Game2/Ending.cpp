@@ -1,4 +1,5 @@
 ﻿#include "stdafx.h"
+#include "Ball.h"
 #include "Ending.h"
 
 Ending::Ending()
@@ -28,16 +29,54 @@ void Ending::Init()
 	bonoBono_skin->scale.y = bonoBono->scale.y;
 }
 
-void Ending::Update()
+void Ending::Update(Ball* ball)
 {
+	if (this->stage[0])
+	{
+		if (bonoBono->GetWorldPos().x > 0.0f)
+			bonoBono->MoveWorldPos(LEFT * 300.f * DELTA);
+		else
+		{
+			ball->stop = false;
+			this->stage[0] = false;
+			this->stage[1] = true;
+		}
+	}
+	else if (this->stage[1])
+	{
+		if (bonoBono->GetWorldPos().x < 300.0f)
+		{
+			bonoBono->MoveWorldPos(RIGHT * 300.f * DELTA);
+			ball->SetWorldPos(bonoBono->GetWorldPos());
+			ball->Update();
+		}
+		else
+		{
+			ball->fire(DOWN * Vector2(100.f, 100.f));
+			this->stage[1] = false;
+			this->stage[2] = true;
+		}
+	}
+	else if (this->stage[2])
+	{
+		if (ball->GetWorldPos().y < -55.f)
+		{
+			ball->fire(RIGHT);
+		}
+		else
+		{
+			this->stage[2] = false;
+		}
+	}
+
+
 	bonoBono->Update();
 	bonoBono_skin->Update();
 }
 
 void Ending::LateUpdate()
 {
-	if (stage[0])
-		bonoBono->MoveWorldPos(LEFT * 300.f * DELTA);
+
 }
 
 void Ending::Render()
