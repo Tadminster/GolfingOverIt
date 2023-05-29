@@ -59,12 +59,9 @@ void Ending::Update(Ball* ball)
 	}
 	else if (this->stage[2])
 	{
-		if (ball->GetWorldPos().y < -55.f)
+		if (ball->isStop)
 		{
-			ball->fire(RIGHT);
-		}
-		else
-		{
+			ball->fire(LEFT * Vector2(1000.f, 1000.f));
 			this->stage[2] = false;
 		}
 	}
