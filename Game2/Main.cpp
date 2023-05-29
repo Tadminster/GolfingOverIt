@@ -154,7 +154,7 @@ void Main::Update()
 		}
 		else
 		{
-			golfBall->color = Color(0.f, 0.f, 0.f, 1.f);
+			golfBall->color = Color(0.5f, 0.5f, 0.5f, 1.0f);
 			golfBall->Update();
 		}
 
