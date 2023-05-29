@@ -6,37 +6,49 @@
 MapObject::MapObject()
 {
 	backGroundImg = new ObImage(L"bg_3.png");
-	for (int i = 0; i < MAPMAX; i++)
-		map[i] = new Wall();
-	for (int i = 0; i < FLBMAX; i++) {
-		floatingBall[i] = new Obstacle();
-	}
+	for (int i = 0; i < MAPMAX; i++) map[i] = new Wall();
+	for (int i = 0; i < FLBMAX; i++) floatingBall[i] = new Obstacle();
 	for (int i = 0; i < 4; i++) {
 		wallImg[i] = new ObImage(L"ground_3.png");
 		wallImg[i]->SetParentRT(*map[i]);
 	}
+
 	for (int i = 4; i < 10; i++) {
 		wallImg[i] = new ObImage(L"ground_2.png");
 		wallImg[i]->SetParentRT(*map[i]);
 	}
-	for (int i = 10; i < 15; i++) {
-		wallImg[i] = new ObImage(L"ground_4.png");
-		wallImg[i]->SetParentRT(*map[i]);
+
+	for (int i = 10; i < 18; i++) {
+		if (i < 16) {
+			wallImg[i] = new ObImage(L"ground_4.png");
+			wallImg[i]->SetParentRT(*map[i]);
+		}
+		else {
+			wallImg[i] = new ObImage(L"ground_5.png");
+			wallImg[i]->SetParentRT(*map[i]);
+		}
 	}
-	for (int i = 15; i < 23; i++) {
-		wallImg[i] = new ObImage(L"ground_6.png");
-		wallImg[i]->SetParentRT(*map[i]);
+
+	for (int i = 18; i < 22; i++) {
+		if (i < 21) {
+			wallImg[i] = new ObImage(L"ground_5.png");
+			wallImg[i]->SetParentRT(*map[i]);
+		}
+		else {
+			wallImg[21] = new ObImage(L"ground_4.png");
+			wallImg[21]->SetParentRT(*map[21]);
+		}
 	}
-	for (int i = 23; i < 30; i++) {
+
+	for (int i = 22; i < 29; i++) {
 		wallImg[i] = new ObImage(L"ground_5.png");
 		wallImg[i]->SetParentRT(*map[i]);
 	}
-	for (int i = 30; i < 34; i++) {
+
+	for (int i = 29; i < 35; i++) {
 		wallImg[i] = new ObImage(L"ground_1.png");
 		wallImg[i]->SetParentRT(*map[i]);
 	}
-	wallImg[34] = new ObImage(L"bono.png");
-	wallImg[34]->SetParentRT(*map[34]);
 
 	wallImg[35] = new ObImage(L"ground_3.png");
 	wallImg[35]->SetParentRT(*map[35]);
@@ -254,7 +266,6 @@ void MapObject::Init()
 	backGroundImg->SetWorldPos(Vector2(0.0f, 900.0f));
 	backGroundImg->scale.x = app.GetWidth();
 	backGroundImg->scale.y = 2800;
-	;
 }
 
 void MapObject::Update()
