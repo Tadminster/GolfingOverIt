@@ -41,7 +41,7 @@ void Ball::fire(Vector2 dir)
 { 
     pressPower = min(dir.Length() * 2.0f, 550.f);
     dir.Normalize();
-    fireDir =dir;
+    fireDir = dir;
 }
 
 bool Ball::stopcheck()
