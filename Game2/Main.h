@@ -4,6 +4,7 @@
 class Main : public Scene
 {
 private:
+	class Title* title;
 	class MapObject* mapObj;
 	class Ending* ending;
 	class Ball* golfBall;
@@ -24,6 +25,7 @@ private:
 	float pow;
 
 	bool ADMIN_MODE = false;
+	bool gameStart = false;
 
 public:
 	Main();

@@ -10,6 +10,7 @@
     <ClInclude Include="MapObject.h" />
     <ClInclude Include="Ball_trail.h" />
     <ClInclude Include="Ending.h" />
+    <ClInclude Include="Title.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -20,5 +21,6 @@
     <ClCompile Include="MapObject.cpp" />
     <ClCompile Include="Ball_trail.cpp" />
     <ClCompile Include="Ending.cpp" />
+    <ClCompile Include="Title.cpp" />
   </ItemGroup>
 </Project>
