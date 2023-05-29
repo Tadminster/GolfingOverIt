@@ -12,11 +12,11 @@ MapObject::MapObject()
 		floatingBall[i] = new Obstacle();
 	}
 	for (int i = 0; i < 4; i++) {
-		wallImg[i] = new ObImage(L"forest-2_ground.png");
+		wallImg[i] = new ObImage(L"ground_1.png");
 		wallImg[i]->SetParentRT(*map[i]);
 	}
 	for (int i = 4; i < 34; i++) {
-		wallImg[i] = new ObImage(L"forest-2_ground.png");
+		wallImg[i] = new ObImage(L"ground_1.png");
 		wallImg[i]->SetParentRT(*map[i]);
 	}
 	wallImg[34] = new ObImage(L"bono.png");
