@@ -12,20 +12,39 @@ MapObject::MapObject()
 		floatingBall[i] = new Obstacle();
 	}
 	for (int i = 0; i < 4; i++) {
-		wallImg[i] = new ObImage(L"ground_1.png");
+		wallImg[i] = new ObImage(L"ground_3.png");
 		wallImg[i]->SetParentRT(*map[i]);
 	}
-	for (int i = 4; i < 34; i++) {
+	for (int i = 4; i < 10; i++) {
+		wallImg[i] = new ObImage(L"ground_2.png");
+		wallImg[i]->SetParentRT(*map[i]);
+	}
+	for (int i = 10; i < 15; i++) {
+		wallImg[i] = new ObImage(L"ground_4.png");
+		wallImg[i]->SetParentRT(*map[i]);
+	}
+	for (int i = 15; i < 23; i++) {
+		wallImg[i] = new ObImage(L"ground_6.png");
+		wallImg[i]->SetParentRT(*map[i]);
+	}
+	for (int i = 23; i < 30; i++) {
+		wallImg[i] = new ObImage(L"ground_5.png");
+		wallImg[i]->SetParentRT(*map[i]);
+	}
+	for (int i = 30; i < 34; i++) {
 		wallImg[i] = new ObImage(L"ground_1.png");
 		wallImg[i]->SetParentRT(*map[i]);
 	}
 	wallImg[34] = new ObImage(L"bono.png");
 	wallImg[34]->SetParentRT(*map[34]);
 
-	for (int i = 35; i < 38; i++) {
-		wallImg[i] = new ObImage(L"wallImgRock.jpg");
-		wallImg[i]->SetParentRT(*map[i]);
-	}
+	wallImg[35] = new ObImage(L"ground_3.png");
+	wallImg[35]->SetParentRT(*map[35]);
+	
+	wallImg[36] = new ObImage(L"leftwall.jpg");
+	wallImg[36]->SetParentRT(*map[36]);
+	wallImg[37] = new ObImage(L"rightwall.jpg");
+	wallImg[37]->SetParentRT(*map[37]);
 }
 
 MapObject::~MapObject()
@@ -45,23 +64,27 @@ void MapObject::Init()
 	{
 		floatingBall[0]->flbpower = 200.0f;
 		floatingBall[0]->SetWorldPos(Vector2(0.0f, 380.0f));
+		floatingBall[0]->color = Vector4(89.0f / 255.0f, 124.0f / 255.0f, 247.0f / 255.0f, 1.0f);
 
 		floatingBall[1]->flbpower = 300.0f;
 		floatingBall[1]->SetWorldPos(Vector2(-200.0f, 700.0f));
+		floatingBall[1]->color = Vector4(89.0f / 255.0f, 124.0f / 255.0f, 247.0f / 255.0f, 1.0f);
 
 		floatingBall[2]->flbpower = 250.0f;
 		floatingBall[2]->SetWorldPos(Vector2(-100.0f, 1150.0f));
+		floatingBall[2]->color = Vector4(76.0f / 255.0f, 97.0f / 255.0f, 211.0f / 255.0f, 1.0f);
 
 		floatingBall[3]->flbpower = 400.0f;
 		floatingBall[3]->SetWorldPos(Vector2(-300.0f, 1500.0f));
+		floatingBall[3]->color = Vector4(39.0f / 255.0f, 50.0f / 255.0f, 109.0f / 255.0f, 1.0f);
 
 		map[0]->scale.x = 300.0f;
-		map[0]->scale.y = 50.0f;
-		map[0]->SetWorldPos(Vector2(-300.0f, -275));
+		map[0]->scale.y = 300.0f;
+		map[0]->SetWorldPos(Vector2(-300.0f, -400));
 		map[1]->scale.x = 320.0f;
-		map[1]->scale.y = 150.0f;
+		map[1]->scale.y = 300.0f;
 		map[1]->rotation.z = 10.0f * ToRadian;
-		map[1]->SetWorldPos(Vector2(-5.0f, -300));
+		map[1]->SetWorldPos(Vector2(-5.0f, -380));
 		map[2]->scale.x = 300.0f;
 		map[2]->scale.y = 250.0f;
 		map[2]->SetWorldPos(Vector2(250.0f, -330));
@@ -211,14 +234,14 @@ void MapObject::Init()
 		map[34]->SetWorldPos(Vector2(0.0f, 2200));
 
 		map[36]->scale.x = 100.0f;
-		map[36]->scale.y = 4600.0f;
+		map[36]->scale.y = 2900.0f;
 		map[36]->pivot = OFFSET_B;
-		map[36]->SetWorldPos(Vector2(-450.0f, 0.0f));
+		map[36]->SetWorldPos(Vector2(-450.0f, 1000.0f));
 
 		map[37]->scale.x = 100.0f;
-		map[37]->scale.y = 4600.0f;
+		map[37]->scale.y = 2900.0f;
 		map[37]->pivot = OFFSET_B;
-		map[37]->SetWorldPos(Vector2(450.0f, 0.0f));
+		map[37]->SetWorldPos(Vector2(450.0f, 1000.0f));
 	}
 	for (int i = 0; i < 4; i++) {
 		wallImg[i]->scale.x = map[i]->scale.x;
