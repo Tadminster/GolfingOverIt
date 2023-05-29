@@ -138,7 +138,14 @@ void Main::Update()
 				// 유도선을 그려줌
 				for (int i = 0; i < 5; i++)
 				{
-					Vector2 direction = INPUT->GetWorldMousePos() - point;						// 계산에 쓰일 벡터
+					Vector2 direction;
+					if (INPUT->GetWorldMousePos().x > 2000 || INPUT->GetWorldMousePos().x < -2000)
+						direction = Vector2(-2000 - point.x, INPUT->GetWorldMousePos().y - point.y);
+					else if (INPUT->GetWorldMousePos().y > 2000 || INPUT->GetWorldMousePos().y < -2000)
+						direction = Vector2(INPUT->GetWorldMousePos().x - point.x, 2000 - point.y);
+					else 
+						direction = INPUT->GetWorldMousePos() - point;
+
 					ball_guideLine[i]->rotation2.z = atan2f(direction.y, direction.x) + PI;		// 유도선 방향 계산
 					ball_guideLine[i]->Update();												
 				}
