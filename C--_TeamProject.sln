@@ -32,6 +32,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Image", "Image", "{FC8A074E
 		Contents\Images\bono.bmp = Contents\Images\bono.bmp
 		Contents\Images\bono.jpg = Contents\Images\bono.jpg
 		Contents\Images\bono.png = Contents\Images\bono.png
+		Contents\Images\ground_1.png = Contents\Images\ground_1.png
+		Contents\Images\ground_2.png = Contents\Images\ground_2.png
+		Contents\Images\ground_3.png = Contents\Images\ground_3.png
+		Contents\Images\ground_4.png = Contents\Images\ground_4.png
+		Contents\Images\ground_5.png = Contents\Images\ground_5.png
+		Contents\Images\ground_6.png = Contents\Images\ground_6.png
 		Contents\Images\wallImgRock.jpg = Contents\Images\wallImgRock.jpg
 	EndProjectSection
 EndProject
