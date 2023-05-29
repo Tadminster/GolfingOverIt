@@ -323,32 +323,33 @@ void Main::Update()
 		}
 
 		if (ADMIN_MODE)
-		{
-			if (INPUT->KeyPress(VK_UP))
-			{
-				CAM->position += UP * 500.0f * DELTA;
+		{			
+			//공이동			
+			if (INPUT->KeyPress('W'))
+			{				
+				golfBall->MoveWorldPos(UP * 500.0f * DELTA);
 			}
-			if (INPUT->KeyPress(VK_DOWN))
+			if (INPUT->KeyPress('S'))
 			{
-				CAM->position += DOWN * 500.0f * DELTA;
+				golfBall->MoveWorldPos(DOWN * 500.0f * DELTA);
 			}
-			if (INPUT->KeyPress(VK_LEFT))
+			if (INPUT->KeyPress('A'))
 			{
-				CAM->position += LEFT * 500.0f * DELTA;
+				golfBall->MoveWorldPos(LEFT * 500.0f * DELTA);
 			}
-			if (INPUT->KeyPress(VK_RIGHT))
+			if (INPUT->KeyPress('D'))
 			{
-				CAM->position += RIGHT * 500.0f * DELTA;;
+				golfBall->MoveWorldPos(RIGHT * 500.0f * DELTA);
 			}
-		}
-		else
-		{
-			CAM->position.y = golfBall->GetWorldPos().y + 100.0f;
-			CAM->position.x = golfBall->GetWorldPos().x;
-		}
+			golfBall->gravityForce = 0.0f;
+			golfBall->pressPower = 0.0f;
+			golfBall->Update();
+		}		
 	}
 
 	// 카메라가 공에 따라가게
+	CAM->position.y = golfBall->GetWorldPos().y + 100.0f;
+	CAM->position.x = golfBall->GetWorldPos().x;
 	CAM->position.x = Utility::Saturate(CAM->position.x, -400.0f, 400.0f);
 	CAM->position.y = Utility::Saturate(CAM->position.y, -200.0f, 2000.0f);
 
