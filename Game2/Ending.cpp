@@ -6,6 +6,9 @@ Ending::Ending()
 	bonoBono = new ObRect();
 	bonoBono_skin = new ObImage(L"bono.png");
 	bonoBono_skin->SetParentRT(*bonoBono);
+
+	for (auto& stage : this->stage)
+		stage = false;
 }
 
 Ending::~Ending()
@@ -33,6 +36,8 @@ void Ending::Update()
 
 void Ending::LateUpdate()
 {
+	if (stage[0])
+		bonoBono->MoveWorldPos(LEFT * 300.f * DELTA);
 }
 
 void Ending::Render()
