@@ -7,14 +7,9 @@ private:
 	class MapObject* mapObj;
 	class Ball* golfBall;
 	class Ball_guideLine* ball_guideLine[5];
-	/*class Wall* map[MAPMAX];
-	class Obstacle* floatingBall[FLBMAX];*/
 	class ObRect* goal;
 
 	vector<class Ball_trail> trail;
-
-	/*ObImage* backGroundImg;
-	ObImage* wallImg[MAPMAX];*/
 
 	Vector2 mousepoint;
 	Vector2 ballpoint;

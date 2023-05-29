@@ -4,7 +4,7 @@
 class MapObject
 {
 private:
-	ObImage* backGroundImg[3];
+	ObImage* backGroundImg;
 	ObImage* wallImg[MAPMAX];
 public:
 	class Wall* map[MAPMAX];

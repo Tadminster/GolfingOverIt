@@ -216,13 +216,11 @@ void Main::LateUpdate()
 	for (int i = 0; i < MAPMAX; i++)
 	{
 		mapObj->map[i]->Collision(golfBall);
-		//map[i]->Collision(golfBall);
 	}
 	//방해물충돌
 	for (int i = 0; i < FLBMAX; i++)
 	{
 		if (mapObj->floatingBall[i]->Intersect(golfBall)) golfBall->ReflectionBall(mapObj->floatingBall[i]);
-		//if (floatingBall[i]->Intersect(golfBall)) golfBall->ReflectionBall(floatingBall[i]);
 	}
 	//골대충돌
 	if (goal->Intersect(golfBall)) isGameOver = true;

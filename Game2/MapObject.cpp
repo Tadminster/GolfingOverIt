@@ -5,23 +5,24 @@
 
 MapObject::MapObject()
 {
-	//backGroundImg[0] = new ObImage(L"bg.png");
-	backGroundImg[1] = new ObImage(L"bg2.png");
-
+	backGroundImg = new ObImage(L"bg_3.png");
 	for (int i = 0; i < MAPMAX; i++)
 		map[i] = new Wall();
 	for (int i = 0; i < FLBMAX; i++) {
 		floatingBall[i] = new Obstacle();
 	}
 	for (int i = 0; i < 4; i++) {
-		wallImg[i] = new ObImage(L"wallImgRock.jpg");
+		wallImg[i] = new ObImage(L"forest-2_ground.png");
 		wallImg[i]->SetParentRT(*map[i]);
 	}
-	for (int i = 4; i < 36; i++) {
-		wallImg[i] = new ObImage(L"1234.png");
+	for (int i = 4; i < 34; i++) {
+		wallImg[i] = new ObImage(L"forest-2_ground.png");
 		wallImg[i]->SetParentRT(*map[i]);
 	}
-	for (int i = 36; i < 38; i++) {
+	wallImg[34] = new ObImage(L"bono.png");
+	wallImg[34]->SetParentRT(*map[34]);
+
+	for (int i = 35; i < 38; i++) {
 		wallImg[i] = new ObImage(L"wallImgRock.jpg");
 		wallImg[i]->SetParentRT(*map[i]);
 	}
@@ -29,8 +30,7 @@ MapObject::MapObject()
 
 MapObject::~MapObject()
 {
-	//delete backGroundImg[0];
-	delete backGroundImg[1];
+	delete backGroundImg;
 	for (int i = 0; i < MAPMAX; i++)
 		delete map[i];
 	for (int i = 0; i < FLBMAX; i++)
@@ -41,6 +41,7 @@ MapObject::~MapObject()
 
 void MapObject::Init()
 {
+	
 	{
 		floatingBall[0]->flbpower = 200.0f;
 		floatingBall[0]->SetWorldPos(Vector2(0.0f, 380.0f));
@@ -204,6 +205,7 @@ void MapObject::Init()
 		map[33]->scale.y = 30.0f;
 		map[33]->SetWorldPos(Vector2(-350.0f, 2030));
 
+		//골대
 		map[34]->scale.x = 50.0f;
 		map[34]->scale.y = 50.0f;
 		map[34]->SetWorldPos(Vector2(0.0f, 2200));
@@ -218,15 +220,17 @@ void MapObject::Init()
 		map[37]->pivot = OFFSET_B;
 		map[37]->SetWorldPos(Vector2(450.0f, 0.0f));
 	}
-	for (int i = 0; i < MAPMAX; i++) {
+	for (int i = 0; i < 4; i++) {
 		wallImg[i]->scale.x = map[i]->scale.x;
 		wallImg[i]->scale.y = map[i]->scale.y;
 	}
-	/*backGroundImg[0]->scale.x = backGroundImg[0]->imageSize.x;
-	backGroundImg[0]->scale.y = backGroundImg[0]->imageSize.y;*/
-	backGroundImg[1]->SetWorldPos(Vector2(0.0f, 900.0f));
-	backGroundImg[1]->scale.x = app.GetWidth();
-	backGroundImg[1]->scale.y = 2800;
+	for (int i = 4; i < MAPMAX; i++) {
+		wallImg[i]->scale.x = map[i]->scale.x;
+		wallImg[i]->scale.y = map[i]->scale.y;
+	}
+	backGroundImg->SetWorldPos(Vector2(0.0f, 900.0f));
+	backGroundImg->scale.x = app.GetWidth();
+	backGroundImg->scale.y = 2800;
 	;
 }
 
@@ -282,8 +286,7 @@ void MapObject::Update()
 	{
 		map[i]->Update();
 	}
-	//backGroundImg[0]->Update();
-	backGroundImg[1]->Update();
+	backGroundImg->Update();
 }
 
 void MapObject::LateUpdate()
@@ -293,9 +296,7 @@ void MapObject::LateUpdate()
 
 void MapObject::Render()
 {
-	//backGroundImg[0]->Render();
-	backGroundImg[1]->Render();
+	backGroundImg->Render();
 	for (int i = 0; i < MAPMAX; i++) wallImg[i]->Render();
 	for (int i = 0; i < FLBMAX; i++) floatingBall[i]->Render();
-	//for (int i = 0; i < MAPMAX; i++) map[i]->Render();
 }
