@@ -60,14 +60,28 @@ void Title::LateUpdate()
 	if (btn_start->Intersect(INPUT->GetWorldMousePos()))
 	{
 		skin_start->color.x = 0.1f;
+		skin_start->scale.x = btn_start->scale.x * 1.15f;
+		skin_start->scale.y = btn_start->scale.y * 1.15f;
 	}
-	else skin_start->color.x = 0.5f;
+	else
+	{
+		skin_start->color.x = 0.5f;
+		skin_start->scale.x = btn_start->scale.x;
+		skin_start->scale.y = btn_start->scale.y;
+	}
 
 	if (btn_exit->Intersect(INPUT->GetWorldMousePos()))
 	{
 		skin_exit->color.x = 0.1f;
+		skin_exit->scale.x = btn_exit->scale.x * 1.15f;
+		skin_exit->scale.y = btn_exit->scale.y * 1.15f;
 	}
-	else skin_exit->color.x = 0.5f;
+	else
+	{
+		skin_exit->scale.x = btn_exit->scale.x;
+		skin_exit->scale.y = btn_exit->scale.y;
+		skin_exit->color.x = 0.5f;
+	}
 }
 
 void Title::Render()

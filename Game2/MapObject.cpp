@@ -48,6 +48,7 @@ MapObject::MapObject()
 	for (int i = 29; i < 35; i++) {
 		wallImg[i] = new ObImage(L"ground_1.png");
 		wallImg[i]->SetParentRT(*map[i]);
+		wallImg[i]->color = Color(0.6f, 0.6f, 0.6f, 1.0f);
 	}
 
 	wallImg[35] = new ObImage(L"ground_3.png");
@@ -76,19 +77,19 @@ void MapObject::Init()
 	{
 		floatingBall[0]->flbpower = 200.0f;
 		floatingBall[0]->SetWorldPos(Vector2(0.0f, 380.0f));
-		floatingBall[0]->color = Vector4(89.0f / 255.0f, 124.0f / 255.0f, 247.0f / 255.0f, 1.0f);
+		floatingBall[0]->color = Color(89.0f / 255.0f, 124.0f / 255.0f, 247.0f / 255.0f, 1.0f);
 
 		floatingBall[1]->flbpower = 300.0f;
 		floatingBall[1]->SetWorldPos(Vector2(-200.0f, 700.0f));
-		floatingBall[1]->color = Vector4(89.0f / 255.0f, 124.0f / 255.0f, 247.0f / 255.0f, 1.0f);
+		floatingBall[1]->color = Color(89.0f / 255.0f, 124.0f / 255.0f, 247.0f / 255.0f, 1.0f);
 
 		floatingBall[2]->flbpower = 250.0f;
 		floatingBall[2]->SetWorldPos(Vector2(-100.0f, 1150.0f));
-		floatingBall[2]->color = Vector4(76.0f / 255.0f, 97.0f / 255.0f, 211.0f / 255.0f, 1.0f);
+		floatingBall[2]->color = Color(76.0f / 255.0f, 97.0f / 255.0f, 211.0f / 255.0f, 1.0f);
 
 		floatingBall[3]->flbpower = 400.0f;
 		floatingBall[3]->SetWorldPos(Vector2(-300.0f, 1500.0f));
-		floatingBall[3]->color = Vector4(39.0f / 255.0f, 50.0f / 255.0f, 109.0f / 255.0f, 1.0f);
+		floatingBall[3]->color = Color(39.0f / 255.0f, 50.0f / 255.0f, 109.0f / 255.0f, 1.0f);
 
 		map[0]->scale.x = 300.0f;
 		map[0]->scale.y = 300.0f;
